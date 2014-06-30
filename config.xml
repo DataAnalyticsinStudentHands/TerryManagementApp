@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="org.housuggest.healthyhomes" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Healthy Homes</name>
+    <description>
+        An aid for home inspections concerned with the various aspects of health for the residents.
+    </description>
+    <author email="dprice2@uh.edu" href="http://housuggest.org">
+        Data Analytics in Student Hands Team, Summer of Apps 2014
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
