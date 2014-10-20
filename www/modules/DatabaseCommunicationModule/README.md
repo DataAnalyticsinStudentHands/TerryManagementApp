@@ -9,7 +9,7 @@ Open module in Brackets and use live-preview feature or alternatively ```` npm s
 
 ### Using Module in Project
 - Copy js/services.js to project and create a script src link to it and properly inject dependency.
-- Copy  databaseModule.run() in app.js to project's app.js and rename 'databaseModule' to proper module name. Configure redirection states and Restangular base URL as necessary.
+- Copy contents of databaseModule.run() in app.js to project's app.js and rename 'databaseModule' to proper module name. Configure redirection states and Restangular base URL as necessary.
 - Add 'authenticate: true' to states that require user to be logged in.
 - Refer to implementation example (js/controllers.js) to implement module in controller.
 - Add ifLoggedIn checker on the login page to redirect users to app from login page once logged in. (js/controllers.js).
@@ -22,11 +22,8 @@ https://medium.com/@mattlanham/authentication-with-angularjs-4e927af3a15f
 http://www.frederiknakstad.com/2014/02/09/ui-router-in-angular-client-side-auth/
 
 ### Pending/ChangeLog
-- Promises ($q) - In Progress
- - Necessary for proper authChecking
-- Storage of Token
- - Local Storage for PhoneGap - In Progress
- - Cookie Storage - Done
+- Promises ($q) - Done!
+- Storage of Token - Local Storage - Done!
 - Switch views based on logged in/out - Done!
 - Proper communication with database - async - Done! - Via Restangular
 - Authentication - Done

@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var databaseModule = angular.module('databaseModule', ['restangular', 'ngRoute', 'ngCookies', 'databaseControllerModule', 'databaseServicesModule',  'ui.router']);
+var databaseModule = angular.module('databaseModule', ['restangular', 'databaseControllerModule', 'databaseServicesModule',  'ui.router']);
 
 databaseModule.config(
   function($stateProvider, $urlRouterProvider) {
@@ -17,6 +17,13 @@ databaseModule.config(
           url: "/login",
           templateUrl: "partials/login.html",
           controller: 'loginCtrl',
+          authenticate: false
+      });
+    $stateProvider.
+      state('register', {
+          url: "/register",
+          templateUrl: "partials/register.html",
+          controller: 'registerCtrl',
           authenticate: false
       });
 
@@ -34,7 +41,8 @@ databaseModule.config(
   });
 
 databaseModule.run(['Restangular', '$rootScope', 'Auth', '$q', '$state', function(Restangular, $rootScope, Auth, $q, $state) {
-    Restangular.setBaseUrl("http://localhost:8080/RESTFUL-WS/services/");
+//    Restangular.setBaseUrl("http://localhost:8080/RESTFUL-WS/services/");
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");     //HOUSUGGEST FOR VMA CORE
     $rootScope.Restangular = function() {
         return Restangular;
     }
@@ -42,19 +50,6 @@ databaseModule.run(['Restangular', '$rootScope', 'Auth', '$q', '$state', functio
         //
     }
     $rootScope.isAuthenticated = function() {
-        //BELOW - Trying to get promises to work to verify auth
-//        var deferred = $q.defer();
-//        //This should be set to a work-all URL.
-//        var rqPromise = Restangular.all("users").get("2").then(function(result) {
-//            console.log("authed");
-//            return true;
-//        }, function(error) {
-//            Auth.clearCredentials();
-//            console.log("not-authed");
-//            return false;
-//        });
-//        return deferred.resolve(rqPromise);
-        //END
         return Auth.hasCredentials();
     }
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
