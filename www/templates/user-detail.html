@@ -1,0 +1,33 @@
+<!--
+  This template loads for the 'tab.user-detail' state (app.js)
+  'user' is a $scope variable created in the UserDetailsCtrl controller (controllers.js)
+  The UserDetailCtrl pulls data via Restangular from a remote database
+-->
+<ion-view title="{{user.username}}"> <ion-content
+	has-header="true" padding="true">
+
+<div class="list">
+	<h2>Edit User Information for {{user.firstName}} {{user.lastName}}</h2>
+	<label class="item item-input item-stacked-label"> <span
+		class="input-label">First Name</span> <input type="text"
+		ng-model="user.firstName">
+	</label> 
+	<label class="item item-input item-stacked-label"> <span
+		class="input-label">Last Name</span> <input type="text"
+		ng-model="user.lastName">
+	</label> 
+	<label class="item item-input item-stacked-label"> <span
+		class="input-label">Email</span> <input type="text"
+		ng-model="user.email">
+	</label>
+	
+	
+</div>
+
+<button ng-click="updateUser()" class="button button-block button-positive">
+		Update</button>
+	<button ng-click="cancel()" class="button button-block button-positive">
+		Cancel</button>
+</ion-content> </ion-view>
+
+
