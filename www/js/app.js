@@ -2,8 +2,8 @@
 
 angular.module('dash-admin-app', [
     'ionic',
-    'starter.controllers',
-    'starter.services',
+    'Controllers',
+    'Services',
     'restangular',
     'databaseControllerModule',
     'databaseServicesModule'
@@ -51,6 +51,15 @@ angular.module('dash-admin-app', [
                 console.log("authed");
             }
         });
+    
+        //Logout user by clearing credentials
+        $rootScope.logout = function () {
+            Auth.clearCredentials();
+            console.log("log out");
+            $state.go('login', {}, {
+                reload: true
+            });
+        };
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -62,8 +71,6 @@ angular.module('dash-admin-app', [
         // Each state's controller can be found in controllers.js
         $stateProvider
         
-                
-        
             .state('login', {
                 url: "/login",
                 templateUrl: "templates/login.html",
@@ -71,13 +78,6 @@ angular.module('dash-admin-app', [
                 authenticate: false
             })
         
-            .state('register', {
-                url: "/register",
-                templateUrl: "templates/register.html",
-                controller: 'registerCtrl',
-                authenticate: false
-            })
-
             // setup an abstract state for the tabs directive
             .state('secure', {
                 url: "/tab",
@@ -86,7 +86,7 @@ angular.module('dash-admin-app', [
                 authenticate: true
             })
 
-        // Each tab has its own nav history stack:
+            // Each tab has its own nav history stack:
             .state('secure.dash', {
                 url: '/dash',
                 views: {
@@ -103,7 +103,7 @@ angular.module('dash-admin-app', [
                 views: {
                     'secure-users': {
                         templateUrl: 'templates/tab-users.html',
-                        controller: 'FriendsCtrl'
+                        controller: 'UsersCtrl'
                     }
                 },
                 authenticate: true
@@ -113,7 +113,7 @@ angular.module('dash-admin-app', [
                 views: {
                     'secure-users': {
                         templateUrl: 'templates/user-detail.html',
-                        controller: 'FriendDetailCtrl'
+                        controller: 'UserDetailCtrl'
                     }
                 },
                 authenticate: true

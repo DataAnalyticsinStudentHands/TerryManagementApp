@@ -6,7 +6,7 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state',
  function($scope, Auth, $state) {
      if($scope.isAuthenticated() === true) {
          //Point 'em to logged in page of app
-         $state.go('secure');
+         $state.go('secure.dash');
      }
      
      //we need to put the salt on server + client side and it needs to be static
@@ -25,7 +25,7 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state',
                 $scope.loginResult = result;
                 $scope.loginMsg = "You have logged in successfully! Status 200OK technomumbojumbo";
                 Auth.confirmCredentials();
-                $state.go('secure');
+                $state.go('secure.dash');
              }, function(error) {
                 $scope.loginMsg = "Arghhh, matey! Check your username or password.";
                 Auth.clearCredentials();

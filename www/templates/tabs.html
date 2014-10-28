@@ -5,22 +5,23 @@
 -->
 <ion-tabs class="tabs-icon-top">
 
-  <!-- Dashborad Tab -->
-  <ion-tab title="Dashboard" icon="icon ion-home" href="#/tab/dash">
-    <ion-nav-view name="secure-dash"></ion-nav-view>
-  </ion-tab>
+    <!-- Dashborad Tab -->
+    <ion-tab title="Dashboard" icon="icon ion-home" href="#/tab/dash">
+        <ion-nav-view name="secure-dash"></ion-nav-view>
+    </ion-tab>
 
-  <!-- Users Tab -->
-  <ion-tab title="Users" icon="icon ion-person-stalker" href="#/tab/users">
-    <ion-nav-view name="secure-users"></ion-nav-view>
-  </ion-tab>
+    <!-- Users Tab -->
+    <ion-tab title="Users" icon="icon ion-person-stalker" href="#/tab/users">
+        <ion-nav-view name="secure-users"></ion-nav-view>
+    </ion-tab>
 
-  <!-- Account Tab -->
-  <ion-tab title="Account" icon="icon ion-gear-b" href="#/tab/account">
-    <ion-nav-view name="secure-account"></ion-nav-view>
-  </ion-tab>
-  
-  <ion-tab title="Sign-Out" icon="ion-log-out" href="#/sign-in">
-        </ion-tab>
+    <!-- Account Tab -->
+    <ion-tab title="Account" icon="icon ion-gear-b" href="#/tab/account">
+        <ion-nav-view name="secure-account"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Sign Out Tab -->
+    <ion-tab title="Sign-Out" icon="ion-log-out" ng-click="logout()">
+    </ion-tab>
 
 </ion-tabs>
