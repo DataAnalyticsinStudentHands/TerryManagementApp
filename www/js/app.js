@@ -5,6 +5,7 @@ angular.module('dash-admin-app', [
     'Controllers',
     'Services',
     'restangular',
+    'ngNotify',
     'databaseControllerModule',
     'databaseServicesModule'
 ])

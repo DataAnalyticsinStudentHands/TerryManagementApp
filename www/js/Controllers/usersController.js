@@ -12,7 +12,7 @@ angular.module('Controllers', [])
         'use strict';
     })
 
-    .controller('UsersCtrl', function ($scope, $location, $ionicModal, Restangular) {
+    .controller('UsersCtrl', function ($scope, $location, $ionicModal, Restangular, UserService) {
         'use strict';
 
         $scope.myVariables = {};
@@ -22,14 +22,8 @@ angular.module('Controllers', [])
 
         // callback for ng-click 'deleteUser':
         $scope.deleteUser = function (userId) {
-            Restangular.all('users').all(userId).remove().then(
-                function (result) {
-                    
-                },
-                function (resultFail) {
-                    
-                }
-            );
+            UserService.deleteUser(userId);
+            $scope.data.users = Restangular.all('users').getList().$object;
         };
 
         // callback for ng-click 'modal'- open Modal dialog to

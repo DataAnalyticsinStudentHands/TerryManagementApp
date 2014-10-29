@@ -7,7 +7,7 @@
  * # UserService
  * Service
  */
-angular.module('Services').factory('UserService', function (Restangular, $q, $filter) {
+angular.module('Services').factory('UserService', function (Restangular, $q, $filter, ngNotify) {
     'use strict';
 
     var allUsers,
@@ -66,8 +66,21 @@ angular.module('Services').factory('UserService', function (Restangular, $q, $fi
                 return Restangular.all("users").all(id).post(user);
             },
         deleteUser:
-            function (uid) {
-                return Restangular.all("users").all(uid).remove();
+            function (userId) {
+                Restangular.all('users').all(userId).remove().then(
+                function (result) {
+                    ngNotify.set("Succesfully deleted user.", {
+                        position: 'bottom',
+                        type: 'success'
+                    });
+                },
+                function (error) {
+                    ngNotify.set("Could not delete user!", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
             }
     };
 });
