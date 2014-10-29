@@ -116,7 +116,12 @@ angular.module('dash-admin-app', [
                         controller: 'UserDetailCtrl'
                     }
                 },
-                authenticate: true
+                authenticate: true,
+                resolve: {
+                user: function(Restangular, $stateParams){
+                        return Restangular.one('users', $stateParams.userId).get();
+                    }
+                }
             })
 
             .state('secure.account', {

@@ -54,12 +54,15 @@ angular.module('Controllers', [])
         });
     })
 
-    .controller('UserDetailCtrl', function ($scope, $stateParams, Restangular) {
+    .controller('UserDetailCtrl', function ($scope, $stateParams, Restangular, user) {
         'use strict';
 
-        Restangular.one('users', $stateParams.userId).get().then(function (result) {
+      /*  Restangular.one('users', $stateParams.userId).get().then(function (result) {
             $scope.user = result;
-        });
+        });*/
+    
+        var original = user;
+        $scope.user = Restangular.copy(original);
 
     })
 
