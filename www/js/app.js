@@ -4,6 +4,7 @@ angular.module('dash-admin-app', [
     'ionic',
     'Controllers',
     'Services',
+    'Directives',
     'restangular',
     'ngNotify',
     'databaseControllerModule',
@@ -26,13 +27,9 @@ angular.module('dash-admin-app', [
         });
 
         Restangular.setBaseUrl("http://localhost:8080/CHW/");
-        //Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/"); //HOUSUGGEST FOR VMA CORE
+        //Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");
         $rootScope.Restangular = function () {
             return Restangular;
-        };
-
-        $rootScope.addAuth = function () {
-            //
         };
 
         $rootScope.isAuthenticated = function () {

@@ -59,7 +59,20 @@ angular.module('Services').factory('UserService', function (Restangular, $q, $fi
             },
         addUser:
             function (user) {
-                return Restangular.all("users").post(user);
+                return Restangular.all("users").post(user).then(
+                    function (result) {
+                    ngNotify.set("Succesfully created user.", {
+                        position: 'bottom',
+                        type: 'success'
+                    });
+                },
+                function (error) {
+                    ngNotify.set("Could not create user!", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+                );
             },
         editUser:
             function (id, user) {

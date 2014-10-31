@@ -3,7 +3,8 @@
     <ion-content class="has-header">
 
         <div class="buttons">
-            <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
+            <button class="button button-icon icon ion-minus-circled button-clear button-dark" ng-click="data.showDelete = !data.showDelete"></button>
+            <button type="button" name="addbutton" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('user')"></button>
         </div>
 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">

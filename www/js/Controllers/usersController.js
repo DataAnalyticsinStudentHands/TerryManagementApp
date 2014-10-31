@@ -17,6 +17,7 @@ angular.module('Controllers', [])
 
         $scope.myVariables = {};
         $scope.data = {};
+        $scope.user = {};
 
         $scope.data.users = Restangular.all('users').getList().$object;
 
@@ -26,35 +27,34 @@ angular.module('Controllers', [])
             $scope.data.users = Restangular.all('users').getList().$object;
         };
 
-        // callback for ng-click 'modal'- open Modal dialog to
-        // create new User
-        $ionicModal.fromTemplateUrl('templates/modals/modal_user.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
+        // callback for ng-click 'showAddModal':
+        $scope.showAddModal = function (acType) {
 
-        // Execute action on hide modal
-        $scope.$on('modal.hidden', function () {
-            $scope.Restangular().all('users').getList().then(
-                function (result) {
-                    $scope.users = result;
-                },
-                function (resultFail) {
-                    // console.log(resultFail);
-                }
-            );
-        });
+            $scope.myVariables.current_mode = "Add";
+        
+            $ionicModal.fromTemplateUrl('templates/modals/modal_' + acType + '.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+        };
+    
+        // callback for ng-click 'saveModal':
+        $scope.saveModal = function () {
+                $scope.user.username = $scope.user.email;
+                UserService.addUser($scope.user).then(
+                    function (success) {
+                        $scope.modal.hide();
+                    }
+                );
+        };
     })
 
     .controller('UserDetailCtrl', function ($scope, $stateParams, Restangular, user) {
         'use strict';
 
-      /*  Restangular.one('users', $stateParams.userId).get().then(function (result) {
-            $scope.user = result;
-        });*/
-    
         var original = user;
         $scope.user = Restangular.copy(original);
 

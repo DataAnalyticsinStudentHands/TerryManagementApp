@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">Add User</h1>
+        <h1 class="title">{{myVariables.current_mode}} User</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
         <form novalidate class="submit" on-valid-submit="saveModal()">
-            <div class="row">
-                <div class="col">
-                    <label class="item item-input">
-                        <span class="input-label">First Name:</span>
-                        <input name="firstName" ng-model="user.firstName" type="text" placeholder="first name">
-                    </label>
+            <div class="list list-inset">
+                <div class="item item-input validated">
+                        <label class="input-label">&nbsp;email:</label>
+                        <input name="firstName" ng-model="user.email" type="email" placeholder="email" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;First Name:</label>
+                    <input name="firstName" ng-model="user.firstName" type="text" placeholder="first name" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;Last Name:</label>
+                    <input name="lastName" ng-model="user.lastName" type="text" placeholder="last name" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;Password:</label>
+                    <input name="lastName" ng-model="user.password" type="text" placeholder="last name" required>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label class="item item-input">
-                        <span class="input-label">Last Name:</span>
-                        <input name="lastName" ng-model="user.lastName" type="text" placeholder="last name">
-                    </label>
-                </div>
-            </div>
-                
-            
+
             <div class="row">
                 <div class="col col-25 col-offset-75">
                     <button class="button button-full button-positive" type="submit">Save</button>
