@@ -7,6 +7,7 @@ angular.module('dash-admin-app', [
     'Directives',
     'restangular',
     'ngNotify',
+    'angular-data.DSCacheFactory',
     'databaseControllerModule',
     'databaseServicesModule'
 ])
