@@ -1,0 +1,66 @@
+[
+  {
+    "name":"Abogacia",
+    "id":1
+  },
+  {
+    "name":"Advocacy",
+    "id":2
+  },
+  {
+    "name":"Capacity Building ",
+    "id":3
+  },
+  {
+    "name":"Communication Skills ",
+    "id":4
+  },
+  {
+    "name":"Community Service",
+    "id":5
+  },
+  {
+    "name":"Conocimiento Base",
+    "id":6
+  },
+  {
+    "name":"Coordinar Servicios",
+    "id":7
+  },
+  {
+    "name":"Coordination",
+    "id":8
+  },
+  {
+    "name":"Dessarrollo de capacidad el la communidad ",
+    "id":9
+  },
+  {
+    "name":"Ensenanza",
+    "id":10
+  },
+  {
+    "name":"Interpersonal Communication ",
+    "id":11
+  },
+  {
+    "name":"Knowledge Base ",
+    "id":12
+  },
+  {
+    "name":"Organizational ",
+    "id":13
+  },
+  {
+    "name":"Service Coordination",
+    "id":14
+  },
+  {
+    "name":"Skills",
+    "id":15
+  },
+  {
+    "name":"Teaching Skills",
+    "id":16
+  }
+]

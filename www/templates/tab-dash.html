@@ -1,6 +1,41 @@
 <ion-view title="Dashboard"> <ion-content
 	class="has-header padding">
-<h1>Items to be listed:</h1>
+<p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            CHW Data Entry</p>
+
+        <form novalidate class="submit" on-valid-submit="save('tabs.myapplication.essays')">
+            
+            <div class="item item-button-left dark">
+                List of Locations
+                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('location')"></button>
+            </div>
+
+            <div class="list list-inset">
+                <div class="item" ng-repeat="item in locations" item="item">
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('location', item.id)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('location', item)">&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}}</button>
+                </div>
+            </div>
+            
+            <div class="item item-button-left dark">
+                List of classes
+                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('class')"></button>
+            </div>
+
+            <div class="list list-inset">
+                <div class="item" ng-repeat="item in classes" item="item">
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('class', item.id)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('class', item)">&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}} {{item.duration}} Amount: {{item.amount}}</button>
+                </div>
+            </div>
+
+            <!-- Submit/Next button -->
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button class="button button-full button-positive" type="submit">Next</button>
+                </div>
+            </div>
+        </form>
 
 
 	

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Location</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <form novalidate class="submit" on-valid-submit="saveModal('locations')">
+            <div class="list list-inset">
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;Name:</label>
+                    <input name="name" ng-model="location.name" type="text" placeholder="name" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;Description:</label>
+                    <input name="description" ng-model="location.description" type="text" placeholder="description">
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;Address:</label>
+                    <input name="address" ng-model="location.address" type="text" placeholder="street address" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;City:</label>
+                    <input name="city" ng-model="location.city" type="text" placeholder="city" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;Zip Code:</label>
+                    <input name="zip" ng-model="location.zip" type="number" placeholder="zip" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;State:</label>
+                    <input name="state" ng-model="location.state" type="text" placeholder="state" required>
+                </div>
+                <div class="item item-input validated">
+                    <label class="input-label">&nbsp;County:</label>
+                    <input name="county" ng-model="location.county" type="text" placeholder="county" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button class="button button-full button-positive" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>
