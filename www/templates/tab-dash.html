@@ -1,21 +1,31 @@
-<ion-view title="Dashboard"> <ion-content
-	class="has-header padding">
-<p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-            CHW Data Entry</p>
+<ion-view title="Dashboard">
+    <ion-content>
+        
+        <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            CHW Data Entry - List of Locations</p>
+    
+    
+    <div class="buttons">
+            <button type="button" name="deletebutton" class="button icon ion-minus-circled button-clear button-dark" ng-click="data.showDelete = !data.showDelete">&nbsp;Delete Location</button>
+            <button type="button" name="addbutton" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('location')">&nbsp;Add New Location</button>
+        </div>
 
-        <form novalidate class="submit" on-valid-submit="save('tabs.myapplication.essays')">
+        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+            <ion-item ng-repeat="item in locations" type="item-text-wrap" href="#/tab/dash/{{item.id}}">
+                Name: {{item.name}} Id: {{item.id}}
+                <ion-delete-button class="ion-minus-circled" ng-click="deleteData('locations', item.id)"></ion-delete-button>
+            </ion-item>
+        </ion-list>
+
+
+        
             
-            <div class="item item-button-left dark">
-                List of Locations
-                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('location')"></button>
-            </div>
+            
+                
+                
 
-            <div class="list list-inset">
-                <div class="item" ng-repeat="item in locations" item="item">
-                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('location', item.id)"></button>
-                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('location', item)">&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}}</button>
-                </div>
-            </div>
+            
+                    
             
             <div class="item item-button-left dark">
                 List of classes
@@ -24,18 +34,12 @@
 
             <div class="list list-inset">
                 <div class="item" ng-repeat="item in classes" item="item">
-                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('class', item.id)"></button>
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('classes', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('class', item)">&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}} {{item.duration}} Amount: {{item.amount}}</button>
                 </div>
             </div>
 
-            <!-- Submit/Next button -->
-            <div class="row">
-                <div class="col col-25 col-offset-75">
-                    <button class="button button-full button-positive" type="submit">Next</button>
-                </div>
-            </div>
-        </form>
+            
 
 
 	

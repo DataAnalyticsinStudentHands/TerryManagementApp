@@ -7,10 +7,7 @@
     <ion-content>
         <form novalidate class="submit" on-valid-submit="saveModal('classes')">
             <div class="list list-inset">
-                <div class="item item-input validated">
-                    <label class="input-label">&nbsp;Location:</label>
-                    <input name="location" ng-model="aclass.location_id" type="number" placeholder="location_id" required>
-                </div>
+                
                 <div class="item item-input validated">
                     <label class="input-label">&nbsp;Name:</label>
                     <input name="name" ng-model="aclass.name" type="text" placeholder="name" required>
@@ -20,8 +17,12 @@
                     <input name="description" ng-model="aclass.description" type="text" placeholder="description">
                 </div>
                 <div class="item item-input validated">
-                    <label class="input-label">&nbsp;Time:</label>
-                    <input name="lastName" ng-model="aclass.time" type="text" placeholder="time" >
+                    <label class="input-label" ng-click="openDatePicker('Start Time', 'time')">&nbsp;Time:</label>
+                    <input name="lastName" ng-model="aclass.time" type="text" placeholder="Select" >
+                    
+                    
+                    
+                    
                     
                 </div>
                 
@@ -31,7 +32,7 @@
                 </div>
                 <div class="item item-input validated">
                     <label class="input-label">&nbsp;Room:</label>
-                    <input name="lastName" ng-model="aclass.room" type="number" placeholder="zip" >
+                    <input name="lastName" ng-model="aclass.room" type="text" placeholder="room" >
                 </div>
             </div>
 

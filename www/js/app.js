@@ -8,58 +8,57 @@ angular.module('dash-admin-app', [
     'restangular',
     'ngNotify',
     'angular-data.DSCacheFactory',
+    'ui.bootstrap.datetimepicker',
     'databaseControllerModule',
     'databaseServicesModule'
-])
+]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
+    'use strict';
 
-    .run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
-        'use strict';
+    $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
 
-        $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
-            }
+    //Restangular.setBaseUrl("http://localhost:8080/CHW/");
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");
+    $rootScope.Restangular = function () {
+        return Restangular;
+    };
+
+    $rootScope.isAuthenticated = function () {
+        return Auth.hasCredentials();
+    };
+
+    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        console.log("$stateChangeStart");
+        console.log($rootScope.isAuthenticated());
+        if (toState.authenticate && !$rootScope.isAuthenticated()) {
+            console.log("non-authed");
+            // User isn’t authenticated
+            $state.go("login");
+            //What?
+            event.preventDefault();
+        } else {
+            console.log("authed");
+        }
+    });
+
+    //Logout user by clearing credentials
+    $rootScope.logout = function () {
+        Auth.clearCredentials();
+        console.log("log out");
+        $state.go('login', {}, {
+            reload: true
         });
-
-        Restangular.setBaseUrl("http://localhost:8080/CHW/");
-        //Restangular.setBaseUrl("http://www.housuggest.org:8888/VolunteerApp/");
-        $rootScope.Restangular = function () {
-            return Restangular;
-        };
-
-        $rootScope.isAuthenticated = function () {
-            return Auth.hasCredentials();
-        };
-
-        $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-            console.log("$stateChangeStart");
-            console.log($rootScope.isAuthenticated());
-            if (toState.authenticate && !$rootScope.isAuthenticated()) {
-                console.log("non-authed");
-                // User isn’t authenticated
-                $state.go("login");
-                //What?
-                event.preventDefault();
-            } else {
-                console.log("authed");
-            }
-        });
-    
-        //Logout user by clearing credentials
-        $rootScope.logout = function () {
-            Auth.clearCredentials();
-            console.log("log out");
-            $state.go('login', {}, {
-                reload: true
-            });
-        };
-    })
+    };
+})
 
     .config(function ($stateProvider, $urlRouterProvider) {
         'use strict';
@@ -69,14 +68,14 @@ angular.module('dash-admin-app', [
         // Set up the various states which the app can be in.
         // Each state's controller can be found in controllers.js
         $stateProvider
-        
+
             .state('login', {
                 url: "/login",
                 templateUrl: "templates/login.html",
                 controller: 'loginCtrl',
                 authenticate: false
             })
-        
+
             // setup an abstract state for the tabs directive
             .state('secure', {
                 url: "/tab",
@@ -96,6 +95,17 @@ angular.module('dash-admin-app', [
                 },
                 authenticate: true
             })
+        
+            .state('secure.dash-detail', {
+                url: '/dash/:itemId',
+                views: {
+                    'secure-users': {
+                        templateUrl: 'templates/classes.html',
+                        controller: 'DashCtrl'
+                    }
+                },
+                authenticate: true
+            })
 
             .state('secure.users', {
                 url: '/users',
@@ -107,7 +117,8 @@ angular.module('dash-admin-app', [
                 },
                 authenticate: true
             })
-                .state('secure.user-detail', {
+            
+            .state('secure.user-detail', {
                 url: '/user/:userId',
                 views: {
                     'secure-users': {
@@ -117,7 +128,7 @@ angular.module('dash-admin-app', [
                 },
                 authenticate: true,
                 resolve: {
-                user: function(Restangular, $stateParams){
+                    user: function (Restangular, $stateParams) {
                         return Restangular.one('users', $stateParams.userId).get();
                     }
                 }
@@ -134,7 +145,7 @@ angular.module('dash-admin-app', [
                 authenticate: true
             });
 
-            // if none of the above states are matched, use this as the fallback
-            $urlRouterProvider.otherwise("/login");
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise("/login");
 
     });

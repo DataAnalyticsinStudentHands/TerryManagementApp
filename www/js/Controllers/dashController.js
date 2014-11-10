@@ -7,7 +7,7 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, DataService) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService) {
     'use strict';
 
     $scope.myVariables = {
@@ -39,6 +39,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         $scope.myVariables.current_mode = "Add";
         $scope.location = {};
         $scope.aclass = {};
+        $scope.aclass.location_id = $stateParams.itemId;
 
         $ionicModal.fromTemplateUrl('templates/modals/modal_' + acType + '.html', {
             scope: $scope,

@@ -68,13 +68,13 @@ angular.module('Services').factory('DataService', function (Restangular, $q, DSC
 
             return Restangular.all(type).all(item_id).remove().then(
                 function (result) {
-                    ngNotify.set("Succesfully deleted your " + type + " .", {
+                    ngNotify.set("Succesfully deleted your from " + type + " .", {
                         position: 'bottom',
                         type: 'success'
                     });
                 },
                 function (error) {
-                    ngNotify.set("Could not contact server to delete " + type + " !", {
+                    ngNotify.set("Could not contact server to delete from " + type + " !", {
                         position: 'bottom',
                         type: 'error'
                     });

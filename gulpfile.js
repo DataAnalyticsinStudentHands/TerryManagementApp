@@ -2,10 +2,18 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
+var filter = require('gulp-filter');  
+var mainBowerFiles = require('main-bower-files');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+
+var filterByExtension = function(extension){  
+    return filter(function(file){
+        return file.path.match(new RegExp('.' + extension + '$'));
+    });
+};
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -48,3 +56,27 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+gulp.task('makeDist', function(){  
+    var mainFiles = mainBowerFiles();
+
+    if(!mainFiles.length){
+        // No main files found. Skipping....
+        return;
+    }
+    
+    console.log('Found the following main files:\n');
+    console.log(mainFiles);
+
+    var jsFilter = filterByExtension('js');
+
+    return gulp.src(mainFiles)
+        .pipe(jsFilter)
+        .pipe(concat('third-party.js'))
+        .pipe(gulp.dest('./www/js'))
+        .pipe(jsFilter.restore())
+        .pipe(filterByExtension('css'))
+        .pipe(concat('third-party.css'))
+        .pipe(gulp.dest('./www/css'));
+});
+
