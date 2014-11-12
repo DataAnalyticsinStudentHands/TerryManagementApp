@@ -27,7 +27,7 @@ angular.module('dash-admin-app', [
     });
 
     //Restangular.setBaseUrl("http://localhost:8080/CHW/");
-    Restangular.setBaseUrl("http://www.housuggest.org:8888/CHWApp/");
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
     $rootScope.Restangular = function () {
         return Restangular;
     };

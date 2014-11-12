@@ -5,7 +5,7 @@
   "authors": [
     "Peggy Lindner <plindner@uh.edu>"
   ],
-  "description": "DASH Management Application",
+  "description": "Terry Management Application",
   "license": "MIT",
   "ignore": [
     "**/.*",

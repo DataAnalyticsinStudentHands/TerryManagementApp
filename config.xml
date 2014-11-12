@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE project>
 <widget id="com.ionicframework.myproject334440" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>DASH Demo App</name>
+  <name>Terry Management App </name>
   <description>
-        A DASH demo app using the Ionic Framework and Cordova.
+        The Terry Management app using the Ionic Framework and Cordova.
     </description>
   <author email="plindner@uh.edu" href="http://www.housuggest.org/DASH/">
       DASH Team
