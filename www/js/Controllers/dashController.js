@@ -14,22 +14,14 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         current_mode: 'Add'
     };
     
-    $scope.locations = {};
+    $scope.listData = {};
     $scope.location = {};
-    $scope.classes = {};
-    $scope.aclass = {};
+    
 
     // GET 
-    DataService.getAllItems('locations').then(
+    DataService.getAllItems('applications').then(
         function (result) {
-            $scope.locations = result;
-        }
-    );
-
-    // GET 
-    DataService.getAllItems('classes').then(
-        function (result) {
-            $scope.classes = result;
+            $scope.listData = result;
         }
     );
     

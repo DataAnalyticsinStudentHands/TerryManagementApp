@@ -16,7 +16,7 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state',
          
      $scope.submit = function() {
          if ($scope.model.userName && $scope.model.passWord) {
-             $scope.passWordHashed = new String(CryptoJS.SHA512($scope.passWord + $scope.model.userName + $scope.salt));
+             $scope.passWordHashed = new String(CryptoJS.SHA512($scope.model.passWord + $scope.model.userName + $scope.salt));
              console.log($scope.passWordHashed.toString());
              Auth.setCredentials($scope.model.userName, $scope.passWordHashed);
 //             $scope.loginResult = $scope.Restangular.get();

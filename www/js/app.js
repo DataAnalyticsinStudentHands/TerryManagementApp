@@ -26,8 +26,8 @@ angular.module('dash-admin-app', [
         }
     });
 
-    //Restangular.setBaseUrl("http://localhost:8080/CHW/");
-    Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    Restangular.setBaseUrl("http://localhost:8080/terry/");
+    //Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
     $rootScope.Restangular = function () {
         return Restangular;
     };
@@ -99,23 +99,18 @@ angular.module('dash-admin-app', [
             .state('secure.dash-detail', {
                 url: '/dash/:itemId',
                 views: {
-                    'secure-users': {
-                        templateUrl: 'templates/classes.html',
+                    'secure-dash': {
+                        templateUrl: 'templates/dash-detail.html',
                         controller: 'DashCtrl'
                     }
                 },
-                authenticate: true
-            })
-
-            .state('secure.users', {
-                url: '/users',
-                views: {
-                    'secure-users': {
-                        templateUrl: 'templates/tab-users.html',
-                        controller: 'UsersCtrl'
+                authenticate: true,
+                resolve: {
+                    item: function (Restangular, $stateParams) {
+                        return Restangular.one('applications', $stateParams.itemId).get();
                     }
-                },
-                authenticate: true
+                }
+                
             })
             
             .state('secure.user-detail', {
