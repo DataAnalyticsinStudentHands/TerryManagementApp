@@ -7,11 +7,38 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function (Restangular, $q, ngNotify) {
+angular.module('Services').factory('DataService', function ($http, Restangular, ngNotify) {
     'use strict';
+    
+    //Load data for form data for terry application
+    var application_form;
+    
+    $http.get('json/form_application.json').success(function (data) {
+        application_form = data;
+    });
 
     return {
-        
+        getApplicationForm: function () {
+            return application_form;
+        },
+        addItem: function (type, item) {
+
+            return Restangular.all(type).post(item).then(
+
+                function (result) {
+                    ngNotify.set("Succesfully saved your " + type + " to the server.", {
+                        position: 'bottom',
+                        type: 'success'
+                    });
+                },
+                function (error) {
+                    ngNotify.set("Could not contact server to add " + type + " !", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+        },
         getAllItems: function (acType) {
 
             return Restangular.all(acType).getList().then(
@@ -45,24 +72,6 @@ angular.module('Services').factory('DataService', function (Restangular, $q, ngN
                 }
             );
 
-        },
-        addItem: function (type, item) {
-
-            return Restangular.all(type).post(item).then(
-
-                function (result) {
-                    ngNotify.set("Succesfully saved your " + type + " to the server.", {
-                        position: 'bottom',
-                        type: 'success'
-                    });
-                },
-                function (error) {
-                    ngNotify.set("Could not contact server to add " + type + " !", {
-                        position: 'bottom',
-                        type: 'error'
-                    });
-                }
-            );
         },
         updateItem: function (type, item_id, item) {
 

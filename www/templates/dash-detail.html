@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<ion-view title="Application {{item.first_name}}">
+<ion-view title="Application Details for {{item.first_name}} {{item.last_name}}">
     <ion-content>
-        
-{{item.first_name}}
+
             <div class="row">
-                <div class="col col-25 col-offset-50">
-                    <button ng-click="cancel()" class="button button-block button-positive">Cancel</button>
-                </div>
                 <div class="col col-25 ">
-                    <button class="button button-full button-positive" ng-click="createPdf(item)">pdf</button>
+                    <button class="button button-full button-positive" ng-click="createPdf(item)">View PDF</button>
                 </div>
             </div>
         

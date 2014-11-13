@@ -1,4 +1,4 @@
-/*global angular, cordova, console*/
+/*global angular, cordova, console, StatusBar*/
 
 angular.module('terry-management-app', [
     'ionic',
@@ -27,10 +27,11 @@ angular.module('terry-management-app', [
 
     Restangular.setBaseUrl("http://localhost:8080/terry/");
     //Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    
     $rootScope.Restangular = function () {
         return Restangular;
     };
-
+    
     $rootScope.isAuthenticated = function () {
         return Auth.hasCredentials();
     };
@@ -86,6 +87,11 @@ angular.module('terry-management-app', [
             // Each tab has its own nav history stack:
             .state('secure.dash', {
                 url: '/dash',
+                resolve: {
+                    items: function (DataService) {
+                        return DataService.getAllItems('applications');
+                    }
+                },
                 views: {
                     'secure-dash': {
                         templateUrl: 'templates/tab-dash.html',
@@ -97,20 +103,18 @@ angular.module('terry-management-app', [
         
             .state('secure.dash-detail', {
                 url: '/dash/:itemId',
-                
                 authenticate: true,
                 resolve: {
-                    item: function (Restangular, $stateParams) {
-                        return Restangular.one('applications', $stateParams.itemId).get();
+                    item: function (DataService, $stateParams) {
+                        return DataService.getItem('applications', $stateParams.itemId);
                     }
                 },
-            views: {
+                views: {
                     'secure-dash': {
                         templateUrl: 'templates/dash-detail.html',
-                        controller: 'DashCtrl'
+                        controller: 'DashDetailCtrl'
                     }
                 }
-                
             })
 
             .state('secure.account', {

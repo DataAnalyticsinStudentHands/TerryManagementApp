@@ -1,0 +1,884 @@
+[
+
+
+    {
+        "name": "first_name",
+        "label": "First Name:",
+        "form": "student_information",
+        "id": 2,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "last_name",
+        "label": "Last Name:",
+        "form": "student_information",
+        "id": 3,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "uh_id",
+        "label": "UH ID:",
+        "form": "student_information",
+        "id": 4,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "middle_name",
+        "label": "Middle Name:",
+        "form": "student_information",
+        "id": 5,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "preferred_name",
+        "label": "Preferred Name:",
+        "form": "student_information",
+        "id": 6,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "ssn",
+        "label": "SSN:",
+        "form": "student_information",
+        "id": 7,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "permanent_address",
+        "label": "Permanent Address:",
+        "form": "student_information",
+        "id": 8,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "city",
+        "label": "City:",
+        "form": "student_information",
+        "id": 9,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "state",
+        "label": "State:",
+        "form": "student_information",
+        "id": 10,
+        "type": "text",
+        "required": "true"
+    },
+
+    {
+        "name": "dob",
+        "label": "Date of Birth:",
+        "form": "student_information",
+        "id": 11,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "county",
+        "label": "County:",
+        "form": "student_information",
+        "id": 12,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "home_phone",
+        "label": "Home Phone:",
+        "form": "student_information",
+        "id": 13,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "alt_cell_phone",
+        "label": "Alternate/Cell Phone:",
+        "form": "student_information",
+        "id": 14,
+        "type": "false"
+    },
+    {
+        "name": "gender",
+        "label": "Gender:",
+        "form": "student_information",
+        "id": 15,
+        "type": "text"
+    },
+    {
+        "name": "email",
+        "label": "Email Address:",
+        "form": "student_information",
+        "id": 16,
+        "type": "email",
+        "required": "true"
+    },
+    {
+        "name": "citizen",
+        "label": "U.S. Citizen:",
+        "form": "student_information",
+        "id": 17,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "permanent_resident",
+        "label": "Permanent Resident:",
+        "form": "student_information",
+        "id": 18,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "permanent_resident_card",
+        "label": "Permanent Resident Type of Card:",
+        "form": "student_information",
+        "id": 19,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "texas_resident",
+        "label": "Texas Resident:",
+        "form": "student_information",
+        "id": 20,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "birthplace",
+        "label": "Birthplace:",
+        "form": "student_information",
+        "id": 21,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "ethnic_background",
+        "label": "Ethnic Background:",
+        "form": "student_information",
+        "id": 22,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "anticipated_major",
+        "label": "Anticipated College Major:",
+        "form": "student_information",
+        "id": 23,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "highschool_name",
+        "label": "High School Name:",
+        "form": "highschool_information",
+        "id": 24,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "highschool_city",
+        "label": "High School City/ST:",
+        "form": "highschool_information",
+        "id": 25,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "highschool_councelor",
+        "label": "Your High School Counselor:",
+        "form": "highschool_information",
+        "id": 26,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "highschool_phone",
+        "label": "School Phone/Ext.:",
+        "form": "highschool_information",
+        "id": 27,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "highschool_councelor_email",
+        "label": "Your High School Counselors Email Address:",
+        "form": "highschool_information",
+        "id": 28,
+        "type": "email",
+        "required": "true"
+    },
+    {
+        "name": "highschool_gpa",
+        "label": "High School GPA:",
+        "form": "highschool_information",
+        "id": 29,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "highschool_scale",
+        "label": "Scale:",
+        "form": "highschool_information",
+        "id": 30,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "highschool_graduation_date",
+        "label": "Graduation Date:",
+        "form": "highschool_information",
+        "id": 31,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "highschool_rank",
+        "label": "Class Rank:",
+        "form": "highschool_information",
+        "id": 32,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "highschool_rank_out",
+        "label": "out of",
+        "form": "highschool_information",
+        "id": 33,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "highschool_rank_tied",
+        "label": "Number of students tied for this rank:",
+        "form": "highschool_information",
+        "id": 34,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "psat_verbal",
+        "label": "Verbal:",
+        "form": "highschool_information",
+        "id": 35,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "psat_math",
+        "label": "Math:",
+        "form": "highschool_information",
+        "id": 36,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "psat_writing",
+        "label": "Writing Skills:",
+        "form": "highschool_information",
+        "id": 37,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "psat_selection",
+        "label": "Selection Index:",
+        "form": "highschool_information",
+        "id": 38,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "psat_date",
+        "label": "Date of Test:",
+        "form": "highschool_information",
+        "id": 39,
+        "type": "date",
+        "required": "false"
+    },
+    {
+        "name": "sat_reading",
+        "label": "Critical Reading:",
+        "form": "highschool_information",
+        "id": 40,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "sat_math",
+        "label": "Mathematics:",
+        "form": "highschool_information",
+        "id": 41,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "sat_writing",
+        "label": "Writing:",
+        "form": "highschool_information",
+        "id": 42,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "sat_composite",
+        "label": "Composite:",
+        "form": "highschool_information",
+        "id": 43,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "sat_date",
+        "label": "Date of Test:",
+        "form": "highschool_information",
+        "id": 44,
+        "type": "date",
+        "required": "false"
+    },
+    {
+        "name": "act_composite",
+        "label": "Composite:",
+        "form": "highschool_information",
+        "id": 45,
+        "type": "number",
+        "required": "true"
+    },
+    {
+        "name": "act_date",
+        "label": "Date of Test:",
+        "form": "highschool_information",
+        "id": 46,
+        "type": "date",
+        "required": "false"
+        },
+    {
+        "name": "national_merit",
+        "label": "National Merit:",
+        "form": "highschool_information",
+        "id": 47,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "national_merit_date",
+        "label": "Date of Test:",
+        "form": "highschool_information",
+        "id": 48,
+        "type": "date",
+        "required": "false"
+    },
+    {
+        "name": "national_achievement",
+        "label": "NationalAchievement:",
+        "form": "highschool_information",
+        "id": 49,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "national_achievement_date",
+        "label": "Date of Test:",
+        "form": "highschool_information",
+        "id": 50,
+        "type": "date",
+        "required": "false"
+    },
+    {
+        "name": "national_hispanic",
+        "label": "National Hispanic:",
+        "form": "highschool_information",
+        "id": 51,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "national_hispanic_date",
+        "label": "Date of Test:",
+        "form": "highschool_information",
+        "id": 52,
+        "type": "date",
+        "required": "false"
+    },
+    {
+        "name": "first_graduate",
+        "label": "Will you be the first in your family to graduate college?",
+        "form": "college_plans",
+        "id": 53,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "why_apply",
+        "label": "Why have you chosen to apply to the University of Houston?",
+        "form": "college_plans",
+        "id": 54,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "why_major",
+        "label": "Why have you chosen your academic major(s)?",
+        "form": "college_plans",
+        "id": 55,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "educational_plans",
+        "label": "Briefly describe any educational plans you have beyond earning your Bachelor’s degree:",
+        "form": "college_plans",
+        "id": 56,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "life_goals",
+        "label": "What are some of your life’s goals and objectives?",
+        "form": "college_plans",
+        "id": 57,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "marital_status",
+        "label": "Your marital status:",
+        "form": "financial_information",
+        "id": 58,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "marital_status_parents",
+        "label": "Your parents' marital status:",
+        "form": "financial_information",
+        "id": 59,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "total_annual_income",
+        "label": "Your total annual income:",
+        "form": "financial_information",
+        "id": 60,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "present_partner",
+        "label": "You presently live with (name & relationship)",
+        "form": "financial_information",
+        "id": 61,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "father_occupation",
+        "label": "Father’s occupation:",
+        "form": "financial_information",
+        "id": 62,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "stepparent_occupation",
+        "label": "Step Parent’s occupation:",
+        "form": "financial_information",
+        "id": 63,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "father_employer",
+        "label": "Father’s employer:",
+        "form": "financial_information",
+        "id": 64,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "stepparent_employer",
+        "label": "Step Parent’s employer:",
+        "form": "financial_information",
+        "id": 65,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "father_total_income",
+        "label": "Father’s total annual income:",
+        "form": "financial_information",
+        "id": 66,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "stepparent_total_income",
+        "label": "Step Parent’s total annual income:",
+        "form": "financial_information",
+        "id": 67,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "father_age",
+        "label": "Father’s age:",
+        "form": "financial_information",
+        "id": 68,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "stepparent_age",
+        "label": "Step Parent’s age:",
+        "form": "financial_information",
+        "id": 69,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "father_level_education",
+        "label": "Highest level of education achieved:",
+        "form": "financial_information",
+        "id": 70,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "stepparent_level_education",
+        "label": "Highest level of education achieved:",
+        "form": "financial_information",
+        "id": 71,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "mother_occupation",
+        "label": "Mother’s occupation:",
+        "form": "financial_information",
+        "id": 72,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "guardian_occupation",
+        "label": "Guardian’s occupation:",
+        "form": "financial_information",
+        "id": 73,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "mother_employer",
+        "label": "Mother’s employer:",
+        "form": "financial_information",
+        "id": 74,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "guardian_employer",
+        "label": "Guardian’s employer:",
+        "form": "financial_information",
+        "id": 75,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "mother_total_income",
+        "label": "Mother’s total annual income:",
+        "form": "financial_information",
+        "id": 76,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "guardian_total_income",
+        "label": "Guardian’s total annual income:",
+        "form": "financial_information",
+        "id": 77,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "mother_age",
+        "label": "Mother’s age:",
+        "form": "financial_information",
+        "id": 78,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "guardian_age",
+        "label": "Guardian’s age:",
+        "form": "financial_information",
+        "id": 79,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "mother_level_education",
+        "label": "Highest level of education achieved:",
+        "form": "financial_information",
+        "id": 80,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "guardian_level_education",
+        "label": "Highest level of education achieved:",
+        "form": "financial_information",
+        "id": 81,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "income_same",
+        "label": "Has your family’s income for 2014 remained the same as 2013?",
+        "form": "financial_information",
+        "id": 82,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "increased",
+        "label": "increased",
+        "form": "financial_information",
+        "id": 83,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "decreased",
+        "label": "decreased",
+        "form": "financial_information",
+        "id": 84,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "family_attending_college",
+        "label": "Number of family members attending college during the 2015-2016 academic year (include yourself):",
+        "form": "financial_information",
+        "id": 85,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "financial_assistance",
+        "label": "Are you receiving financial assistance (such as Social Security disability) from any local or federal government entity?",
+        "form": "financial_information",
+        "id": 86,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "assistance_type",
+        "label": "assistance_type",
+        "form": "financial_information",
+        "id": 87,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "assistance_amount",
+        "label": "assistance_amount",
+        "form": "financial_information",
+        "id": 88,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "funds_saved_you",
+        "label": "Funds for college saved by you:",
+        "form": "financial_information",
+        "id": 89,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "funds_saved_others",
+        "label": "Funds for college saved by others:",
+        "form": "financial_information",
+        "id": 90,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "total_savings",
+        "label": "Your parents’ or guardians’ total cash savings (not limited to college):",
+        "form": "financial_information",
+        "id": 91,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "total_investments",
+        "label": "Value of your parents’ or guardians’ other investments (<b>NOT</b> including home):",
+        "form": "financial_information",
+        "id": 92,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "net_value",
+        "label": "Net value of your parents’ or guardians’ businesses, farms and/or ranches:",
+        "form": "financial_information",
+        "id": 93,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "adjusted_cross_income",
+        "label": "Parents’/Guardians’ Adjusted Gross Income for 2014 (line 37 on Form 1040; line 21 on form 1040A):",
+        "form": "financial_information",
+        "id": 94,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "projected_support",
+        "label": "Projected parental support (annual):",
+        "form": "financial_information",
+        "id": 95,
+        "type": "number",
+        "required": "false"
+    },
+    {
+        "name": "description_special_circumstances",
+        "label": "Please describe any special circumstances that affect your family’s ability to fund your college expenses:",
+        "form": "financial_information",
+        "id": 96,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "texas_tomorrow_fund",
+        "label": "Do you have a Texas Tomorrow Fund or 529 college savings plan?  If so, what is the plan’s value?",
+        "form": "financial_information",
+        "id": 97,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "sibling_terry",
+        "label": "Do you have a sibling who is a current/past Terry Scholar or who is applying for a Terry Scholarship?  If so, please give name(s) and institution(s):",
+        "form": "financial_information",
+        "id": 98,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "department_scholarship",
+        "label": "Please indicate any college or departmental scholarships specific to your intended major for which you are applying:",
+        "form": "scholarship_information",
+        "id": 99,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "app_uh_method",
+        "label": "Method of Application UH:",
+        "form": "submit",
+        "id": 101,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "app_uh_date_sub",
+        "label": "UH Application submission date:",
+        "form": "submit",
+        "id": 102,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "app_uh_date_int_sub",
+        "label": "UH Application anticipated submission date:",
+        "form": "submit",
+        "id": 103,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "transcript_method",
+        "label": "Method of sending Transcripts:",
+        "form": "submit",
+        "id": 104,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "transcript_date_sub",
+        "label": "Transcripts submission date:",
+        "form": "submit",
+        "id": 105,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "transcript_date_int_sub",
+        "label": "Transcripts anticipated submission date:",
+        "form": "submit",
+        "id": 106,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "fafsa_method",
+        "label": "Method of Application FAFSA:",
+        "form": "submit",
+        "id": 107,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "fafsa_date_sub",
+        "label": "FAFSA application submission date:",
+        "form": "submit",
+        "id": 108,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "fafsa_date_int_sub",
+        "label": "FAFSA application anticipated submission date:",
+        "form": "submit",
+        "id": 109,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "housing_method",
+        "label": "Method of Application UH Housing:",
+        "form": "submit",
+        "id": 110,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "housing_date_sub",
+        "label": "UH Housing application submission date:",
+        "form": "submit",
+        "id": 111,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "housing_date_int_sub",
+        "label": "UH Housing application anticipated submission date:",
+        "form": "submit",
+        "id": 112,
+        "type": "date",
+        "required": "true"
+    }
+
+]
