@@ -1,32 +1,17 @@
 <!DOCTYPE html>
 <ion-view title="Application {{item.first_name}}">
     <ion-content>
-        <form novalidate class="submit" on-valid-submit="editUser()">
-
-            <div class="list list-inset">
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">First Name</span>
-                    <input name="firstName" ng-model="user.firstName" type="text" placeholder="first name">
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Last Name</span>
-                    <input name="lastName" ng-model="user.lastName" type="text" placeholder="last name">
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Email</span> 
-                    <input type="text" ng-model="user.email" placeholder="email">
-                </label>
-            </div>
-
+        
+{{item.first_name}}
             <div class="row">
                 <div class="col col-25 col-offset-50">
                     <button ng-click="cancel()" class="button button-block button-positive">Cancel</button>
                 </div>
                 <div class="col col-25 ">
-                    <button class="button button-full button-positive" type="submit">Update</button>
+                    <button class="button button-full button-positive" ng-click="createPdf(item)">pdf</button>
                 </div>
             </div>
-        </form>
+        
     </ion-content>
 </ion-view>
 

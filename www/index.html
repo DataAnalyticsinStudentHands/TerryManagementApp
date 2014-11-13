@@ -3,36 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>DASH Admin App</title>
+    <title>Terry Management App</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/third-party.css">
     
-    <script type="text/javascript" src="js/third-party.js"></script>   
+    <script type="text/javascript" src="js/third-party.js"></script>  
+      
+    <script type="text/javascript" src="lib/pdfmake/build/pdfmake.js"></script>
+    <script type="text/javascript" src="lib/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
     <!--the app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/Controllers/controllers.js"></script>
-    <script src="js/Controllers/dashController.js"></script>
-    <script src="js/Controllers/userDetailController.js"></script>
-    <script src="js/Controllers/accountController.js"></script>
-    <script src="js/Services/services.js"></script>
-    <script src="js/Services/dataService.js"></script>
-    <script src="js/Services/userService.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/Directives/directives.js"></script>
-    <script src="js/Directives/validation.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/Controllers/controllers.js"></script>
+    <script type="text/javascript" src="js/Controllers/dashController.js"></script>
+    <script type="text/javascript" src="js/Controllers/userDetailController.js"></script>
+    <script type="text/javascript" src="js/Controllers/accountController.js"></script>
+    <script type="text/javascript" src="js/Services/services.js"></script>
+    <script type="text/javascript" src="js/Services/dataService.js"></script>
+    <script type="text/javascript" src="js/Services/userService.js"></script>
+    <script type="text/javascript" src="js/Services/itemsResource.js"></script>
+    <script type="text/javascript" src="js/filters.js"></script>
+    <script type="text/javascript" src="js/Directives/directives.js"></script>
+    <script type="text/javascript" src="js/Directives/validation.js"></script>
       
     <!-- modules -->
-    <script src="modules/DatabaseCommunicationModule/js/controllers.js"></script> 
-    <script src="modules/DatabaseCommunicationModule/js/services.js"></script>
+    <script type="text/javascript" src="modules/DatabaseCommunicationModule/js/controllers.js"></script> 
+    <script type="text/javascript" src="modules/DatabaseCommunicationModule/js/services.js"></script>
     
   </head>
-  <body ng-app="dash-admin-app" animation="slide-left-right-ios7">
+  <body ng-app="terry-management-app" animation="slide-left-right-ios7">
     <!-- 
       The nav bar that will be updated as we navigate between views.
     -->

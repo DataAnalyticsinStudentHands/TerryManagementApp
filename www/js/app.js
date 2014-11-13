@@ -1,13 +1,12 @@
 /*global angular, cordova, console*/
 
-angular.module('dash-admin-app', [
+angular.module('terry-management-app', [
     'ionic',
     'Controllers',
     'Services',
     'Directives',
     'restangular',
     'ngNotify',
-    'angular-data.DSCacheFactory',
     'ui.bootstrap.datetimepicker',
     'databaseControllerModule',
     'databaseServicesModule'
@@ -98,35 +97,20 @@ angular.module('dash-admin-app', [
         
             .state('secure.dash-detail', {
                 url: '/dash/:itemId',
-                views: {
-                    'secure-dash': {
-                        templateUrl: 'templates/dash-detail.html',
-                        controller: 'DashCtrl'
-                    }
-                },
+                
                 authenticate: true,
                 resolve: {
                     item: function (Restangular, $stateParams) {
                         return Restangular.one('applications', $stateParams.itemId).get();
                     }
+                },
+            views: {
+                    'secure-dash': {
+                        templateUrl: 'templates/dash-detail.html',
+                        controller: 'DashCtrl'
+                    }
                 }
                 
-            })
-            
-            .state('secure.user-detail', {
-                url: '/user/:userId',
-                views: {
-                    'secure-users': {
-                        templateUrl: 'templates/user-detail.html',
-                        controller: 'UserDetailCtrl'
-                    }
-                },
-                authenticate: true,
-                resolve: {
-                    user: function (Restangular, $stateParams) {
-                        return Restangular.one('users', $stateParams.userId).get();
-                    }
-                }
             })
 
             .state('secure.account', {

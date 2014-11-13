@@ -1,13 +1,13 @@
 {
-  "name": "DASH Admin App",
-  "version": "0.0.0",
-  "homepage": "https://github.com/DataAnalyticsinStudentHands/DASHAdminApp",
-  "authors": [
+    "name": "DASH Admin App",
+    "version": "0.0.0",
+    "homepage": "https://github.com/DataAnalyticsinStudentHands/DASHAdminApp",
+    "authors": [
     "Peggy Lindner <plindner@uh.edu>"
   ],
-  "description": "Terry Management Application",
-  "license": "MIT",
-  "ignore": [
+    "description": "Terry Management Application",
+    "license": "MIT",
+    "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
@@ -15,22 +15,23 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
-    "lodash": "latest",
-    "ng-notify": "latest",
-    "restangular": "latest",
-    "angular-ui-utils": "latest",
-    "angular-bootstrap-datetimepicker": "~0.2.4",
-    "moment": "^2.6.0",
-    "ng-file-upload-shim": "latest",
-    "ng-file-upload": "latest",
-    "ng-currency": "latest",
-    "angular-cache": "latest",
-    "cryptojslib": "~3.1.2",
-    "pdfmake": "latest"
-  },
+    "dependencies": {
+        "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
+        "lodash": "latest",
+        "ng-notify": "latest",
+        "restangular": "latest",
+        "angular-ui-utils": "latest",
+        "angular-bootstrap-datetimepicker": "~0.2.4",
+        "moment": "^2.6.0",
+        "ng-file-upload-shim": "latest",
+        "ng-file-upload": "latest",
+        "ng-currency": "latest",
+        "angular-cache": "latest",
+        "cryptojslib": "~3.1.2",
+        "pdfmake": "latest"
+    },
     "overrides": {
+       
         "cryptojslib": {
             "main": "rollups/sha512.js"
         },

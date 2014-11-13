@@ -7,7 +7,7 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function (Restangular, $q, DSCacheFactory, ngNotify) {
+angular.module('Services').factory('DataService', function (Restangular, $q, ngNotify) {
     'use strict';
 
     return {
@@ -15,6 +15,23 @@ angular.module('Services').factory('DataService', function (Restangular, $q, DSC
         getAllItems: function (acType) {
 
             return Restangular.all(acType).getList().then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
+                    result.type = acType;
+                    return result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data for " + acType, {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+
+        },
+        getItem: function (acType, id) {
+
+            return Restangular.one(acType, id).get().then(
                 function (result) {
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
