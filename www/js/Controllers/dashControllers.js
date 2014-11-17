@@ -21,7 +21,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
  * # DashController
  * Controller for object details used in the dashboard
  */
-angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item) {
+angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework) {
     'use strict';
 
     $scope.item = item;
@@ -171,7 +171,11 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                     alignment: 'center'
                 },
                 chapterheader: {
-                    fontSize: 16,
+                    fontSize: 12,
+                    bold: true,
+                    margin: [0, 10, 0, 5]
+                },
+                sub: {
                     bold: true,
                     margin: [0, 10, 0, 5]
                 },
@@ -628,12 +632,12 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                 },
                 {
                     text: 'Test Scores',
-                    bold: 'true'
+                    style: 'sub'
                 },
                 
                 {
                     table: {
-                        widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
+                        widths: [20, 70, 50, 20, 100, 50, 20, 80, 50],
                         headerRows: 0,
                         body: [
                             [
@@ -658,12 +662,13 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'right'
                                 },
                                 {
-                                    text: [item.sat_critical_reading],
+                                    text: [item.sat_reading],
                                     alignment: 'left'
                                 },
                                 {
-                                    text: 'AC',
-                                    bold: 'true'
+                                    text: 'ACT',
+                                    bold: 'true',
+                                    alignment: 'right'
                                 },
                                 {
                                     text: 'Composite:',
@@ -676,36 +681,139 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                             ],
                             [
                                 {
-                                    text: 'National Achievement:'
+                                    text: ''
                                 },
                                 {
-                                    text: [item.national_achievement],
-                                    alignment: 'left'
-                                },
-                                {
-                                    text: 'Date:',
+                                    text: 'Math:',
                                     alignment: 'right'
                                 },
                                 {
-                                    text: [item.national_achievement_date],
+                                    text: [item.psat_math.toString()],
+                                    alignment: 'left'
+                                },
+                                {
+                                    text: '',
+                                },
+                                {
+                                    text: 'Mathematics:',
+                                    alignment: 'right'
+                                },
+                                {
+                                    text: [item.sat_math.toString()],
+                                    alignment: 'left'
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: 'Date of Test:',
+                                    alignment: 'right'
+                                },
+                                {
+                                    text: [item.act_date],
                                     alignment: 'left'
                                 }
                             ],
                             [
                                 {
-                                    text: 'National Hispanic:'
+                                    text: 'Writing Skills:',
+                                    alignment: 'right',
+                                    colSpan: 2
                                 },
                                 {
-                                    text: [item.national_hispanic],
+                                    text: [item.psat_writing.toString()],
                                     alignment: 'left'
                                 },
                                 {
-                                    text: 'Date:',
+                                    text: '',
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: 'Writing:',
                                     alignment: 'right'
                                 },
                                 {
-                                    text: [item.national_hispanic_date],
+                                    text: [item.sat_writing.toString()],
                                     alignment: 'left'
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: ''
+                                }
+                            ],
+                            [
+                                {
+                                    text: 'Selection Index:',
+                                    alignment: 'right',
+                                    colSpan: 2
+                                },
+                                {
+                                    text: [item.psat_selection.toString()],
+                                    alignment: 'left'
+                                },
+                                {
+                                    text: '',
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: 'Composite:',
+                                    alignment: 'right'
+                                },
+                                {
+                                    text: [item.sat_composite.toString()],
+                                    alignment: 'left'
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: ''
+                                }
+                            ],
+                            [
+                                {
+                                    text: 'Date of Test:',
+                                    alignment: 'right',
+                                    colSpan: 2
+                                },
+                                {
+                                    text: [item.psat_date],
+                                    alignment: 'left'
+                                },
+                                {
+                                    text: '',
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: 'Date of Test:',
+                                    alignment: 'right'
+                                },
+                                {
+                                    text: [item.sat_date],
+                                    alignment: 'left'
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: ''
+                                },
+                                {
+                                    text: ''
                                 }
                             ]
                            
@@ -715,7 +823,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
 				},
                 {
                     text: 'Indicate the level of recognition you have achieved in the following scholarship competition(s).',
-                    bold: 'true'
+                    style: 'sub'
                 },
                 {
                     table: {
@@ -776,7 +884,48 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                         ]
                     },
                     layout: 'noBorders'
-				}
+				},
+                {
+                    text: 'III.	PRE-AP, ADVANCED PLACEMENT (AP), INTERNATIONAL BACCALAUREATE PROGRAM (IB), OR DUAL CREDIT (DC) COURSEWORK TAKEN IN HIGH SCHOOL',
+                    style: 'chapterheader'
+                },
+                {
+                    table: {
+                        widths: ['*', '*', '*', '*'],
+                        headerRows: 1,
+                        body: [
+                            [
+                                {
+                                    text: 'Sophomore Level Coursework:'
+                                },
+                                {
+                                    text: 'AP/IB/DC'
+                                },
+                                {
+                                    text: 'Credit Hours:'
+                                },
+                                {
+                                    text: 'Final Grade'
+                                }
+                            ],
+                            [
+                                {
+                                    text: [coursework[0].name]
+                                },
+                                {
+                                    text: [coursework.toString()]
+                                },
+                                {
+                                    text: [coursework.toString()]
+                                },
+                                {
+                                    text: [coursework.toString()]
+                                }
+                            ]
+                        ]
+                    }
+				},
+
             ]
         };
 

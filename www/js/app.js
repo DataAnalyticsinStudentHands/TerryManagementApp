@@ -81,17 +81,18 @@ angular.module('terry-management-app', [
                 url: "/tab",
                 abstract: true,
                 templateUrl: "templates/tabs.html",
+                resolve: {
+                    items: function (DataService) {
+                        return DataService.getAllItems('applications');
+                    }
+                },
                 authenticate: true
             })
 
             // Each tab has its own nav history stack:
             .state('secure.dash', {
                 url: '/dash',
-                resolve: {
-                    items: function (DataService) {
-                        return DataService.getAllItems('applications');
-                    }
-                },
+                
                 views: {
                     'secure-dash': {
                         templateUrl: 'templates/tab-dash.html',
@@ -107,6 +108,9 @@ angular.module('terry-management-app', [
                 resolve: {
                     item: function (DataService, $stateParams) {
                         return DataService.getItem('applications', $stateParams.itemId);
+                    },
+                    coursework: function (DataService, $stateParams) {
+                        return DataService.getItemList('coursework', $stateParams.itemId);
                     }
                 },
                 views: {

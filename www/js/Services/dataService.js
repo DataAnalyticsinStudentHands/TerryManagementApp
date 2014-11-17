@@ -58,10 +58,26 @@ angular.module('Services').factory('DataService', function ($http, Restangular, 
         },
         getItem: function (acType, id) {
 
-            return Restangular.one(acType, id).get().then(
+           return Restangular.one(acType, id).get().then(
                 function (result) {
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
+                    return result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data for " + acType, {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+
+        },
+        getItemList: function (acType, id) {
+
+           return Restangular.one(acType).one('list').getList(id).then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
                     return result;
                 },
                 function (error) {
