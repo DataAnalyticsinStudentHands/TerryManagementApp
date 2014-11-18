@@ -26,7 +26,7 @@ angular.module('terry-management-app', [
     });
 
     Restangular.setBaseUrl("http://localhost:8080/terry/");
-    //Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terry/");
     
     $rootScope.Restangular = function () {
         return Restangular;
