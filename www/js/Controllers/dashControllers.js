@@ -113,6 +113,39 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
             }
         });
     };
+    
+    var externalDataRetrievedFromServer = [
+        { name: 'Bartek', age: 34 },
+        { name: 'John', age: 27 },
+        { name: 'Elizabeth', age: 30 }
+    ];
+    
+    function buildTableBody(data, columns) {
+        var body = [];
+
+        body.push(columns);
+
+        data.forEach(function (row) {
+            var dataRow = [];
+
+            columns.forEach(function (column) {
+                dataRow.push(row[column].toString());
+            });
+
+            body.push(dataRow);
+        });
+
+        return body;
+    }
+    
+    function table(data, columns) {
+        return {
+            table: {
+                headerRows: 1,
+                body: buildTableBody(data, columns)
+            }
+        };
+    }
 
     // callback for ng-click 'deleteData':
     $scope.createPdf = function () {
@@ -692,7 +725,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'left'
                                 },
                                 {
-                                    text: '',
+                                    text: ''
                                 },
                                 {
                                     text: 'Mathematics:',
@@ -725,7 +758,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'left'
                                 },
                                 {
-                                    text: '',
+                                    text: ''
                                 },
                                 {
                                     text: ''
@@ -759,7 +792,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'left'
                                 },
                                 {
-                                    text: '',
+                                    text: ''
                                 },
                                 {
                                     text: ''
@@ -793,7 +826,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'left'
                                 },
                                 {
-                                    text: '',
+                                    text: ''
                                 },
                                 {
                                     text: ''
@@ -913,7 +946,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     text: [coursework[0].name]
                                 },
                                 {
-                                    text: [coursework.toString()]
+                                    text: [coursework[0].type]
                                 },
                                 {
                                     text: [coursework.toString()]
@@ -925,7 +958,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                         ]
                     }
 				},
-
+                table(coursework, ['name', 'type', 'credit_hours'])
             ]
         };
 
