@@ -200,7 +200,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                 }
             },
             defaultStyle: {
-                font: 'TimesNewRoman'
+               // font: 'TimesNewRoman'
             },
             header: function (currentPage, pageCount) {
                 return {
@@ -252,22 +252,6 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                     text: 'I. STUDENT INFORMATION',
                     style: 'chapterheader'
                 },
-                /*{
-                    table:
-                        {
-                            headerRows: 1,
-                            body:
-                                [
-                                    [
-                                        {
-                                            text: item.first_name
-                                        }
-                                    ],
-                                    ['']
-                                ]
-                        },
-                    layout: 'headerLineOnly'
-                },*/
                 {
                     columns: [
                         {
@@ -287,7 +271,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                     text: '(Last, First, Middle)'
 
                 },
-                {
+ {
                     columns: [
                         {
                             text: 'Preferred Name:',
@@ -888,55 +872,20 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                 {
                     text: 'III.	PRE-AP, ADVANCED PLACEMENT (AP), INTERNATIONAL BACCALAUREATE PROGRAM (IB), OR DUAL CREDIT (DC) COURSEWORK TAKEN IN HIGH SCHOOL',
                     style: 'chapterheader'
-                },
-                {
-                    table: {
-                        widths: ['*', '*', '*', '*'],
-                        headerRows: 1,
-                        body: [
-                            [
-                                {
-                                    text: 'Sophomore Level Coursework:'
-                                },
-                                {
-                                    text: 'AP/IB/DC'
-                                },
-                                {
-                                    text: 'Credit Hours:'
-                                },
-                                {
-                                    text: 'Final Grade'
-                                }
-                            ],
-                            [
-                                {
-                                    text: [coursework[0].name]
-                                },
-                                {
-                                    text: [coursework.toString()]
-                                },
-                                {
-                                    text: [coursework.toString()]
-                                },
-                                {
-                                    text: [coursework.toString()]
-                                }
-                            ]
-                        ]
-                    }
-				},
+                }
 
+                
             ]
         };
 
-        pdfMake.fonts = {
+     /*   pdfMake.fonts = {
             TimesNewRoman: {
                 normal: 'Times-New-Roman-Regular.ttf',
                 bold: 'Times-New-Roman-Bold.ttf',
                 italics: 'Times-New-Roman-Italic.ttf',
                 bolditalics: 'Times-New-Roman-Bold-Italic.ttf'
             }
-        };
+        };*/
 
         try {
             pdfMake.createPdf(docDefinition).open();
