@@ -21,105 +21,9 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
  * # DashController
  * Controller for object details used in the dashboard
  */
-angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework) {
+angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework, activity) {
     'use strict';
 
-    $scope.item = item;
-
-    // callback for ng-click 'showAddModal':
-    $scope.showAddModal = function (acType) {
-
-        $scope.myVariables.current_mode = "Add";
-        $scope.location = {};
-        $scope.aclass = {};
-        $scope.aclass.location_id = $stateParams.itemId;
-
-        $ionicModal.fromTemplateUrl('templates/modals/modal_' + acType + '.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.modal = modal;
-            $scope.modal.show();
-        });
-    };
-
-    // callback for ng-click 'saveModal':
-    $scope.saveModal = function (acType) {
-
-        switch (acType) {
-        case 'locations':
-            if ($scope.myVariables.current_mode === 'Add') {
-                DataService.addItem(acType, $scope.location).then(
-                    function (success) {
-                        $scope.updateList(acType);
-                        $scope.modal.hide();
-                    }
-                );
-            } else {
-                DataService.updateItem(acType, $scope.location.id, $scope.location).then(
-                    function (success) {
-                        $scope.modal.hide();
-                    }
-                );
-            }
-            break;
-        case 'classes':
-            if ($scope.myVariables.current_mode === 'Add') {
-                DataService.addItem(acType, $scope.aclass).then(
-                    function (success) {
-                        $scope.updateList(acType);
-                        $scope.modal.hide();
-                    }
-                );
-            } else {
-                DataService.updateItem(acType, $scope.aclass.id, $scope.aclass).then(
-                    function (success) {
-                        $scope.modal.hide();
-                    }
-                );
-            }
-            break;
-        }
-    };
-
-    // callback for ng-click 'editData'
-    $scope.editData = function (acType, item) {
-        $scope.myVariables.current_mode = "Edit";
-
-        $scope.Data = item;
-
-        $ionicModal.fromTemplateUrl('templates/modals/modal_' + acType + '.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.modal = modal;
-            $scope.modal.show();
-        });
-    };
-
-    // callback for ng-click 'deleteData':
-    $scope.deleteData = function (acType, item_id) {
-
-        $ionicPopup.confirm({
-            title: 'Confirm Delete',
-            template: 'Are you sure you want to delete your ' + acType + ' item from the list?'
-        }).then(function (res) {
-            if (res) {
-                DataService.deleteItem(acType, item_id).then(
-                    function (success) {
-                        $scope.updateList(acType);
-                    }
-                );
-            }
-        });
-    };
-    
-    var externalDataRetrievedFromServer = [
-        { name: 'Bartek', age: 34 },
-        { name: 'John', age: 27 },
-        { name: 'Elizabeth', age: 30 }
-    ];
-    
     function buildTableBody(data, columns, headers) {
         var body = [];
 
@@ -948,6 +852,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'sophomore'),
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'junior'),
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
+                table(activity, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
             ]
                 
         };

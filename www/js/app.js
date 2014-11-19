@@ -25,8 +25,8 @@ angular.module('terry-management-app', [
         }
     });
 
-    //Restangular.setBaseUrl("http://localhost:8080/terry/");
-    Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
+    Restangular.setBaseUrl("http://localhost:8080/terrytest/");
+    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
     //Restangular.setBaseUrl("http://www.housuggest.org:8080/terry/");
     
     $rootScope.Restangular = function () {
@@ -112,6 +112,9 @@ angular.module('terry-management-app', [
                     },
                     coursework: function (DataService, $stateParams) {
                         return DataService.getItemList('coursework', $stateParams.itemId);
+                    },
+                    activity: function (DataService, $stateParams) {
+                        return DataService.getItemList('activity', $stateParams.itemId);
                     }
                 },
                 views: {
