@@ -120,10 +120,10 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
         { name: 'Elizabeth', age: 30 }
     ];
     
-    function buildTableBody(data, columns) {
+    function buildTableBody(data, columns, headers) {
         var body = [];
 
-        body.push(columns);
+        body.push(headers);
 
         data.forEach(function (row) {
             var dataRow = [];
@@ -138,11 +138,46 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
         return body;
     }
     
-    function table(data, columns) {
+    function buildTableWidth(widths) {
+        var width = [];
+        
+        widths.forEach(function () {
+            width.push('*');
+        });
+
+        return width;
+    }
+    
+    function table(data, columns, headers, widths, filter) {
+        if (filter !== undefined) {
+            data = $filter('filter')(data, {
+                        level: filter
+                    }, true);
+        }
         return {
             table: {
+                widths: buildTableWidth(widths),
+                margin: [10, 10, 10, 10],
                 headerRows: 1,
-                body: buildTableBody(data, columns)
+                body: buildTableBody(data, columns, headers),
+                layout: {
+                            hLineWidth: function(i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                            },
+                            vLineWidth: function(i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                            },
+                            hLineColor: function(i, node) {
+                                    return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+                            },
+                            vLineColor: function(i, node) {
+                                    return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+                            },
+                            // paddingLeft: function(i, node) { return 4; },
+                            // paddingRight: function(i, node) { return 4; },
+                            // paddingTop: function(i, node) { return 2; },
+                            // paddingBottom: function(i, node) { return 2; }
+						}
             }
         };
     }
@@ -922,44 +957,11 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                     text: 'III.	PRE-AP, ADVANCED PLACEMENT (AP), INTERNATIONAL BACCALAUREATE PROGRAM (IB), OR DUAL CREDIT (DC) COURSEWORK TAKEN IN HIGH SCHOOL',
                     style: 'chapterheader'
                 },
-                {
-                    table: {
-                        widths: ['*', '*', '*', '*'],
-                        headerRows: 1,
-                        body: [
-                            [
-                                {
-                                    text: 'Sophomore Level Coursework:'
-                                },
-                                {
-                                    text: 'AP/IB/DC'
-                                },
-                                {
-                                    text: 'Credit Hours:'
-                                },
-                                {
-                                    text: 'Final Grade'
-                                }
-                            ],
-                            [
-                                {
-                                    text: [coursework[0].name]
-                                },
-                                {
-                                    text: [coursework[0].type]
-                                },
-                                {
-                                    text: [coursework.toString()]
-                                },
-                                {
-                                    text: [coursework.toString()]
-                                }
-                            ]
-                        ]
-                    }
-				},
-                table(coursework, ['name', 'type', 'credit_hours'])
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'sophomore'),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'junior'),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
             ]
+                
         };
 
         pdfMake.fonts = {
