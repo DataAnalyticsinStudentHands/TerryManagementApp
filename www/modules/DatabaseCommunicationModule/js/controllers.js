@@ -20,7 +20,7 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state',
              console.log($scope.passWordHashed.toString());
              Auth.setCredentials($scope.model.userName, $scope.passWordHashed);
 //             $scope.loginResult = $scope.Restangular.get();
-             $scope.loginResultPromise = $scope.Restangular().all("users").all("myUser").getList();
+             $scope.loginResultPromise = $scope.Restangular().all("users").getList();
              $scope.loginResultPromise.then(function(result) {
                 $scope.loginResult = result;
                 $scope.loginMsg = "You have logged in successfully! Status 200OK technomumbojumbo";

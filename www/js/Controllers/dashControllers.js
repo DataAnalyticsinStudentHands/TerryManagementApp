@@ -124,16 +124,19 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
         var body = [];
 
         body.push(headers);
+        
+        if (data !== undefined) {
 
-        data.forEach(function (row) {
-            var dataRow = [];
+            data.forEach(function (row) {
+                var dataRow = [];
 
-            columns.forEach(function (column) {
-                dataRow.push(row[column].toString());
+                columns.forEach(function (column) {
+                    dataRow.push(row[column].toString());
+                });
+
+                body.push(dataRow);
             });
-
-            body.push(dataRow);
-        });
+        }
 
         return body;
     }
@@ -151,8 +154,8 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
     function table(data, columns, headers, widths, filter) {
         if (filter !== undefined) {
             data = $filter('filter')(data, {
-                        level: filter
-                    }, true);
+                level: filter
+            }, true);
         }
         return {
             table: {
@@ -160,24 +163,25 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                 margin: [10, 10, 10, 10],
                 headerRows: 1,
                 body: buildTableBody(data, columns, headers),
-                layout: {
-                            hLineWidth: function(i, node) {
-                                    return (i === 0 || i === node.table.body.length) ? 2 : 1;
-                            },
-                            vLineWidth: function(i, node) {
-                                    return (i === 0 || i === node.table.widths.length) ? 2 : 1;
-                            },
-                            hLineColor: function(i, node) {
-                                    return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
-                            },
-                            vLineColor: function(i, node) {
-                                    return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
-                            },
-                            // paddingLeft: function(i, node) { return 4; },
-                            // paddingRight: function(i, node) { return 4; },
-                            // paddingTop: function(i, node) { return 2; },
-                            // paddingBottom: function(i, node) { return 2; }
-						}
+                layout:
+                    {
+                        hLineWidth: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                        },
+                        vLineWidth: function (i, node) {
+                            return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                        },
+                        hLineColor: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+                        },
+                        vLineColor: function (i, node) {
+                            return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+                        }
+                        // paddingLeft: function(i, node) { return 4; },
+                        // paddingRight: function(i, node) { return 4; },
+                        // paddingTop: function(i, node) { return 2; },
+                        // paddingBottom: function(i, node) { return 2; }
+                    }
             }
         };
     }
@@ -320,22 +324,6 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                     text: 'I. STUDENT INFORMATION',
                     style: 'chapterheader'
                 },
-                /*{
-                    table:
-                        {
-                            headerRows: 1,
-                            body:
-                                [
-                                    [
-                                        {
-                                            text: item.first_name
-                                        }
-                                    ],
-                                    ['']
-                                ]
-                        },
-                    layout: 'headerLineOnly'
-                },*/
                 {
                     columns: [
                         {
@@ -730,7 +718,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'right'
                                 },
                                 {
-                                    text: [item.sat_reading],
+                                    text: [item.sat_reading.toString()],
                                     alignment: 'left'
                                 },
                                 {
@@ -743,7 +731,7 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
                                     alignment: 'right'
                                 },
                                 {
-                                    text: [item.act_composite],
+                                    text: [item.act_composite.toString()],
                                     alignment: 'left'
                                 }
                             ],
@@ -974,6 +962,8 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
         };
 
         try {
+            //console.log('Create pdf from:');
+            //console.log(docDefinition);
             pdfMake.createPdf(docDefinition).open();
         } catch (err) {
             console.log(err);

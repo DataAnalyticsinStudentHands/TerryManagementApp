@@ -3,7 +3,7 @@
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
             List of Applications Terry Scholarship 2015/16</p>
         <ion-list show-reorder="data.showReorder">
-            <ion-item ng-repeat="item in items | orderBy: 'last_name' " type="item-text-wrap" href="#/tab/dash/{{item.id}}">
+            <ion-item ng-repeat="item in items | orderBy: 'id' " type="item-text-wrap" href="#/tab/dash/{{item.id}}">
                 {{item.id}}: {{item.first_name}} {{item.last_name}} {{item.creation_timestamp | date: 'yyyy-MM-dd'}} 
             </ion-item>
         </ion-list>
