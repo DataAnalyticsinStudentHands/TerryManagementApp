@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<ion-view title="Sign-In">
+<ion-view title="Terry Application Management">
     <ion-content>
-        <div class="list list-inset">
+
+        <div id="lots" class="list list-inset">
             <label class="item item-input">
                 <input type="text" ng-model="model.userName" placeholder="email">
             </label>
@@ -11,17 +12,10 @@
 
             <button ng-click="submit()" class="button button-block button-positive">
                 Login</button>
+        </div>
 
-            <p class="text-center">
-                <a href="#/forgot-password">Forgot password</a>
-            </p>
-
-            <br>
-            <p>{{loginMsg}}</p>
-            <!--            <h3> Result to DB Login Query:</h3>-->
-            <hr>
-            <p>{{loginResult}}</p>
-
+        <div class="Aligner">
+            <img src="img/honors_logo.png" alt="honors_logo">
         </div>
     </ion-content>
 </ion-view>

@@ -7,12 +7,12 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function ($http, Restangular, ngNotify) {
+angular.module('Services').factory('DataService', function ($http, $ionicLoading, Restangular, ngNotify) {
     'use strict';
-    
+
     //Load data for form data for terry application
     var application_form;
-    
+
     $http.get('json/form_application.json').success(function (data) {
         application_form = data;
     });
@@ -40,14 +40,16 @@ angular.module('Services').factory('DataService', function ($http, Restangular, 
             );
         },
         getAllItems: function (acType) {
-
+            $ionicLoading.show();
             return Restangular.all(acType).getList().then(
                 function (result) {
+                    $ionicLoading.hide();
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
                     return result;
                 },
                 function (error) {
+                    $ionicLoading.hide();
                     ngNotify.set("Something went wrong retrieving data for " + acType, {
                         position: 'bottom',
                         type: 'error'
@@ -58,7 +60,7 @@ angular.module('Services').factory('DataService', function ($http, Restangular, 
         },
         getItem: function (acType, id) {
 
-           return Restangular.one(acType, id).get().then(
+            return Restangular.one(acType, id).get().then(
                 function (result) {
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
@@ -74,20 +76,21 @@ angular.module('Services').factory('DataService', function ($http, Restangular, 
 
         },
         getItemList: function (acType, id) {
-
-           return Restangular.one(acType).one('list').getList(id).then(
+            $ionicLoading.show();
+            return Restangular.one(acType).one('list').getList(id).then(
                 function (result) {
+                    $ionicLoading.hide();
                     result = Restangular.stripRestangular(result);
                     return result;
                 },
                 function (error) {
+                    $ionicLoading.hide();
                     ngNotify.set("Something went wrong retrieving data for " + acType, {
                         position: 'bottom',
                         type: 'error'
                     });
                 }
-            );
-
+            ).$object;
         },
         updateItem: function (type, item_id, item) {
 

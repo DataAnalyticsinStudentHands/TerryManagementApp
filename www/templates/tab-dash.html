@@ -1,11 +1,45 @@
+<!DOCTYPE html>
 <ion-view title="Dashboard">
     <ion-content>
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-            List of Applications Terry Scholarship 2015/16</p>
-        <ion-list show-reorder="data.showReorder">
-            <ion-item ng-repeat="item in items | orderBy: 'id' " type="item-text-wrap" href="#/tab/dash/{{item.id}}">
-                {{item.id}}: {{item.first_name}} {{item.last_name}} {{item.creation_timestamp | date: 'yyyy-MM-dd'}} 
-            </ion-item>
-        </ion-list>
+            List of Applications Terry Scholarship 2015/16<br>
+            Totel number of applications in the database: {{items.lenght}}</p>
+            
+        
+        <div class="bar bar-header item-input-inset">
+            <ion-search placeholder="Search applications" filter="search"></ion-search>
+        </div>
+        
+        <div class="list card" ng-repeat="item in items | filter:search.value | orderBy: 'last_name' ">            
+            
+            <div class="item item-icon-left energized" ng-show="item.status == 'in progress' ">
+                <i class="icon ion-edit"></i>
+                <p>Application ID {{item.id}}: {{item.status}}</p>
+                <h2>{{item.first_name}} {{item.last_name}}</h2>
+            </div>
+            <div class="item item-icon-left balanced" ng-show="item.status == 'submitted' ">
+                <i class="icon ion-email"></i>
+                <p>Application ID {{item.id}}: {{item.status}}</p>
+                <h2>{{item.first_name}} {{item.last_name}}</h2>
+            </div>
+            <div class="item item-body">
+                <p>Creation Timestamp: {{item.creation_timestamp | date: 'yyyy-MM-dd'}}</p>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" ng-click="createPdf(item)">
+                    <i class="icon ion-document-text"></i>
+                    Open PDF
+                </a>
+                
+                <a class="tab-item" target="_self" ng-click="downloadEssays()">>
+                    <i class="icon ion-archive"></i>
+                    Download Essays
+                </a>
+                <a class="tab-item" ng-click="showActions(post.id, $event)">
+                    <i class="icon ion-ios7-more"></i>
+                </a>
+            </div>
+        </div>
+
     </ion-content>
 </ion-view>

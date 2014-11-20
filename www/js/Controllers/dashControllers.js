@@ -8,22 +8,17 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, items) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, items, DataService, DownloadService) {
     'use strict';
-
+    
+    //get data for view
     $scope.items = items;
-});
-
-/**
- * @ngdoc function
- * @name controller:DashDetailCtrl
- * @description
- * # DashController
- * Controller for object details used in the dashboard
- */
-angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework, activity) {
-    'use strict';
-
+    $scope.items.lenght = Object.keys(items).length - 1;
+    
+    $scope.downloadEssays = function(type) {
+        return DownloadService.get('20');
+    };
+    
     function buildTableBody(data, columns, headers) {
         var body = [];
 
@@ -91,7 +86,11 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
     }
 
     // callback for ng-click 'deleteData':
-    $scope.createPdf = function () {
+    $scope.createPdf = function (item) {
+        
+        
+        var coursework = DataService.getItemList('coursework', item.id);
+        var activity = DataService.getItemList('activity', item.id);
 
         var default_form = DataService.getApplicationForm(),
             i,
@@ -876,6 +875,21 @@ angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $fi
         
     };
 
+    
+    
+});
+
+/**
+ * @ngdoc function
+ * @name controller:DashDetailCtrl
+ * @description
+ * # DashController
+ * Controller for object details used in the dashboard
+ */
+angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework, activity) {
+    'use strict';
+
+    
     $scope.updateList = function (acType) {
         switch (acType) {
         case 'locations':

@@ -1,4 +1,33 @@
 /* Empty. Add your own CSS if you like */
+#lots {
+    padding-top: 2%;
+    padding-right: 25%;
+    padding-left: 25%;
+}
+
+.Aligner {
+   display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bar.item-input-inset .item-input-wrapper input {
+    width: 100%;
+}
+
+.search-wrapper-light {
+    border-bottom: 2px solid rgba(255,255,255,0.5);
+    background: none;
+    border-radius: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.search-wrapper-light input, .search-wrapper-light input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+  
+ 
 /*
 * CSS for form validation
 */

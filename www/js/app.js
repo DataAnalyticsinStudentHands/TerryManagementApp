@@ -25,8 +25,8 @@ angular.module('terry-management-app', [
         }
     });
 
-    Restangular.setBaseUrl("http://localhost:8080/terrytest/");
-    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
+    //Restangular.setBaseUrl("http://localhost:8080/terrytest/");
+    Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
     //Restangular.setBaseUrl("http://www.housuggest.org:8080/terry/");
     
     $rootScope.Restangular = function () {
@@ -81,34 +81,40 @@ angular.module('terry-management-app', [
             .state('secure', {
                 url: "/tab",
                 abstract: true,
+                authenticate: true,
                 templateUrl: "templates/tabs.html",
                 resolve: {
-                    items: function (DataService) {
+                    items: function (DataService, $ionicLoading) {
                         return DataService.getAllItems('applications');
                     }
                 },
-                authenticate: true
+                
             })
 
             // Each tab has its own nav history stack:
             .state('secure.dash', {
                 url: '/dash',
-                
+                authenticate: true,
                 views: {
                     'secure-dash': {
                         templateUrl: 'templates/tab-dash.html',
                         controller: 'DashCtrl'
                     }
-                },
-                authenticate: true
+                }
             })
         
             .state('secure.dash-detail', {
                 url: '/dash/:itemId',
                 authenticate: true,
                 resolve: {
-                    item: function (DataService, $stateParams) {
-                        return DataService.getItem('applications', $stateParams.itemId);
+                    item: function (DataService, $stateParams, $ionicLoading) {
+                        $ionicLoading.show();
+                        return DataService.getItem('applications', $stateParams.itemId).then(
+                            function (success) {
+                                $ionicLoading.hide();
+                                return success;
+                            }
+                        );
                     },
                     coursework: function (DataService, $stateParams) {
                         return DataService.getItemList('coursework', $stateParams.itemId);

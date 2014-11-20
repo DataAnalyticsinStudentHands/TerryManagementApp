@@ -5,7 +5,7 @@
         "name": "first_name",
         "label": "First Name:",
         "form": "student_information",
-        "id": 2,
+        "id": 1,
         "type": "text",
         "required": "true"
     },
@@ -13,7 +13,7 @@
         "name": "last_name",
         "label": "Last Name:",
         "form": "student_information",
-        "id": 3,
+        "id": 2,
         "type": "text",
         "required": "true"
     },
@@ -21,7 +21,7 @@
         "name": "uh_id",
         "label": "UH ID:",
         "form": "student_information",
-        "id": 4,
+        "id": 3,
         "type": "number",
         "required": "true"
     },
@@ -29,7 +29,7 @@
         "name": "middle_name",
         "label": "Middle Name:",
         "form": "student_information",
-        "id": 5,
+        "id": 4,
         "type": "text",
         "required": "false"
     },
@@ -37,7 +37,7 @@
         "name": "preferred_name",
         "label": "Preferred Name:",
         "form": "student_information",
-        "id": 6,
+        "id": 5,
         "type": "text",
         "required": "false"
     },
@@ -45,7 +45,7 @@
         "name": "ssn",
         "label": "SSN:",
         "form": "student_information",
-        "id": 7,
+        "id": 6,
         "type": "number",
         "required": "true"
     },
@@ -53,7 +53,7 @@
         "name": "permanent_address",
         "label": "Permanent Address:",
         "form": "student_information",
-        "id": 8,
+        "id": 7,
         "type": "number",
         "required": "true"
     },
@@ -61,7 +61,7 @@
         "name": "city",
         "label": "City:",
         "form": "student_information",
-        "id": 9,
+        "id": 8,
         "type": "text",
         "required": "true"
     },
@@ -69,14 +69,21 @@
         "name": "state",
         "label": "State:",
         "form": "student_information",
-        "id": 10,
+        "id": 9,
         "type": "text",
         "required": "true"
     },
-
     {
         "name": "dob",
         "label": "Date of Birth:",
+        "form": "student_information",
+        "id": 10,
+        "type": "date",
+        "required": "true"
+    },
+    {
+        "name": "zip_code",
+        "label": "Zip Code:",
         "form": "student_information",
         "id": 11,
         "type": "date",
