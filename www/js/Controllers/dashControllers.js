@@ -857,13 +857,68 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 table(activity, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
                 
                 {
-                                    text: '',
-                                    pageBreak: 'after'
-                                },
+                    pageBreak: 'after'
+                },
                 {
                     text: 'VI.  FINANCIAL INFORMATION',
                     style: 'chapterheader'
                 },
+                {
+                    text: 'To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient.  FAFSA forms can be submitted on-line after January 1st at www.fafsa.ed.gov.  You must file your FAFSA no later than February 28th. You must complete the FAFSA or your application cannot be processed.',
+                    style: 'notes'
+                },
+                {
+                    text: 'Please complete all questions or your application cannot be considered.  Financial information may be subject to verification from tax returns or other sources.  ',
+                    style: 'sub'
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Your marital status:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.marital_status],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                            {
+                             text: 'Your parents marital status:',
+                             style: 'label',
+                             width: 'auto'
+                        },
+                        {
+                             text: [item.marital_status_parents],
+                             alignment: 'left',
+                             style: 'field'
+                        }
+                    ]
+                }
+        {
+                    columns: [
+                                {
+                                    text: 'Your total annual income:',
+                                    style: 'label',
+                                    width: 'auto'
+                                },
+                                {
+                                    text: [item.total_annual_income],
+                                    alignment: 'left',
+                                    style: 'field'
+                                }
+                        {
+                                    text: 'Your presently live with (name & relationship):',
+                                    style: 'label',
+                                    width: 'auto'
+                                },
+                                {
+                                    text: [item.present_partner],
+                                    alignment: 'left',
+                                    style: 'field'
+                                }
+                    ]
+                }
                 
             ]
                 
