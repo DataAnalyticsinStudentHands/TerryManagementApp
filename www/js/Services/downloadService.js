@@ -1,17 +1,20 @@
-/*global angular, console*/
+/*global angular, console, Blob, saveAs*/
 
-angular.module('Services').service('DownloadService', function Download(Restangular) {
+angular.module('Services').service('DownloadService', function Download($ionicLoading, Restangular) {
     'use strict';
 
-    this.get = function (id) {
-        return Restangular.one('applications/uploads', id)
-            .withHttpConfig({responseType: 'arraybuffer'}).get().then(function (data) {
-                console.log(data);
+    this.get = function (id, fileName) {
+        $ionicLoading.show();
+        return Restangular.all("applications")
+            .withHttpConfig({responseType: 'arraybuffer'}).customGET("download", {applicationId: id, fileName: fileName })
+            .then(function (data) {
+                
                 var blob = new Blob([data], {
                     type: "application/pdf"
                 });
-          //saveAs provided by FileSaver.js
-          saveAs(blob, id + '.pdf');
-        })
-      }
+                //saveAs provided by FileSaver.js
+                saveAs(blob, fileName);
+                $ionicLoading.hide();
+            });
+    };
 });

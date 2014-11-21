@@ -15,8 +15,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
     $scope.items = items;
     $scope.items.lenght = Object.keys(items).length - 1;
     
-    $scope.downloadEssays = function(type) {
-        return DownloadService.get('20');
+    $scope.downloadEssay1 = function(id) {
+        return DownloadService.get(id, 'essay1*');
+    };
+    $scope.downloadEssay2 = function(id) {
+        return DownloadService.get(id, 'essay2*');
     };
     
     function buildTableBody(data, columns, headers) {

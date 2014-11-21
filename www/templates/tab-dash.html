@@ -30,10 +30,13 @@
                     <i class="icon ion-document-text"></i>
                     Open PDF
                 </a>
-                
-                <a class="tab-item" target="_self" ng-click="downloadEssays()">>
+                <a class="tab-item" ng-click="downloadEssay1(item.id)">
                     <i class="icon ion-archive"></i>
-                    Download Essays
+                    Download Essay 1
+                </a>
+                <a class="tab-item" ng-click="downloadEssay2(item.id)">
+                    <i class="icon ion-archive"></i>
+                    Download Essay 2
                 </a>
                 <a class="tab-item" ng-click="showActions(post.id, $event)">
                     <i class="icon ion-ios7-more"></i>
