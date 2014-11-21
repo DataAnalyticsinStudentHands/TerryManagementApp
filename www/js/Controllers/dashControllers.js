@@ -855,6 +855,16 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'junior'),
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
                 table(activity, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
+                
+                {
+                                    text: '',
+                                    pageBreak: 'after'
+                                },
+                {
+                    text: 'VI.  FINANCIAL INFORMATION',
+                    style: 'chapterheader'
+                },
+                
             ]
                 
         };
