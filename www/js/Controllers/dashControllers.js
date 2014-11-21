@@ -882,41 +882,41 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             text: [item.marital_status],
                             alignment: 'left',
                             style: 'field'
-                        }
-                            {
-                             text: 'Your parents marital status:',
-                             style: 'label',
-                             width: 'auto'
                         },
                         {
-                             text: [item.marital_status_parents],
-                             alignment: 'left',
-                             style: 'field'
+                            text: 'Your parents marital status:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.marital_status_parents],
+                            alignment: 'left',
+                            style: 'field'
                         }
                     ]
-                }
-        {
+                },
+                {
                     columns: [
-                                {
-                                    text: 'Your total annual income:',
-                                    style: 'label',
-                                    width: 'auto'
-                                },
-                                {
-                                    text: [item.total_annual_income],
-                                    alignment: 'left',
-                                    style: 'field'
-                                }
                         {
-                                    text: 'Your presently live with (name & relationship):',
-                                    style: 'label',
-                                    width: 'auto'
-                                },
-                                {
-                                    text: [item.present_partner],
-                                    alignment: 'left',
-                                    style: 'field'
-                                }
+                            text: 'Your total annual income:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.total_annual_income],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Your presently live with (name & relationship):',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.present_partner],
+                            alignment: 'left',
+                            style: 'field'
+                        }
                     ]
                 }
                 
