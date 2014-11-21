@@ -894,8 +894,8 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             style: 'field'
                         }
                     ]
-                },
-                {
+                }
+               /* {
                     columns: [
                         {
                             text: 'Your total annual income:',
@@ -903,7 +903,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             width: 'auto'
                         },
                         {
-                            text: [item.total_annual_income],
+                            text: [item.total_annual_income.toString()],
                             alignment: 'left',
                             style: 'field'
                         },
@@ -919,7 +919,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                         }
                     ]
                 }
-                
+                */
             ]
                 
         };
