@@ -25,8 +25,8 @@ angular.module('terry-management-app', [
         }
     });
 
-    Restangular.setBaseUrl("http://localhost:8080/terrytest/");
-    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
+    //Restangular.setBaseUrl("http://localhost:8080/terrytest/");
+    Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
     //Restangular.setBaseUrl("http://www.housuggest.org:8080/terry/");
     
     $rootScope.Restangular = function () {
@@ -84,7 +84,7 @@ angular.module('terry-management-app', [
                 authenticate: true,
                 templateUrl: "templates/tabs.html",
                 resolve: {
-                    items: function (DataService, $ionicLoading) {
+                    items: function (DataService) {
                         return DataService.getAllItems('applications');
                     }
                 }

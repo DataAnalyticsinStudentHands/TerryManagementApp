@@ -13,7 +13,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
     
     //get data for view
     $scope.items = items;
-    $scope.items.lenght = Object.keys(items).length - 1;
+    $scope.items.length = Object.keys(items).length - 1;
     
     $scope.downloadEssay1 = function(id) {
         return DownloadService.get(id, 'essay1*');
