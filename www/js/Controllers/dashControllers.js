@@ -8,7 +8,7 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, items, DataService, DownloadService) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, items, DataService, DownloadService) {
     'use strict';
     
     //get data for view
@@ -91,9 +91,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
     // callback for ng-click 'deleteData':
     $scope.createPdf = function (item) {
         
-        
+        $ionicLoading.show();
         var coursework = DataService.getItemList('coursework', item.id);
         var activity = DataService.getItemList('activity', item.id);
+        
+        $ionicLoading.hide();
 
         var default_form = DataService.getApplicationForm(),
             i,

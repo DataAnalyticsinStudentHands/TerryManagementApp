@@ -125,6 +125,33 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
                     });
                 }
             );
+        },
+        getAllItemsWithFileNames: function (type) {
+            $ionicLoading.show();
+            return Restangular.one(type).one("withfilenames").get().then(
+                function (success) {
+                    $ionicLoading.hide();
+                    success = Restangular.stripRestangular(success);
+                /*$scope.myVariables.orig_fileEssay1 = $filter('filter')(result.fileName, 'essay1');
+                if ($scope.myVariables.orig_fileEssay1.length !== 0) {
+                    $scope.myVariables.fileEssay1 = $scope.myVariables.orig_fileEssay1[0].substr(6);
+                }
+                $scope.myVariables.orig_fileEssay2 = $filter('filter')(result.fileName, 'essay2', 'true');
+                if ($scope.myVariables.orig_fileEssay2.length !== 0) {
+                    $scope.myVariables.fileEssay2 = $scope.myVariables.orig_fileEssay2[0].substr(6);
+                }*/
+                    return success;
+                },
+                function (error) {
+                    $ionicLoading.hide();
+                    ngNotify.set("Something went wrong retrieving list of files for all " + type + " !", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+        
         }
     };
+    
 });

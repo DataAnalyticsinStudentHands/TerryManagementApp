@@ -5,6 +5,7 @@ angular.module('terry-management-app', [
     'Controllers',
     'Services',
     'Directives',
+    'Filters',
     'restangular',
     'ngNotify',
     'ui.bootstrap.datetimepicker',
@@ -84,8 +85,8 @@ angular.module('terry-management-app', [
                 authenticate: true,
                 templateUrl: "templates/tabs.html",
                 resolve: {
-                    items: function (DataService, $ionicLoading) {
-                        return DataService.getAllItems('applications');
+                    items: function (DataService) {
+                        return DataService.getAllItemsWithFileNames('applications');
                     }
                 }
                 

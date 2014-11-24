@@ -23,7 +23,10 @@
                 <h2>{{item.first_name}} {{item.last_name}}</h2>
             </div>
             <div class="item item-body">
-                <p>Creation Timestamp: {{item.creation_timestamp | date: 'yyyy-MM-dd'}}</p>
+                <p>Creation Timestamp: {{item.creation_timestamp | date: 'yyyy-MM-dd'}}</p>              
+                <p ng-show="item.file_names[0]" >Essay 1: {{item.file_names[0] | truncate:6}}</p>
+                <p ng-show="item.file_names[0]" >Essay 2: {{item.file_names[1] | truncate:6}}</p>
+            
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left">
                 <a class="tab-item" ng-click="createPdf(item)">
