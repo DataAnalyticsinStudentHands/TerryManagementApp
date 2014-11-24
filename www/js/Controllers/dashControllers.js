@@ -8,7 +8,7 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, items, DataService, DownloadService) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, items, DataService, DownloadService) {
     'use strict';
     
     //get data for view
@@ -91,9 +91,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
     // callback for ng-click 'deleteData':
     $scope.createPdf = function (item) {
         
-        
+        $ionicLoading.show();
         var coursework = DataService.getItemList('coursework', item.id);
         var activity = DataService.getItemList('activity', item.id);
+        
+        $ionicLoading.hide();
 
         var default_form = DataService.getApplicationForm(),
             i,
@@ -855,6 +857,311 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'junior'),
                 table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
                 table(activity, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
+                
+                {
+                    pageBreak: 'after',
+                    text: ''
+                },
+                {
+                    text: 'VI.  FINANCIAL INFORMATION',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient.  FAFSA forms can be submitted on-line after January 1st at www.fafsa.ed.gov.  You must file your FAFSA no later than February 28th. You must complete the FAFSA or your application cannot be processed.'
+                },
+                {
+                    text: 'Please complete all questions or your application cannot be considered.  Financial information may be subject to verification from tax returns or other sources.  ',
+                    style: 'notes'
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Your marital status:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.marital_status],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Your parents’ marital status:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.marital_status_parents],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Your total annual income:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.total_annual_income.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'You presently live with (name & relationship):',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.present_partner],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Father’s occupation:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.father_occupation],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Step Parent’s occupation:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.stepparent_occupation],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Father’s employer:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.father_employer],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Step Parent’s employer:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.stepparent_employer],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Father’s total annual income:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.father_total_income.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Step Parent’s total annual income:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.stepparent_total_income.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Father’s age',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.father_age.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Step Parent’s age:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.stepparent_age.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Highest level of education achieved:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.father_level_education],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Highest level of education ahcieved:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.stepparent_level_education],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Mother’s occupation:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.mother_occupation],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Guardian’s occupation:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.guardian_occupation],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Mother’s employer:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.mother_employer],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Guardian’s employer:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.guardian_employer],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Mother’s total annual income:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.mother_total_income.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Guardian’s total annual income:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.guardian_total_income.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Mother’s age',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.mother_age.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Guardian’s age:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.guardian_age.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Highest level of education achieved:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.mother_level_education],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Highest level of education ahcieved:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.guardian_level_education],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                }
+                
             ]
                 
         };
