@@ -8,24 +8,37 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, items, DataService, DownloadService) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, items, DataService, DownloadService, Restangular) {
     'use strict';
     
     //get data for view
     $scope.items = items;
     $scope.items.length = Object.keys(items).length - 1;
     
-    $scope.downloadEssay1 = function(id) {
+    $scope.downloadEssay1 = function (id) {
         return DownloadService.get(id, 'essay1*');
     };
-    $scope.downloadEssay2 = function(id) {
+    $scope.downloadEssay2 = function (id) {
         return DownloadService.get(id, 'essay2*');
     };
     
-    function buildTableBody(data, columns, headers) {
-        var body = [];
+    var coursework = [],
+        activity = [],
+        employment = [],
+        volunteer = [];
+    
+    function buildTableBody(data, columns, headers, emptyRows) {
+        var body = [],
+            i,
+            j,
+            headerRow = [];
+        
+        for (i = 0; i < headers.length; i++) {
+            headerRow.push({ text: headers[i], fillColor: 'lightgrey'});
+        }
 
-        body.push(headers);
+        // body.push(headers);
+        body.push(headerRow);
         
         if (data !== undefined) {
 
@@ -38,22 +51,41 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
 
                 body.push(dataRow);
             });
+        } else {
+            if (emptyRows === undefined) {
+                emptyRows = 3;
+            }
+            
+            for (i = 0; i < emptyRows; i++) {
+                var dataRow = [];
+                for (j = 0; j < columns.length; j++) {
+                    dataRow.push(' ');
+                }
+
+                body.push(dataRow);
+            }
         }
 
         return body;
     }
     
     function buildTableWidth(widths) {
-        var width = [];
+        var width = [],
+            i;
         
-        widths.forEach(function () {
+        for (i = 0; i < widths.length; i++) {
+            width.push(widths[i]);
+        }
+        
+       /* widths.forEach(function () {
             width.push('*');
         });
+        */
 
         return width;
     }
     
-    function table(data, columns, headers, widths, filter) {
+    function table(data, columns, headers, widths, filter, emptyRows) {
         if (filter !== undefined) {
             data = $filter('filter')(data, {
                 level: filter
@@ -64,7 +96,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 widths: buildTableWidth(widths),
                 margin: [10, 10, 10, 10],
                 headerRows: 1,
-                body: buildTableBody(data, columns, headers),
+                body: buildTableBody(data, columns, headers, emptyRows),
                 layout:
                     {
                         hLineWidth: function (i, node) {
@@ -79,6 +111,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                         vLineColor: function (i, node) {
                             return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
                         }
+                        
                         // paddingLeft: function(i, node) { return 4; },
                         // paddingRight: function(i, node) { return 4; },
                         // paddingTop: function(i, node) { return 2; },
@@ -87,22 +120,45 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
             }
         };
     }
-
-    // callback for ng-click 'deleteData':
+    
+    
+    
+    
+    // callback for ng-click 'createPdf':
     $scope.createPdf = function (item) {
         
-        $ionicLoading.show();
-        var coursework = DataService.getItemList('coursework', item.id);
-        var activity = DataService.getItemList('activity', item.id);
+        var listPromises = [];
+        listPromises.push(DataService.getItemList('coursework', item.id).then(function (modifiedData) {
+            coursework = modifiedData;
+            }
+        ));
+        listPromises.push (DataService.getItemList('employment', item.id).then(function (returnedData) {
+                employment = returnedData;
+                }
+        ));
+        listPromises.push(DataService.getItemList('activity', item.id).then(function (returnedData) {
+                    activity = returnedData;
+            }
+        ));
+        listPromises.push(DataService.getItemList('volunteer', item.id).then(function (returnedData) {
+                        volunteer = returnedData;
+        }
+                        
+                                                                            ));
+                
+        //after checking individual lists, sift through the results
+        var succes  = $q.all(listPromises)
+            .then(function (item) {
         
-        $ionicLoading.hide();
-
+        
+          
         var default_form = DataService.getApplicationForm(),
             i,
             l,
             docDefinition;
 
         //TODO use filter
+        //clean data
         if (item.citizen !== undefined) {
             if (item.citzen === 'true') {
                 item.citizen = 'Yes';
@@ -124,6 +180,20 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 }
             }
         }
+        
+        if (activity !== undefined) {
+            
+            for (i = 0; i < activity.length; i++) {
+                switch (activity[i].year.text) {
+                case 'Sophomore':
+                    activity.SO = 'x';
+                    break;
+                case '':
+                    break;
+                }
+            }
+        }
+        
         //put NAs for all NULL values
         for (i = 0, l = default_form.length; i < l; i++) {
             if (!item.hasOwnProperty(default_form[i].name)) {
@@ -132,10 +202,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
             }
         }
 
+        //build pdf doc
         docDefinition = {
             styles: {
                 header: {
-                    margin: [40, 20, 40, 0],
+                    margin: [40, 30, 40, 20],
                     fontSize: 10
                 },
                 title: {
@@ -153,7 +224,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 chapterheader: {
                     fontSize: 12,
                     bold: true,
-                    margin: [0, 10, 0, 5]
+                    margin: [0, 10, 0, 10]
                 },
                 sub: {
                     bold: true,
@@ -194,7 +265,6 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                         },
                         {
                             text: 'UH ID:',
-                            
                             width: 'auto'
                         },
                         {
@@ -209,6 +279,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 };
             },
             footer: {
+                margin: [0, 20, 0, 0],
                 text: 'The Honors College ~ 212 MD Anderson Library ~ Houston, TX 77204-2001 ~ 713.743.9010',
                 alignment: 'center'
             },
@@ -601,7 +672,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 
                 {
                     table: {
-                        widths: [20, 70, 50, 20, 100, 50, 20, 80, 50],
+                        widths: [20, 70, 50, 20, 100, 50, 20, 70, 70],
                         headerRows: 0,
                         body: [
                             [
@@ -768,7 +839,8 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                                 },
                                 {
                                     text: [item.sat_date],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    colSpan: 2
                                 },
                                 {
                                     text: ''
@@ -850,13 +922,49 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     layout: 'noBorders'
 				},
                 {
+                    margin: 10,
+                    text: ' '
+                },
+                {
                     text: 'III.	PRE-AP, ADVANCED PLACEMENT (AP), INTERNATIONAL BACCALAUREATE PROGRAM (IB), OR DUAL CREDIT (DC) COURSEWORK TAKEN IN HIGH SCHOOL',
                     style: 'chapterheader'
                 },
-                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'sophomore'),
-                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'junior'),
-                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
-                table(activity, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
+                /*table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 'sophomore', 3),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Junior Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 'junior', 5),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Senior Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 'senior', 7),
+                */{
+                    pageBreak: 'after',
+                    text: ''
+                },
+                
+                {
+                    text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.  Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'Employment, Internships, and Summer Activities',
+                    style: 'notes'
+                },
+                {
+                    margin: [0, 0, 0, 10],
+                    text: ['List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.', { text: ' List your most recent activities first.', bold: true }]
+                },
+                /*table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'], [100, '*', '*', '*', '*'], null, 7),
+                */{
+                    text: 'Extracurricular Activities and Leadership Positions',
+                    style: 'notes'
+                },
+                {
+                    margin: [0, 0, 0, 10],
+                    text: [ { text: 'In order of importance to you', bold: true }, ', list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.']
+                },
+                /*table(activity, ['activity', 'position', 'description', 'date_from', 'date_to'], ['Organization / Activity', 'Position(s) Held', 'Description of Activity', 'FR', 'SO', 'JR', 'SR'], [100, '80', '120', '*', '*', '*', '*'], null, 7),*/
+                
+                
                 
                 {
                     pageBreak: 'after',
@@ -1162,7 +1270,9 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     ]
                 }
                 
-            ]
+            ],
+            pageSize: 'LETTER',
+            pageMargins: [40, 60, 40, 60]
                 
         };
 
@@ -1184,9 +1294,8 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         }
         
     };
-
-    
-    
+                 );
+   
 });
 
 /**
