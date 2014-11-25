@@ -90,7 +90,7 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
                         type: 'error'
                     });
                 }
-            ).$object;
+            );
         },
         updateItem: function (type, item_id, item) {
 

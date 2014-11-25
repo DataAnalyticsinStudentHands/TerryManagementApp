@@ -105,29 +105,16 @@ angular.module('terry-management-app', [
             })
         
             .state('secure.dash-detail', {
-                url: '/dash/:itemId',
+                
+                params: ['itemId'],
+                abstract: true,
                 authenticate: true,
                 resolve: {
-                    item: function (DataService, $stateParams, $ionicLoading) {
-                        $ionicLoading.show();
-                        return DataService.getItem('applications', $stateParams.itemId).then(
-                            function (success) {
-                                $ionicLoading.hide();
-                                return success;
-                            }
-                        );
-                    },
                     coursework: function (DataService, $stateParams) {
                         return DataService.getItemList('coursework', $stateParams.itemId);
                     },
                     activity: function (DataService, $stateParams) {
                         return DataService.getItemList('activity', $stateParams.itemId);
-                    }
-                },
-                views: {
-                    'secure-dash': {
-                        templateUrl: 'templates/dash-detail.html',
-                        controller: 'DashDetailCtrl'
                     }
                 }
             })

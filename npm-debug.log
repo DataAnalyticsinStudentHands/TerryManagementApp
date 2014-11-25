@@ -1,0 +1,162 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'update', '-g', 'ionic' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose url raw ionic
+5 verbose url resolving [ 'https://registry.npmjs.org/', './ionic' ]
+6 verbose url resolved https://registry.npmjs.org/ionic
+7 info trying registry request attempt 1 at 13:37:56
+8 verbose etag "4ZDUTKSYQQYRX14R2EAM2IQQO"
+9 http GET https://registry.npmjs.org/ionic
+10 http 304 https://registry.npmjs.org/ionic
+11 silly registry.get cb [ 304,
+11 silly registry.get   { date: 'Mon, 24 Nov 2014 19:37:56 GMT',
+11 silly registry.get     server: 'Apache',
+11 silly registry.get     via: '1.1 varnish',
+11 silly registry.get     'last-modified': 'Mon, 24 Nov 2014 19:37:57 GMT',
+11 silly registry.get     'cache-control': 'max-age=60',
+11 silly registry.get     etag: '"4ZDUTKSYQQYRX14R2EAM2IQQO"',
+11 silly registry.get     age: '0',
+11 silly registry.get     'x-served-by': 'cache-ord1726-ORD',
+11 silly registry.get     'x-cache': 'HIT',
+11 silly registry.get     'x-cache-hits': '1',
+11 silly registry.get     'x-timer': 'S1416857876.643793,VS0,VE470',
+11 silly registry.get     vary: 'Accept',
+11 silly registry.get     'content-length': '0',
+11 silly registry.get     'keep-alive': 'timeout=10, max=50',
+11 silly registry.get     connection: 'Keep-Alive' } ]
+12 verbose etag ionic from cache
+13 info outdated updating [ [ '/usr/local/lib', 'ionic', '1.2.6', '1.2.8', '1.2.8', '*' ] ]
+14 verbose install where,what [ '/usr/local/lib', [ 'ionic@1.2.8' ] ]
+15 verbose cache add [ 'ionic@1.2.8', null ]
+16 verbose cache add name=undefined spec="ionic@1.2.8" args=["ionic@1.2.8",null]
+17 verbose parsed url { protocol: null,
+17 verbose parsed url   slashes: null,
+17 verbose parsed url   auth: null,
+17 verbose parsed url   host: null,
+17 verbose parsed url   port: null,
+17 verbose parsed url   hostname: null,
+17 verbose parsed url   hash: null,
+17 verbose parsed url   search: null,
+17 verbose parsed url   query: null,
+17 verbose parsed url   pathname: 'ionic@1.2.8',
+17 verbose parsed url   path: 'ionic@1.2.8',
+17 verbose parsed url   href: 'ionic@1.2.8' }
+18 verbose cache add name="ionic" spec="1.2.8" args=["ionic","1.2.8"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: '1.2.8',
+19 verbose parsed url   path: '1.2.8',
+19 verbose parsed url   href: '1.2.8' }
+20 verbose addNamed [ 'ionic', '1.2.8' ]
+21 verbose addNamed [ '1.2.8', '1.2.8' ]
+22 silly lockFile 74ce95ae-ionic-1-2-8 ionic@1.2.8
+23 verbose lock ionic@1.2.8 /Users/spotluri/.npm/74ce95ae-ionic-1-2-8.lock
+24 verbose url raw ionic/1.2.8
+25 verbose url resolving [ 'https://registry.npmjs.org/', './ionic/1.2.8' ]
+26 verbose url resolved https://registry.npmjs.org/ionic/1.2.8
+27 info trying registry request attempt 1 at 13:38:00
+28 verbose etag "4ZDUTKSYQQYRX14R2EAM2IQQO"
+29 http GET https://registry.npmjs.org/ionic/1.2.8
+30 http 304 https://registry.npmjs.org/ionic/1.2.8
+31 silly registry.get cb [ 304,
+31 silly registry.get   { date: 'Mon, 24 Nov 2014 19:38:00 GMT',
+31 silly registry.get     server: 'Apache',
+31 silly registry.get     via: '1.1 varnish',
+31 silly registry.get     'last-modified': 'Mon, 24 Nov 2014 19:38:00 GMT',
+31 silly registry.get     'cache-control': 'max-age=60',
+31 silly registry.get     etag: '"4ZDUTKSYQQYRX14R2EAM2IQQO"',
+31 silly registry.get     age: '0',
+31 silly registry.get     'x-served-by': 'cache-ord1724-ORD',
+31 silly registry.get     'x-cache': 'MISS',
+31 silly registry.get     'x-cache-hits': '0',
+31 silly registry.get     'x-timer': 'S1416857880.706798,VS0,VE97',
+31 silly registry.get     vary: 'Accept',
+31 silly registry.get     'content-length': '0',
+31 silly registry.get     'keep-alive': 'timeout=10, max=50',
+31 silly registry.get     connection: 'Keep-Alive' } ]
+32 verbose etag ionic/1.2.8 from cache
+33 silly lockFile 74ce95ae-ionic-1-2-8 ionic@1.2.8
+34 silly lockFile 74ce95ae-ionic-1-2-8 ionic@1.2.8
+35 silly resolved [ { name: 'ionic',
+35 silly resolved     version: '1.2.8',
+35 silly resolved     preferGlobal: true,
+35 silly resolved     description: 'A tool for creating and developing Ionic Framework mobile apps.',
+35 silly resolved     homepage: 'http://ionicframework.com/',
+35 silly resolved     bin: { ionic: 'bin/ionic' },
+35 silly resolved     keywords:
+35 silly resolved      [ 'ionic',
+35 silly resolved        'ionic framework',
+35 silly resolved        'ionicframework',
+35 silly resolved        'mobile',
+35 silly resolved        'app',
+35 silly resolved        'hybrid',
+35 silly resolved        'cordova',
+35 silly resolved        'phonegap' ],
+35 silly resolved     repository:
+35 silly resolved      { type: 'git',
+35 silly resolved        url: 'https://github.com/driftyco/ionic-cli.git' },
+35 silly resolved     contributors: [ [Object], [Object], [Object] ],
+35 silly resolved     license: 'MIT',
+35 silly resolved     dependencies:
+35 silly resolved      { archiver: '0.5.1',
+35 silly resolved        colors: '0.6.2',
+35 silly resolved        connect: '3.1.1',
+35 silly resolved        'cross-spawn': '0.2.3',
+35 silly resolved        'connect-livereload': '0.4.0',
+35 silly resolved        'event-stream': '3.0.x',
+35 silly resolved        finalhandler: '0.2.0',
+35 silly resolved        'form-data': '0.1.4',
+35 silly resolved        ncp: '0.4.2',
+35 silly resolved        npm: '2.1.3',
+35 silly resolved        open: '0.0.5',
+35 silly resolved        optimist: '0.6.0',
+35 silly resolved        prompt: '0.2.12',
+35 silly resolved        progress: '1.1.7',
+35 silly resolved        q: '1.0.1',
+35 silly resolved        request: '2.27.0',
+35 silly resolved        'serve-static': '1.6.1',
+35 silly resolved        shelljs: '0.2.6',
+35 silly resolved        'tiny-lr-fork': '0.0.5',
+35 silly resolved        unzip: '0.1.9',
+35 silly resolved        'vinyl-fs': '0.3.7',
+35 silly resolved        xml2js: '0.4.4' },
+35 silly resolved     readme: 'Ionic-Cli\n=========\n\nThe Ionic Framework command line utility makes it easy to start, build, run, and emulate [Ionic](http://ionicframework.com/) apps. In the future, it will also have support for our mobile development services and tools that make Ionic even more powerful.\n\nUse the `ionic --help` command for more detailed task information.\n\n## Installing\n\n```bash\n$ npm install -g ionic\n```\n\n*Note: For a global install of `-g ionic`, OSX/Linux users may need to prefix the command with `sudo`.*\n\n\n## Starting an Ionic App\n\n```bash\n$ ionic start myapp [template]\n```\n\nStarter templates can either come from a named template, a Github repo, a Codepen, or a local directory. A starter template is what becomes the `www` directory within the Cordova project.\n\n__Named template starters:__\n\n* [tabs](https://github.com/driftyco/ionic-starter-tabs) (Default)\n* [sidemenu](https://github.com/driftyco/ionic-starter-sidemenu)\n* [blank](https://github.com/driftyco/ionic-starter-blank)\n\n__Github Repo starters:__\n\n* Any Github repo url, ex: [https://github.com/driftyco/ionic-starter-tabs](https://github.com/driftyco/ionic-starter-tabs)\n* Named templates are simply aliases to Ionic starter repos\n\n__Codepen URL starters:__\n\n* Any Codepen url, ex: [http://codepen.io/ionic/pen/odqCz](http://codepen.io/ionic/pen/odqCz)\n* [Ionic Codepen Demos](http://codepen.io/ionic/public-list/)\n\n__Local directory starters:__\n\n* Relative or absolute path to a local directory\n\n__Command-line flags/options:__\n\n    --appname, -a  .......  Human readable name for the app\n                            (Use quotes around the name)\n    --id, -i  ............  Package name set in the <widget id> config\n                            ex: com.mycompany.myapp\n    --no-cordova, -w  ....  Do not create an app targeted for Cordova\n\n\n## Testing in a Browser\n\nUse `ionic serve` to start a local development server for app dev and testing. This is useful for both desktop browser testing, and to test within a device browser which is connected to the same network. Additionally, this command starts LiveReload which is used to monitor changes in the file system. As soon as you save a file the browser is refreshed automatically. View [Using Sass](https://github.com/driftyco/ionic-cli/blob/master/README.md#using-sass) if you would also like to have `ionic serve` watch the project\'s Sass files.\n\n```bash\n$ ionic serve [options]\n```\n\n__Command-line flags/options:__\n\n    [--consolelogs|-c] ......  Print app console logs to Ionic CLI\n    [--serverlogs|-s] .......  Print dev server logs to Ionic CLI\n    [--port|-p] .............  Dev server HTTP port (8100 default)\n    [--livereload-port|-i] ..  Live Reload port (35729 default)\n    [--nobrowser|-b] ........  Disable launching a browser\n    [--nolivereload|-r] .....  Do not start live reload\n\n\n## Adding a platform target\n\n```bash\n$ ionic platform ios android\n```\n\n## Building your app\n\n```bash\n$ ionic build ios\n```\n\n## Live Reload App During Development (beta)\n\nThe `run` or `emulate` command will deploy the app to the specified platform devices/emulators. You can also run __live reload__ on the specified platform device by adding the `--livereload` option. The live reload functionality is similar to `ionic serve`, but instead of developing and debugging an app using a standard browser, the compiled hybrid app itself is watching for any changes to its files and reloading the app when needed. This reduces the requirement to constantly rebuild the app for small changes. However, any changes to plugins will still require a full rebuild. For live reload to work, the dev machine and device must be on the same local network, and the device must support [web sockets](http://caniuse.com/websockets).\n\nWith live reload enabled, an app\'s console logs can also be printed to the terminal/command prompt by including the `--consolelogs` or `-c` option. Additionally, the development server\'s request logs can be printed out using `--serverlogs` or `-s` options.\n\n__Command-line flags/options for `run` and `emulate`:__\n\n    [--livereload|-l] .......  Live Reload app dev files from the device (beta)\n    [--consolelogs|-c] ......  Print app console logs to Ionic CLI (live reload req.)\n    [--serverlogs|-s] .......  Print dev server logs to Ionic CLI (live reload req.)\n    [--port|-p] .............  Dev server HTTP port (8100 default, live reload req.)\n    [--livereload-port|-i] ..  Live Reload port (35729 default, live reload req.)\n    [--debug|--release]\n\nWhile the server is running for live reload, you can use the following commands within the CLI:\n\n    restart or r to restart the client app from the root\n    goto or g and a url to have the app navigate to the given url\n    consolelogs or c to enable/disable console log output\n    serverlogs or s to enable/disable server log output\n    quit or q to shutdown the server and exit\n\n\n## Emulating your app\n\nDeploys the Ionic app on specified platform emulator. This is simply an alias for `run --emulator`.\n\n```bash\n$ ionic emulate ios [options]\n```\n\n\n## Running your app\n\nDeploys the Ionic app on specified platform devices. If a device is not found it\'ll then deploy to an emulator/simulator.\n\n```bash\n$ ionic run ios [options]\n```\n\n\n## Update Ionic lib\n\nUpdate Ionic library files, which are found in the `www/lib/ionic` directory. If bower is being used\nby the project, this command will automatically run `bower update ionic`, otherwise this command updates\nthe local static files from Ionic\'s CDN.\n\n```bash\n$ ionic lib update\n```\n*Note: Using bower? This command does not update Ionic\'s dependencies. Run `bower update` to update Ionic and all of it\'s dependencies defined in `bower.json`.*\n\n## Packaging an app (beta)\n\nUsing Ionic\'s service, you can compile and package your project into an app-store ready app without\nrequiring native SDKs on your machine.\n\n```bash\n$ ionic package debug android\n```\n\nThe third argument can be either `debug` or `release`, and the last argument can be either `android` or `ios`.\n\n\n## Cordova Commands\n\nIonic uses Cordova underneath, so you can also substitute Cordova commands to prepare/build/emulate/run, or to add additional plugins.\n\n*Note: we occasionally send anonymous usage statistics to the Ionic team to make the tool better.*\n\n\n## Using Sass\n\nBy default, starter projects are hooked up to Ionic\'s precompiled CSS file, which is found in the project\'s `www/lib/ionic/css` directory, and is linked to the app in the head of the root `index.html` file. However, Ionic projects can also be customized using [Sass](http://sass-lang.com/), which gives developers and designers "superpowers" in terms of creating and maintaining CSS. Below are two ways to setup Sass for your Ionic project (the `ionic setup sass` command simply does the manual steps for you). Once Sass has been setup for your Ionic project, then the `ionic serve` command will also watch for Sass changes.\n\n#### Setup Sass Automatically\n\n    ionic setup sass\n\n\n#### Setup Sass Manually\n\n1. Run `npm install` from the working directory of an Ionic project. This will install [gulp.js](http://gulpjs.com/) and a few handy tasks, such as [gulp-sass](https://www.npmjs.org/package/gulp-sass) and [gulp-minify-css](https://www.npmjs.org/package/gulp-minify-css).\n2. Remove `<link href="lib/ionic/css/ionic.css" rel="stylesheet">` from the `<head>` of the root `index.html` file.\n3. Remove `<link href="css/style.css" rel="stylesheet">` from the `<head>` of the root `index.html` file.\n4. Add `<link href="css/ionic.app.css" rel="stylesheet">` to the `<head>` of the root `index.html` file.\n5. In the `ionic.project` file, add the JavaScript property `"gulpStartupTasks": ["sass", "watch"]` (this can also be customized to whatever gulp tasks you\'d like).\n',
+35 silly resolved     readmeFilename: 'README.md',
+35 silly resolved     bugs: { url: 'https://github.com/driftyco/ionic-cli/issues' },
+35 silly resolved     _id: 'ionic@1.2.8',
+35 silly resolved     _from: 'ionic@1.2.8' } ]
+36 info install ionic@1.2.8 into /usr/local/lib
+37 info installOne ionic@1.2.8
+38 info /usr/local/lib/node_modules/ionic unbuild
+39 info preuninstall ionic@1.2.6
+40 info uninstall ionic@1.2.6
+41 verbose true,/usr/local/lib/node_modules,/usr/local/lib/node_modules unbuild ionic@1.2.6
+42 verbose /usr/local/bin,[object Object] binRoot
+43 info /usr/local/lib/node_modules/ionic unbuild
+44 info preuninstall ionic@1.2.6
+45 info uninstall ionic@1.2.6
+46 verbose true,/usr/local/lib/node_modules,/usr/local/lib/node_modules unbuild ionic@1.2.6
+47 verbose /usr/local/bin,[object Object] binRoot
+48 error error rolling back Error: EACCES, unlink '/usr/local/bin/ionic'
+48 error error rolling back  ionic@1.2.8 { [Error: EACCES, unlink '/usr/local/bin/ionic'] errno: 3, code: 'EACCES', path: '/usr/local/bin/ionic' }
+49 error Error: EACCES, unlink '/usr/local/bin/ionic'
+49 error  { [Error: EACCES, unlink '/usr/local/bin/ionic'] errno: 3, code: 'EACCES', path: '/usr/local/bin/ionic' }
+50 error Please try running this command again as root/Administrator.
+51 error System Darwin 14.0.0
+52 error command "node" "/usr/local/bin/npm" "update" "-g" "ionic"
+53 error cwd /Users/spotluri/TerryManagementApp
+54 error node -v v0.10.26
+55 error npm -v 1.4.3
+56 error path /usr/local/bin/ionic
+57 error code EACCES
+58 error errno 3
+59 error stack Error: EACCES, unlink '/usr/local/bin/ionic'
+60 verbose exit [ 3, true ]
