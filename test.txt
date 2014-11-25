@@ -1,0 +1,30 @@
+{
+                    pageBreak: 'after',
+                    text: ''
+                },
+                
+                {
+                    text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.  Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'Employment, Internships, and Summer Activities',
+                    style: 'notes'
+                },
+                {
+                    text: 'List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.  List your most recent activities first.',
+                },
+                
+                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
+               /* table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'junior'),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),
+                table(activity, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours:', 'Final Grade'], ['100', '*', '*', '*'], 'senior'),*/
+                
+                {
+                    pageBreak: 'after',
+                    text: ''
+                },
