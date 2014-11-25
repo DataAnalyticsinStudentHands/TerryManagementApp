@@ -94,6 +94,10 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         $ionicLoading.show();
         var coursework = DataService.getItemList('coursework', item.id);
         var activity = DataService.getItemList('activity', item.id);
+        var employment = DataService.getItemList('employment', item.id);
+        var volunteer = DataService.getItemList('volunteer', item.id);
+        var awards = DataService.getItemList('awards', item.id);
+        var university = DataService.getItemList('university', item.id);
         
         $ionicLoading.hide();
 
@@ -862,6 +866,164 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     pageBreak: 'after',
                     text: ''
                 },
+                
+                {
+                    text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.  Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'Employment, Internships, and Summer Activities',
+                    style: 'notes'
+                },
+                {
+                    text: 'List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.  List your most recent activities first.',
+                },
+                
+                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
+               
+                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
+                
+                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
+                
+                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
+                
+                {
+                    text: 'Extracurricular Activities and Leadership Positions',
+                    style: 'notes'
+                },
+                {
+                    text: 'In order of importance to you, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.',
+                },
+                
+                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+               
+                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+                
+                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+                
+                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+                
+                {
+                    text: 'Community or Volunteer Service',
+                    style: 'notes'
+                },
+                {
+                    text: 'Describe your role in the organization, the type of organization you were associated with, how many hours of service you devoted each week, and when you participated in each activity.  List your most recent service first.',
+                },
+                
+                table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
+               
+                 table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
+                
+                 table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
+                
+                 table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
+                
+                {
+                    text: 'Awards, Special Honors, and Distinctions',
+                    style: 'notes'
+                },
+                {
+                    text: 'In order of importance to you, list up to six major awards, honors, or distinctions that you received both in and out of school during grades 9-12.',
+                },
+                
+                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+               
+                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+                
+                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+                
+                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
+                
+                {
+                    pageBreak: 'after',
+                    text: ''
+                },
+                
+                {
+                    text: 'V.  COLLEGE PLANS',
+                    style: 'chapterheader'
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Will you be the first in your family to graduate college?',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.first_graduate],
+                            style: 'field'
+                        }
+                    ]
+                },
+                
+                {
+                    columns: [
+                        {
+                            text: 'Why have you chosen to apply to the University of Houston?',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.why_apply],
+                            style: 'field'
+                        }
+                    ]
+                },
+                
+                 {
+                    text: 'List, in order of preference, the top six colleges or universities you are considering attending (be sure to rank the University of Houston among your choices):',
+                    style: 'notes'
+                },
+               table(university, ['name', 'name', 'name'], ['University Name', 'University Name', 'University Name'],['100', '100', '100']),
+               table(university, ['name', 'name', 'name'], ['University Name', 'University Name', 'University Name'],['100', '100', '100']),
+                {
+                    columns: [
+                        {
+                            text: 'Why have you chosen your academic major(s)?',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.why_major],
+                            style: 'field'
+                        }
+                    ]
+                },
+                
+                {
+                    columns: [
+                        {
+                            text: 'Briefly describe any educational plans you have beyond earning your Bachelor’s degree:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.educational_plans],
+                            style: 'field'
+                        }
+                    ]
+                },
+                
+                {
+                    columns: [
+                        {
+                            text: 'What are some of your life’s goals and objectives?',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.life_goals],
+                            style: 'field'
+                        }
+                    ]
+                },
+                
                 {
                     text: 'VI.  FINANCIAL INFORMATION',
                     style: 'chapterheader'
