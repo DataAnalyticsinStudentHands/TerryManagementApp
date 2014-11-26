@@ -1,0 +1,38 @@
+
+[
+        {
+            "name": "position",
+            "label": "Position/Job Title:",
+            "form": "modal_employment",
+            "id": 1,
+            "type": "text"
+    },  
+       {
+            "name": "employer",
+            "label": "Employer:",
+            "form": "modal_employment",
+            "id": 2,
+            "type": "text"
+    },
+        {
+            "name": "hours",
+            "label": "Hours:",
+            "form": "modal_employment",
+            "id": 3,
+            "type": "date"
+    },
+        {
+            "name": "date_from",
+            "label": "From Date:",
+            "form": "modal_employment",
+            "id": 4,
+            "type": "date"
+    },
+        {
+            "name": "date_to",
+            "label": "To Date:",
+            "form": "modal_employment",
+            "id": 5,
+            "type": "date"
+    }
+  ]

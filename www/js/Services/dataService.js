@@ -11,15 +11,54 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
     'use strict';
 
     //Load data for form data for terry application
-    var application_form;
+    var application_form,
+        modal_award_form,
+        modal_child_form,
+        modal_coursework_form,
+        modal_employment_form,
+        modal_scholarship_form,
+        modal_volunteer_form;
 
     $http.get('json/form_application.json').success(function (data) {
         application_form = data;
     });
+    $http.get('json/form_modal_award.json').success(function (data) {
+        modal_award_form = data;
+    });
+    $http.get('json/form_modal_child.json').success(function (data) {
+        modal_child_form = data;
+    });
+    $http.get('json/form_modal_coursework.json').success(function (data) {
+        modal_coursework_form = data;
+    });
+    $http.get('json/form_modal_employment.json').success(function (data) {
+        modal_employment_form = data;
+    });
+    $http.get('json/form_modal_scholarship.json').success(function (data) {
+        modal_scholarship_form = data;
+    });
+    $http.get('json/form_modal_volunteer.json').success(function (data) {
+        modal_volunteer_form = data;
+    });
 
     return {
-        getApplicationForm: function () {
-            return application_form;
+        getApplicationForm: function (acType) {
+            switch (acType) {
+            case 'application':
+                return application_form;
+            case 'award':
+                return modal_award_form;
+            case 'child':
+                return modal_child_form;
+            case 'coursework':
+                return modal_coursework_form;
+            case 'employment':
+                return modal_employment_form;
+            case 'scholarship':
+                return modal_scholarship_form;
+            case 'volunteer':
+                return modal_volunteer_form;
+            }
         },
         addItem: function (type, item) {
 
@@ -56,7 +95,6 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
                     });
                 }
             );
-
         },
         getItem: function (acType, id) {
 
@@ -76,15 +114,15 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
 
         },
         getItemList: function (acType, id) {
-            $ionicLoading.show();
+            
             return Restangular.one(acType).one('list').getList(id).then(
                 function (result) {
-                    $ionicLoading.hide();
+                    
                     result = Restangular.stripRestangular(result);
                     return result;
                 },
                 function (error) {
-                    $ionicLoading.hide();
+                    
                     ngNotify.set("Something went wrong retrieving data for " + acType, {
                         position: 'bottom',
                         type: 'error'

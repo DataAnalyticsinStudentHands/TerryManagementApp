@@ -1,0 +1,45 @@
+[
+        
+        {
+            "name": "place",
+            "label": "Place of Service:",
+            "form": "modal_volunteer",
+            "id": 1,
+            "type": "text"
+    },
+       {
+            "name": "description",
+            "label": "Description of Service:",
+            "form": "modal_volunteer",
+            "id": 2,
+            "type": "text"
+    },
+        {
+            "name": "hours_total",
+            "label": "Total Hours:",
+            "form": "modal_volunteer",
+            "id": 3,
+            "type": "number"
+    },
+        {
+            "name": "hours_week",
+            "label": "Hours per Week:",
+            "form": "modal_volunteer",
+            "id": 4,
+            "type": "number"
+    },
+        {
+            "name": "date_from",
+            "label": "From Date:",
+            "form": "modal_volunteer",
+            "id": 5,
+            "type": "date"
+    }, 
+        {
+            "name": "date_to",
+            "label": "To Date:",
+            "form": "modal_volunteer",
+            "id": 6,
+            "type": "date"
+    }
+  ]

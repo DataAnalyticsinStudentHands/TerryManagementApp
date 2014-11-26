@@ -1,0 +1,32 @@
+
+    
+[
+        {
+            "name": "award",
+            "label": "Award/Distinction/Honor:",
+            "form": "modal_award",
+            "id": 1,
+            "type": "text"
+    }, 
+       {
+            "name": "description",
+            "label": "Description or Basis for Award or Sponsor of Award:",
+            "form": "modal_award",
+            "id": 2,
+            "type": "text"
+    },
+        {
+            "name": "level",
+            "label": "Level of Competition:",
+            "form": "modal_award",
+            "id": 3,
+            "type": "text"
+    },
+        {
+            "name": "year",
+            "label": "Year(s) Received",
+            "form": "modal_award",
+            "id": 4,
+            "type": "number"
+    }
+  ]

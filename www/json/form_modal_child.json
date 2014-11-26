@@ -1,0 +1,44 @@
+[
+        {
+            "name": "name",
+            "label": "Name:",
+            "form": "modal_child",
+            "id": 1,
+            "type": "text"
+    },
+       {
+            "name": "age",
+            "label": "Age:",
+            "form": "modal_child",
+            "id": 2,
+            "type": "number"
+    },
+        {
+            "name": "relationship",
+            "label": "Relationship:",
+            "form": "modal_child",
+            "id": 3,
+            "type": "text"
+    },
+        {
+            "name": "school",
+            "label": "School/College:",
+            "form": "modal_child",
+            "id": 4,
+            "type": "text"
+    },
+        {
+            "name": "year",
+            "label": "Year in College:",
+            "form": "modal_child",
+            "id": 5,
+            "type": "number"
+    }, 
+        {
+            "name": "self_supporting",
+            "label": "Self-Supporting?",
+            "form": "modal_child",
+            "id": 6,
+            "type": "text"
+    }
+  ]

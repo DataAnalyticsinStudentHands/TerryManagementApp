@@ -1,0 +1,39 @@
+
+ 
+[
+    {
+            "name": "level",
+            "label": "Level:",
+            "form": "modal_coursework",
+            "id": 1,
+            "type": "text"
+    }, 
+       {
+            "name": "name",
+            "label": "Description/Name:",
+            "form": "modal_coursework",
+            "id": 2,
+            "type": "text"
+    },
+        {
+            "name": "type",
+            "label": "Type:",
+            "form": "modal_coursework",
+            "id": 3,
+            "type": "text"
+    },
+        {
+            "name": "credit_hours",
+            "label": "Credit Hours:",
+            "form": "modal_coursework",
+            "id": 4,
+            "type": "number"
+    },
+        {
+            "name": "final_grade",
+            "label": "Final Grade:",
+            "form": "modal_coursework",
+            "id": 5,
+            "type": "text"
+    }
+  ]

@@ -1,0 +1,31 @@
+
+[
+        {
+            "name": "applied_received",
+            "label": "Applied/received for:",
+            "form": "modal_scholarship",
+            "id": 1,
+            "type": "text"
+    },
+       {
+            "name": "name",
+            "label": "Scholarship or Grant Name:",
+            "form": "modal_scholarship",
+            "id": 2,
+            "type": "text"
+    },
+        {
+            "name": "duration",
+            "label": "Duration:",
+            "form": "modal_scholarship",
+            "id": 3,
+            "type": "text"
+    },
+        {
+            "name": "amount",
+            "label": "Amount per year:",
+            "form": "modal_scholarship",
+            "id": 4,
+            "type": "number"
+    }
+  ]
