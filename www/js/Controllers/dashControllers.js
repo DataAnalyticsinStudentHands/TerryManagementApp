@@ -33,7 +33,6 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
     var child = [];
     var scholarship = [];
     
-
     function putNA (data, acType) {
         //put NAs for all NULL values
         var form = DataService.getApplicationForm(acType),
@@ -50,7 +49,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         return data;
     }
     
-    // callback for ng-click 'createPdf':
+// callback for ng-click 'createPdf':
    $scope.createPdf = function (item) {
 
         //load all list data
@@ -67,7 +66,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
             employment = putNA(returnedData, 'employment');
         }));
         listPromises.push(DataService.getItemList('activity', item.id).then(function (returnedData) {
-            var activity = returnedData;
+            activity = returnedData;
             if (activity !== undefined) {
                 //convert long string into short version
                 for (i = 0; i < activity.length; i++) {
@@ -99,7 +98,6 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         }));
         listPromises.push(DataService.getItemList('award', item.id).then(function (returnedData) {
             award = returnedData;
-            
             if (award !== undefined) {
                 //convert long string into short version
                 for (i = 0; i < award.length; i++) {
@@ -127,11 +125,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         }));
         listPromises.push(DataService.getItemList('university', item.id).then(function (returnedData) {
             university = returnedData;
-            
             university.sort(function(a,b) { return (a.rank) - (b.rank); } );
             for (i = 0; i < university.length; i++) {
                 university[i].rank++;
             }
+
             var diff = university.length - 6;
             for (var i = diff; i < 6; i++) {
                 university[i].rank = i;
@@ -145,7 +143,6 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         }));
         listPromises.push(DataService.getItemList('scholarship', item.id).then(function (returnedData) {
             scholarship = returnedData;
-            
             for (i = 0; i < scholarship.length; i++) {
                 if (scholarship[i].applied_received) {
                     scholarship[i].level = 'applied';
