@@ -8,7 +8,7 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, items, DataService, DownloadService, Restangular) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, $q, $timeout, items, DataService, DownloadService) {
     'use strict';
     
     //get data for view
@@ -22,11 +22,170 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         return DownloadService.get(id, 'essay2*');
     };
     
-    var coursework = [],
-        activity = [],
-        employment = [],
-        volunteer = [];
+    $scope.loadingIndicator;
     
+    var coursework = [];
+    var employment = [];
+    var activity = [];
+    var volunteer = [];
+    var award = [];
+    var university = [];
+    var child = [];
+    var scholarship = [];
+    
+    // callback for ng-click 'createPdf':
+   $scope.createPdf = function (item) {
+
+        //load all list data
+        $scope.loadingIndicator = $ionicLoading.show({
+            content: 'Downloading data and Creating pdf ...',
+        });
+
+        var listPromises = [];
+        listPromises.push(DataService.getItemList('coursework', item.id).then(function (returnedData) {
+            coursework = returnedData;
+        }));
+        listPromises.push (DataService.getItemList('employment', item.id).then(function (returnedData) {
+            employment = returnedData;
+        }));
+        listPromises.push(DataService.getItemList('activity', item.id).then(function (returnedData) {
+            activity = returnedData;
+            if (activity !== undefined) {
+                //convert long string into short version
+                for (i = 0; i < activity.length; i++) {
+                    var test = angular.fromJson(activity[i].year);
+                    if (test[0].checked) {
+                        activity[i].FR = 'x';
+                    } else 
+                        activity[i].FR = ' ';
+                    if (test[1].checked) {
+                        activity[i].SO = 'x';
+                    } else 
+                        activity[i].SO = ' ';
+                    if (test[2].checked) {
+                        activity[i].JR = 'x';
+                    } else 
+                        activity[i].JR = ' ';
+                    if (test[3].checked) {
+                        activity[i].SR = 'x';
+                    } else 
+                        activity[i].SR = ' ';
+                }
+            }
+        }));
+        listPromises.push(DataService.getItemList('volunteer', item.id).then(function (returnedData) {
+            volunteer = returnedData;
+        }));
+        listPromises.push(DataService.getItemList('award', item.id).then(function (returnedData) {
+            award = returnedData;
+            if (award !== undefined) {
+                //convert long string into short version
+                for (i = 0; i < award.length; i++) {
+                    var test = angular.fromJson(award[i].year);
+                    if (test[0].checked) {
+                        award[i].FR = 'x';
+                    } else 
+                        award[i].FR = ' ';
+                    if (test[1].checked) {
+                        award[i].SO = 'x';
+                    } else 
+                        award[i].SO = ' ';
+                    if (test[2].checked) {
+                        activity[i].JR = 'x';
+                    } else 
+                        award[i].JR = ' ';
+                    if (test[3].checked) {
+                        award[i].SR = 'x';
+                    } else 
+                        award[i].SR = ' ';
+                }
+            }
+        }));
+        listPromises.push(DataService.getItemList('university', item.id).then(function (returnedData) {
+            university = returnedData;
+            university.sort(function(a,b) { return (a.rank) - (b.rank); } );
+            for (i = 0; i < university.length; i++) {
+                university[i].rank++;
+            }
+        }));
+        listPromises.push(DataService.getItemList('child', item.id).then(function (returnedData) {
+            child = returnedData;
+        }));
+        listPromises.push(DataService.getItemList('scholarship', item.id).then(function (returnedData) {
+            scholarship = returnedData;
+            for (i = 0; i < scholarship.length; i++) {
+                if (scholarship[i].applied_received) {
+                    scholarship[i].level = 'applied';
+                } else {
+                    scholarship[i].level = 'received';
+                }
+            }
+        }));
+       
+        var default_form = DataService.getApplicationForm(),
+            i,
+            l,
+            docDefinition;
+
+        //TODO use filter
+        //clean data
+        if (item.citizen !== undefined) {
+            if (item.citzen === 'true') {
+                item.citizen = 'Yes';
+            } else {
+                item.citizen = 'No';
+                if (item.permanent_resident !== undefined) {
+                    if (item.permanent_resident === 'true') {
+                        item.permanent_resident = 'Yes';
+                        if (item.permanent_resident_card !== undefined) {
+                            if (item.permanent_resident_card) {
+                                item.permanent_resident_card = '1551';
+                            } else {
+                                item.permanent_resident_card = '1551C';
+                            }
+                        }
+                    } else {
+                        item.permanent_resident = 'No';
+                    }
+                }
+            }
+        }
+        
+        //put NAs for all NULL values
+        for (i = 0, l = default_form.length; i < l; i++) {
+            if (!item.hasOwnProperty(default_form[i].name)) {
+                item[default_form[i].name] = "N/A";
+            }
+        }
+       
+        //after loading individual lists, we are ready to create the actual pdf
+        $q.all(listPromises).then(function () {
+            //define font to use in pdf
+            pdfMake.fonts = {
+                TimesNewRoman: {
+                    normal: 'Times-New-Roman-Regular.ttf',
+                    bold: 'Times-New-Roman-Bold.ttf',
+                    italics: 'Times-New-Roman-Italic.ttf',
+                    bolditalics: 'Times-New-Roman-Bold-Italic.ttf'
+                }
+            };
+
+            var docDefinition = createDocument(item);
+            
+            $timeout(function() {
+                $ionicLoading.hide();
+            }, 5500);
+            try {
+                pdfMake.createPdf(docDefinition).open();
+                //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
+            } catch (err) {
+                console.log(err);
+            }
+
+        });
+    };
+    
+    //support functions for pdf creation
     function buildTableBody(data, columns, headers, emptyRows) {
         var body = [],
             i,
@@ -40,6 +199,10 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         // body.push(headers);
         body.push(headerRow);
         
+        if (emptyRows === undefined) {
+                emptyRows = 3;
+        }
+        
         if (data !== undefined) {
 
             data.forEach(function (row) {
@@ -51,24 +214,27 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
 
                 body.push(dataRow);
             });
-        } else {
-            if (emptyRows === undefined) {
-                emptyRows = 3;
-            }
             
-            for (i = 0; i < emptyRows; i++) {
-                var dataRow = [];
-                for (j = 0; j < columns.length; j++) {
-                    dataRow.push(' ');
-                }
-
-                body.push(dataRow);
+            emptyRows = emptyRows - data.length;
+            if (emptyRows < 0) {
+                emptyRows = 0;
             }
+        } 
+        
+            
+        for (i = 0; i < emptyRows; i++) {
+            var dataRow = [];
+            for (j = 0; j < columns.length; j++) {
+                dataRow.push(' ');
+            }
+
+            body.push(dataRow);
         }
 
         return body;
     }
     
+    //support functions for pdf creation
     function buildTableWidth(widths) {
         var width = [],
             i;
@@ -76,16 +242,12 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         for (i = 0; i < widths.length; i++) {
             width.push(widths[i]);
         }
-        
-       /* widths.forEach(function () {
-            width.push('*');
-        });
-        */
 
         return width;
     }
     
-    function table(data, columns, headers, widths, filter, emptyRows) {
+    //support functions for pdf creation
+    function table(data, columns, headers, widths, emptyRows, filter) {
         if (filter !== undefined) {
             data = $filter('filter')(data, {
                 level: filter
@@ -121,102 +283,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         };
     }
     
-    
-    
-    
-    // callback for ng-click 'createPdf':
-    $scope.createPdf = function (item) {
-        
-<<<<<<< HEAD
-        $ionicLoading.show();
-        var coursework = DataService.getItemList('coursework', item.id);
-        var activity = DataService.getItemList('activity', item.id);
-        var employment = DataService.getItemList('employment', item.id);
-        var volunteer = DataService.getItemList('volunteer', item.id);
-        var awards = DataService.getItemList('awards', item.id);
-        var university = DataService.getItemList('university', item.id);
-=======
-        var listPromises = [];
-        listPromises.push(DataService.getItemList('coursework', item.id).then(function (modifiedData) {
-            coursework = modifiedData;
-            }
-        ));
-        listPromises.push (DataService.getItemList('employment', item.id).then(function (returnedData) {
-                employment = returnedData;
-                }
-        ));
-        listPromises.push(DataService.getItemList('activity', item.id).then(function (returnedData) {
-                    activity = returnedData;
-            }
-        ));
-        listPromises.push(DataService.getItemList('volunteer', item.id).then(function (returnedData) {
-                        volunteer = returnedData;
-        }
-                        
-                                                                            ));
-                
-        //after checking individual lists, sift through the results
-        var succes  = $q.all(listPromises)
-            .then(function (item) {
->>>>>>> 1458cdf9301854a5aa4b73b6c9f2be803c3cb4cd
-        
-        
-          
-        var default_form = DataService.getApplicationForm(),
-            i,
-            l,
-            docDefinition;
-
-        //TODO use filter
-        //clean data
-        if (item.citizen !== undefined) {
-            if (item.citzen === 'true') {
-                item.citizen = 'Yes';
-            } else {
-                item.citizen = 'No';
-                if (item.permanent_resident !== undefined) {
-                    if (item.permanent_resident === 'true') {
-                        item.permanent_resident = 'Yes';
-                        if (item.permanent_resident_card !== undefined) {
-                            if (item.permanent_resident_card) {
-                                item.permanent_resident_card = '1551';
-                            } else {
-                                item.permanent_resident_card = '1551C';
-                            }
-                        }
-                    } else {
-                        item.permanent_resident = 'No';
-                    }
-                }
-            }
-        }
-        
-        if (activity !== undefined) {
-            
-            for (i = 0; i < activity.length; i++) {
-                switch (activity[i].year.text) {
-                case 'Sophomore':
-                    activity.SO = 'x';
-                    break;
-                case '':
-                    break;
-                }
-            }
-        }
-        
-        //put NAs for all NULL values
-        for (i = 0, l = default_form.length; i < l; i++) {
-            if (!item.hasOwnProperty(default_form[i].name)) {
-                console.log(default_form[i].name);
-                item[default_form[i].name] = "N/A";
-            }
-        }
-
-        //build pdf doc
-        docDefinition = {
+    function createDocument (item) {
+        return {
             styles: {
                 header: {
-                    margin: [40, 30, 40, 20],
+                    margin: [40, 30, 40, 10],
                     fontSize: 10
                 },
                 title: {
@@ -271,7 +342,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             text: 'STUDENT NAME:'
                         },
                         {
-                            text: [item.first_name, item.last_name]
+                            text: [item.first_name, ' ', item.last_name]
                         },
                         {
                             text: 'UH ID:',
@@ -939,17 +1010,15 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     text: 'III.	PRE-AP, ADVANCED PLACEMENT (AP), INTERNATIONAL BACCALAUREATE PROGRAM (IB), OR DUAL CREDIT (DC) COURSEWORK TAKEN IN HIGH SCHOOL',
                     style: 'chapterheader'
                 },
-                /*table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 'sophomore', 3),
-                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Junior Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 'junior', 5),
-                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Senior Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 'senior', 7),
-                */{
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Sophomore Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 3, 'sophomore'),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Junior Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 5, 'junior'),
+                table(coursework, ['name', 'type', 'credit_hours', 'final_grade'], ['Senior Level Coursework', 'AP/IB/DC', 'Credit Hours', 'Final Grade'], [200, '*', '*', '*'], 7, 'senior'),
+                {
                     pageBreak: 'after',
                     text: ''
                 },
-                
                 {
-                    text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.  Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.',
-                    style: 'chapterheader'
+                    text: [{ text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.', bold: true }, ' Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.']
                 },
                 {
                     text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS',
@@ -960,67 +1029,19 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     style: 'notes'
                 },
                 {
-                    margin: [0, 0, 0, 10],
+                    margin: [0, 0, 0, 5],
                     text: ['List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.', { text: ' List your most recent activities first.', bold: true }]
                 },
-                /*table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'], [100, '*', '*', '*', '*'], null, 7),
-                */{
+                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'], [100, '*', '*', '*', '*'], 7),
+                {
                     text: 'Extracurricular Activities and Leadership Positions',
                     style: 'notes'
                 },
                 {
-                    margin: [0, 0, 0, 10],
+                    margin: [0, 0, 0, 5],
                     text: [ { text: 'In order of importance to you', bold: true }, ', list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.']
                 },
-                /*table(activity, ['activity', 'position', 'description', 'date_from', 'date_to'], ['Organization / Activity', 'Position(s) Held', 'Description of Activity', 'FR', 'SO', 'JR', 'SR'], [100, '80', '120', '*', '*', '*', '*'], null, 7),*/
-                
-                
-                
-                {
-                    pageBreak: 'after',
-                    text: ''
-                },
-                
-                {
-                    text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.  Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.',
-                    style: 'chapterheader'
-                },
-                {
-                    text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS',
-                    style: 'chapterheader'
-                },
-                {
-                    text: 'Employment, Internships, and Summer Activities',
-                    style: 'notes'
-                },
-                {
-                    text: 'List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.  List your most recent activities first.',
-                },
-                
-                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
-               
-                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
-                
-                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
-                
-                table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'],['100', '*', '*', '*', '*']),
-                
-                {
-                    text: 'Extracurricular Activities and Leadership Positions',
-                    style: 'notes'
-                },
-                {
-                    text: 'In order of importance to you, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.',
-                },
-                
-                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-               
-                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-                
-                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-                
-                table(activity, ['activity', 'position', 'description', 'year'], ['Organization/Activity', 'Position(s) Held', 'Description of Activity', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-                
+                table(activity, ['activity', 'position', 'description', 'FR', 'SO', 'JR', 'SR'], ['Organization / Activity', 'Position(s) Held', 'Description of Activity', 'FR', 'SO', 'JR', 'SR'], [120, 100, 150, '*', '*', '*', '*'], 6), 
                 {
                     text: 'Community or Volunteer Service',
                     style: 'notes'
@@ -1028,116 +1049,107 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 {
                     text: 'Describe your role in the organization, the type of organization you were associated with, how many hours of service you devoted each week, and when you participated in each activity.  List your most recent service first.',
                 },
-                
-                table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
-               
-                 table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
-                
-                 table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
-                
-                 table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],['100', '*', '*', '*', '*', '*']),
-                
+                table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],[120, 160, 30, 30, '*', '*'], 6),   
+                {
+                    pageBreak: 'after',
+                    text: ''
+                },
+                {
+                    text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS (continued)',
+                    style: 'chapterheader'
+                },
                 {
                     text: 'Awards, Special Honors, and Distinctions',
                     style: 'notes'
                 },
                 {
-                    text: 'In order of importance to you, list up to six major awards, honors, or distinctions that you received both in and out of school during grades 9-12.',
+                    margin: [0, 0, 0, 5],
+                    text: [{text: 'In order of importance to you', bold: true}, ', list up to six major awards, honors, or distinctions that you received both in and out of school during grades 9-12.'],
                 },
-                
-                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-               
-                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-                
-                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-                
-                table(awards, ['award', 'description', 'level', 'year'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR/SO/JR/SR'],['100', '*', '*', '*']),
-                
-                {
-                    pageBreak: 'after',
-                    text: ''
-                },
-                
+                table(award, ['award', 'description', 'level', 'FR', 'SO', 'JR', 'SR'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR', 'SO', 'JR', 'SR'],[150, 150, 100, '*', '*', '*', '*'], 6),
                 {
                     text: 'V.  COLLEGE PLANS',
                     style: 'chapterheader'
                 },
                 {
-                    columns: [
-                        {
-                            text: 'Will you be the first in your family to graduate college?',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.first_graduate],
-                            style: 'field'
-                        }
-                    ]
+                    text: 'Will you be the first in your family to graduate college?',
+                    style: 'label'
                 },
-                
                 {
-                    columns: [
-                        {
-                            text: 'Why have you chosen to apply to the University of Houston?',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.why_apply],
-                            style: 'field'
-                        }
-                    ]
+                    margin: [0, 0, 0, 10],
+                    text: [item.first_graduate],
+
                 },
-                
-                 {
+                {
+                    text: 'Why have you chosen to apply to the University of Houston?',
+                    style: 'label'
+                },
+                {
+                    margin: [0, 0, 0, 10],
+                    text: [item.why_apply],
+                },
+                {
+                    margin: [0, 0, 0, 5],
                     text: 'List, in order of preference, the top six colleges or universities you are considering attending (be sure to rank the University of Houston among your choices):',
                     style: 'notes'
                 },
-               table(university, ['name', 'name', 'name'], ['University Name', 'University Name', 'University Name'],['100', '100', '100']),
-               table(university, ['name', 'name', 'name'], ['University Name', 'University Name', 'University Name'],['100', '100', '100']),
                 {
-                    columns: [
-                        {
-                            text: 'Why have you chosen your academic major(s)?',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.why_major],
-                            style: 'field'
-                        }
-                    ]
-                },
-                
+                    table: {
+                        widths: ['*', '*'],
+                        headerRows: 0,
+                        body: [
+                            [
+                                {
+                                    text: [university[0].rank.toString(), ' ', university[0].name],
+                                },
+                                {
+                                    text: [university[3].rank.toString(), ' ', university[3].name],
+                                }
+                            ],
+                            [
+                                {
+                                    text: [university[1].rank.toString(), ' ', university[1].name],
+                                },
+                                {
+                                    text: [university[4].rank.toString(), ' ', university[4].name],
+                                }
+                            ],
+                            [
+                                {
+                                    text: [university[2].rank.toString(), ' ', university[2].name],
+                                },
+                                {
+                                    text: [university[5].rank.toString(), ' ', university[5].name],
+                                }
+                            ]
+                        ]
+                    }
+				},
                 {
-                    columns: [
-                        {
-                            text: 'Briefly describe any educational plans you have beyond earning your Bachelor’s degree:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.educational_plans],
-                            style: 'field'
-                        }
-                    ]
+                    margin: [0, 10, 0, 10],
+                    text: 'Why have you chosen your academic major(s)?',
                 },
-                
                 {
-                    columns: [
-                        {
-                            text: 'What are some of your life’s goals and objectives?',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.life_goals],
-                            style: 'field'
-                        }
-                    ]
+                    margin: [0, 0, 0, 10],
+                    text: [item.why_major]
                 },
-                
+                {
+                    text: 'Briefly describe any educational plans you have beyond earning your Bachelor’s degree:',
+                    style: 'label'
+                },
+                {
+                    margin: [0, 0, 0, 10],
+                    text: [item.educational_plans]
+                },
+                {
+                    text: 'What are some of your life’s goals and objectives?',
+                    style: 'label'
+                },
+                {
+                    margin: [0, 0, 0, 10],
+                    text: [item.life_goals],
+                    pageBreak: 'after',
+                },
                 {
                     text: 'VI.  FINANCIAL INFORMATION',
                     style: 'chapterheader'
@@ -1426,7 +1438,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             style: 'field'
                         },
                         {
-                            text: 'Highest level of education ahcieved:',
+                            text: 'Highest level of education achieved:',
                             style: 'label',
                             width: 'auto'
                         },
@@ -1436,34 +1448,164 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             style: 'field'
                         }
                     ]
-                }
-                
+                },
+                {
+                    text: 'The following questions will help to estimate your financial need.  Please complete all questions or your application cannot be considered.',
+                    style: 'notes'
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Funds for college saved by you:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.funds_saved_you.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        },
+                        {
+                            text: 'Funds for college saved by others:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.funds_saved_others.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                }, 
+                {
+                    columns: [
+                        {
+                            text: 'Your parents’ or guardians’ total cash savings (not limited to college):',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.total_savings.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Value of your parents’ or guardians’ other investments (NOT including home):',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.total_investments.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Net value of your parents’ or guardians’ businesses, farms and/or ranches:',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.net_value.toString()],
+                            alignment: 'left',
+                            style: 'field'
+                        }
+                    ]
+                }, 
+				{
+                    text: 'Parents’/Guardians’ Adjusted Gross Income for 2014 (line 37 on Form 1040; line 21 on form 1040A):',
+                    bold: true
+                },		
+				{
+                    columns: [
+                        {
+                            text: [item.adjusted_cross_income.toString()],
+                            style: 'field',
+                            width: 'auto'
+                        },
+                        {
+                            text: 'Projected parental support (annual):',
+                            style: 'label'
+                        },
+                        {
+                            text: [item.projected_support.toString()],
+                            style: 'field',
+                            width: 'auto',
+                            pageBreak: 'after'
+                        },
+                    ]
+                }, 
+                {
+                    text: 'VI.  FINANCIAL INFORMATION  (continued)',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'Please describe any special circumstances that affect your family’s ability to fund your college expenses (response required):',
+                    bold: true
+                },
+				{
+                    text: [item.description_special_circumstances],
+                    style: 'field',
+                    width: 'auto',
+                },	
+				{
+                    text: 'Do you have a Texas Tomorrow Fund or 529 college savings plan?  If so, what is the plan’s value?',
+                },
+				{
+                    text: [item.texas_tomorrow_fund],
+                    style: 'field',
+                    width: 'auto',
+                },																													{
+                    text: 'Please provide the specified information for all children under 25 years of age in your family.  Do not include yourself or your parents. ',
+                },								
+                table(child, ['name', 'age', 'relationship', 'year', 'self_supporting'], ['Name', 'Age', 'Relationship', 'Year in College', 'Self-Supporting?'],[150, 50, 100, '*', '*'], 5),
+                {
+                    margin: [0, 0, 0, 5],
+                    text: 'Do you have a sibling who is a current/past Terry Scholar or who is applying for a Terry Scholarship?  If so, please give name(s) and institution(s):',
+                },
+                {
+                    text: [item.sibling_terry],
+                    style: 'field'
+                },
+                {
+                    text: 'VII.  UNIVERSITY SCHOLARSHIP INFORMATION',
+                    style: 'chapterheader'
+                },
+                {
+                    text: 'All entering freshmen admitted to the University of Houston are automatically considered for the University-Funded Scholarships for Freshman (http://www.uh.edu/financial/undergraduate/types-aid/scholarships/). ',
+                    italics: true
+                },
+                {
+                    margin: [0, 0, 0, 5],
+                    text: 'Please indicate any college or departmental scholarships specific to your intended major for which you are applying:',
+                },
+                {
+                    text: [item.department_scholarship],
+                    style: 'field'
+                },
+                {
+                    margin: [0, 0, 0, 5],
+                    text: 'List other scholarships for which you have applied for the 2015-2016 academic year:',
+                },
+                table(scholarship, ['name', 'duration', 'amount'], ['Scholarship or Grant Name', 'Duration', 'Amount per year'],[200, 150, '*'], 4, 'applied'),
+				{
+                    margin: [0, 0, 0, 5],
+                    text: 'List other scholarships or grants you will receive for the 2015-2016 academic year:',
+                },
+                table(scholarship, ['name', 'duration', 'amount'], ['Scholarship or Grant Name', 'Duration', 'Amount per year'],[200, 150, '*'], 4, 'received'),
             ],
             pageSize: 'LETTER',
             pageMargins: [40, 60, 40, 60]
                 
         };
-
-        pdfMake.fonts = {
-            TimesNewRoman: {
-                normal: 'Times-New-Roman-Regular.ttf',
-                bold: 'Times-New-Roman-Bold.ttf',
-                italics: 'Times-New-Roman-Italic.ttf',
-                bolditalics: 'Times-New-Roman-Bold-Italic.ttf'
-            }
-        };
-
-        try {
-            //console.log('Create pdf from:');
-            //console.log(docDefinition);
-            pdfMake.createPdf(docDefinition).open();
-        } catch (err) {
-            console.log(err);
-        }
-        
-    };
-                 );
-   
+    }
 });
 
 /**
@@ -1475,28 +1617,5 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
  */
 angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework, activity) {
     'use strict';
-
     
-    $scope.updateList = function (acType) {
-        switch (acType) {
-        case 'locations':
-            // GET 
-            DataService.getAllItems(acType).then(
-                function (result) {
-                    $scope.locations = result;
-                }
-            );
-            break;
-        case 'classes':
-            // GET 
-            DataService.getAllItems(acType).then(
-                function (result) {
-                    $scope.classes = result;
-                }
-            );
-            break;
-        }
-    };
-
-
 });
