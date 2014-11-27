@@ -4,7 +4,6 @@
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
             List of Applications Terry Scholarship 2015/16<br>
             Totel number of applications in the database: {{items.length}}</p>
-            
         
         <div class="bar bar-header item-input-inset">
             <ion-search placeholder="Search applications" filter="search"></ion-search>
@@ -25,7 +24,7 @@
             <div class="item item-body">
                 <p>Creation Timestamp: {{item.creation_timestamp | date: 'yyyy-MM-dd'}}</p>              
                 <p ng-show="item.file_names[0]" >Essay 1: {{item.file_names[0] | truncate:6}}</p>
-                <p ng-show="item.file_names[0]" >Essay 2: {{item.file_names[1] | truncate:6}}</p>
+                <p ng-show="item.file_names[1]" >Essay 2: {{item.file_names[1] | truncate:6}}</p>
             
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left">
@@ -33,11 +32,11 @@
                     <i class="icon ion-document-text"></i>
                     Open PDF
                 </a>
-                <a class="tab-item" ng-click="downloadEssay1(item.id)">
+                <a class="tab-item" ng-click="downloadEssay1(item.id, item.last_name, item.first_name)" ng-show="item.file_names[0]">
                     <i class="icon ion-archive"></i>
                     Download Essay 1
                 </a>
-                <a class="tab-item" ng-click="downloadEssay2(item.id)">
+                <a class="tab-item" ng-click="downloadEssay2(item.id, item.last_name, item.first_name)" ng-show="item.file_names[1]">
                     <i class="icon ion-archive"></i>
                     Download Essay 2
                 </a>

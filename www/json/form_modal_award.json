@@ -27,6 +27,6 @@
             "label": "Year(s) Received",
             "form": "modal_award",
             "id": 4,
-            "type": "number"
+            "type": "text"
     }
   ]

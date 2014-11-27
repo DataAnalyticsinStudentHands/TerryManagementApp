@@ -8,18 +8,18 @@
  * # DashController
  * Controller for objects used in the dashboard
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, $q, $timeout, items, DataService, DownloadService) {
+angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, $q, $timeout, ngNotify, items, DataService, DownloadService) {
     'use strict';
     
     //get data for view
     $scope.items = items;
     $scope.items.length = Object.keys(items).length - 1;
     
-    $scope.downloadEssay1 = function (id) {
-        return DownloadService.get(id, 'essay1*');
+    $scope.downloadEssay1 = function (id, lastname, firstname) {
+        return DownloadService.get(id, 'essay1*', lastname + '.' + firstname + '.essay1');
     };
-    $scope.downloadEssay2 = function (id) {
-        return DownloadService.get(id, 'essay2*');
+    $scope.downloadEssay2 = function (id, lastname, firstname) {
+        return DownloadService.get(id, 'essay2*', lastname + '.' + firstname + '.essay2');
     };
     
     $scope.loadingIndicator;
@@ -40,7 +40,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         if (form !== undefined) {
             for (i = 0, l = data.length; i < l; i++) {
                 for (j = 0, k = form.length; j< k; j++) {
-                    if (!data.hasOwnProperty(form[j].name)) {
+                    if (!data[i].hasOwnProperty(form[j].name)) {
                         data[i][form[j].name] = "N/A";
                     }
                 }
@@ -130,9 +130,13 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 university[i].rank++;
             }
 
-            var diff = university.length - 6;
-            for (var i = diff; i < 6; i++) {
-                university[i].rank = i;
+            if (university.length < 6) {
+                for (i = university.length; i < 6; i++) {
+                    var newuniversity = {};
+                    newuniversity.rank = i + 1;
+                    newuniversity.name = '';
+                    university.push(newuniversity);
+                }
             }
             var data = university;
             university = putNA(data, 'university');
@@ -206,14 +210,13 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
             
             $timeout(function() {
                 $ionicLoading.hide();
-            }, 5500);
+            }, 200);
             try {
                 pdfMake.createPdf(docDefinition).open();
                 //pdfMake.createPdf(docDefinition).download('optionalName.pdf');
             } catch (err) {
                 console.log(err);
             }
-
         });
     };
     
@@ -1571,7 +1574,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             style: 'field',
                             width: 'auto',
                             pageBreak: 'after'
-                        },
+                        }
                     ]
                 }, 
                 {

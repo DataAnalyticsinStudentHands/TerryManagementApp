@@ -11,7 +11,9 @@ angular.module('terry-management-app', [
     'ui.bootstrap.datetimepicker',
     'databaseControllerModule',
     'databaseServicesModule'
-]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
+])
+
+.run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
     'use strict';
 
     $ionicPlatform.ready(function () {
