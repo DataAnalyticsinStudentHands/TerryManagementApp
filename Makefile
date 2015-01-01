@@ -3,7 +3,7 @@ PROD_REPO = ssh://plindner@housuggest.org/~/terrymanagement.git
 
 # Deploy tasks
 
-prod: build git-prod deploy
+prod: build git-prod
 	@ git tag -f production
 	@ echo "Production deploy complete"
 
@@ -28,4 +28,5 @@ git-prod:
 	git commit -m "Release" && \
 	git push -f origin +master:refs/heads/master
 
-.PHONY: install build clean deploy git-prod prod
+
+.PHONY: install build clean git-prod prod

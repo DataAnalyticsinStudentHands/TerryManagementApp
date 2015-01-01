@@ -165,7 +165,7 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
             );
         },
         getAllItemsWithFileNames: function (type) {
-            $ionicLoading.show();
+            $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Loading Applications ...</div>'});
             return Restangular.one(type).one("withfilenames").get().then(
                 function (success) {
                     $ionicLoading.hide();

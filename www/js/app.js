@@ -88,7 +88,7 @@ angular.module('terry-management-app', [
                 templateUrl: "templates/tabs.html",
                 resolve: {
                     items: function (DataService) {
-                        return DataService.getAllItemsWithFileNames('applications');
+                        return DataService.getAllItemsWithFileNames('application');
                     }
                 }
                 

@@ -12,7 +12,7 @@ angular.module('Services').service('DownloadService', function Download($ionicLo
 
     this.get = function (id, fileName, fileLabel) {
         $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Downloading PDF ...</div>'});
-        return Restangular.all("applications")
+        return Restangular.all("application")
             .withHttpConfig({responseType: 'arraybuffer'}).customGET("download", {applicationId: id, fileName: fileName })
             .then(
             function (success) {

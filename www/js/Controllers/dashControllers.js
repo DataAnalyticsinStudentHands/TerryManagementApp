@@ -37,6 +37,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         //put NAs for all NULL values
         var form = DataService.getApplicationForm(acType),
             i, j, l, k;
+        
         if (form !== undefined) {
             for (i = 0, l = data.length; i < l; i++) {
                 for (j = 0, k = form.length; j< k; j++) {
@@ -61,9 +62,15 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         listPromises.push(DataService.getItemList('coursework', item.id).then(function (returnedData) {
             coursework = putNA(returnedData, 'coursework');
         }));
-        listPromises.push (DataService.getItemList('employment', item.id).then(function (returnedData) {
+        listPromises.push(DataService.getItemList('employment', item.id).then(function (returnedData) {
             //employment = returnedData;
-            employment = putNA(returnedData, 'employment');
+            var temp = returnedData;
+            if (temp !== undefined) {
+                employment = putNA(returnedData, 'employment');
+            } else {
+                employment = temp;
+            }
+                
         }));
         listPromises.push(DataService.getItemList('activity', item.id).then(function (returnedData) {
             activity = returnedData;
