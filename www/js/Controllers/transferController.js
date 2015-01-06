@@ -3,44 +3,41 @@
 
 /**
  * @ngdoc function
- * @name controller:DashCtrl
+ * @name controller:TransferCtrl
  * @description
- * # DashController
- * Controller for objects used in the dashboard
+ * # TransferController
+ * Controller for transfer applications 
  */
-angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, $q, $timeout, ngNotify, items, DataService, DownloadService) {
+angular.module('Controllers').controller('TransferCtrl', function ($scope, $filter, $ionicLoading, $ionicModal, $ionicPopup, $q, $timeout, ngNotify, items, DataService, DownloadService) {
     'use strict';
-    
+
     //get data for view
     $scope.items = items;
-    $scope.items.length = Object.keys(items).length - 1;
-    
+    $scope.itemslength = Object.keys(items).length - 1;
+
     $scope.downloadEssay1 = function (id, lastname, firstname) {
         return DownloadService.get(id, 'essay1*', lastname + '.' + firstname + '.essay1');
     };
-    $scope.downloadEssay2 = function (id, lastname, firstname) {
-        return DownloadService.get(id, 'essay2*', lastname + '.' + firstname + '.essay2');
-    };
-    
-    $scope.loadingIndicator;
-    
-    var coursework = [];
-    var employment = [];
-    var activity = [];
-    var volunteer = [];
-    var award = [];
-    var university = [];
-    var child = [];
-    var scholarship = [];
-    
-    function putNA (data, acType) {
+
+    var employment = [],
+        activity = [],
+        volunteer = [],
+        award = [],
+        university = [],
+        child = [],
+        scholarship = [];
+
+    function putNA(data, acType) {
         //put NAs for all NULL values
         var form = DataService.getApplicationForm(acType),
-            i, j, l, k;
-        
+            i,
+            j,
+            l,
+            k;
+
         if (form !== undefined) {
             for (i = 0, l = data.length; i < l; i++) {
-                for (j = 0, k = form.length; j< k; j++) {
+                for (j = 0, k = form.length; j < k; j++) {
                     if (!data[i].hasOwnProperty(form[j].name)) {
                         data[i][form[j].name] = "N/A";
                     }
@@ -49,51 +46,45 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         }
         return data;
     }
-    
-// callback for ng-click 'createPdf':
-   $scope.createPdf = function (item) {
+
+    // callback for ng-click 'createPdf':
+    $scope.createPdf = function (item) {
 
         //load all list data
         $scope.loadingIndicator = $ionicLoading.show({
-            content: 'Downloading data and Creating pdf ...',
+            content: 'Downloading data and Creating pdf ...'
         });
 
         var listPromises = [];
-        listPromises.push(DataService.getItemList('coursework', item.id).then(function (returnedData) {
-            coursework = putNA(returnedData, 'coursework');
-        }));
-        listPromises.push(DataService.getItemList('employment', item.id).then(function (returnedData) {
-            //employment = returnedData;
-            var temp = returnedData;
-            if (temp !== undefined) {
-                employment = putNA(returnedData, 'employment');
-            } else {
-                employment = temp;
-            }
-                
-        }));
+        
         listPromises.push(DataService.getItemList('activity', item.id).then(function (returnedData) {
             activity = returnedData;
             if (activity !== undefined) {
+                var i,
+                    test;
                 //convert long string into short version
                 for (i = 0; i < activity.length; i++) {
-                    var test = angular.fromJson(activity[i].year);
+                    test = angular.fromJson(activity[i].year);
                     if (test[0].checked) {
                         activity[i].FR = 'x';
-                    } else 
+                    } else {
                         activity[i].FR = ' ';
+                    }
                     if (test[1].checked) {
                         activity[i].SO = 'x';
-                    } else 
+                    } else {
                         activity[i].SO = ' ';
+                    }
                     if (test[2].checked) {
                         activity[i].JR = 'x';
-                    } else 
+                    } else {
                         activity[i].JR = ' ';
+                    }
                     if (test[3].checked) {
                         activity[i].SR = 'x';
-                    } else 
+                    } else {
                         activity[i].SR = ' ';
+                    }
                 }
             }
             var data = activity;
@@ -106,65 +97,43 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
         listPromises.push(DataService.getItemList('award', item.id).then(function (returnedData) {
             award = returnedData;
             if (award !== undefined) {
+                var i,
+                    test;
                 //convert long string into short version
                 for (i = 0; i < award.length; i++) {
-                    var test = angular.fromJson(award[i].year);
+                    test = angular.fromJson(award[i].year);
                     if (test[0].checked) {
                         award[i].FR = 'x';
-                    } else 
+                    } else {
                         award[i].FR = ' ';
+                    }
                     if (test[1].checked) {
                         award[i].SO = 'x';
-                    } else 
+                    } else {
                         award[i].SO = ' ';
+                    }
                     if (test[2].checked) {
                         award[i].JR = 'x';
-                    } else 
+                    } else {
                         award[i].JR = ' ';
+                    }
                     if (test[3].checked) {
                         award[i].SR = 'x';
-                    } else 
+                    } else {
                         award[i].SR = ' ';
+                    }
                 }
             }
             var data = award;
             award = putNA(data, 'award');
         }));
-        listPromises.push(DataService.getItemList('university', item.id).then(function (returnedData) {
-            university = returnedData;
-            university.sort(function(a,b) { return (a.rank) - (b.rank); } );
-            for (i = 0; i < university.length; i++) {
-                university[i].rank++;
-            }
-
-            if (university.length < 6) {
-                for (i = university.length; i < 6; i++) {
-                    var newuniversity = {};
-                    newuniversity.rank = i + 1;
-                    newuniversity.name = '';
-                    university.push(newuniversity);
-                }
-            }
-            var data = university;
-            university = putNA(data, 'university');
-        }));
+        
         listPromises.push(DataService.getItemList('child', item.id).then(function (returnedData) {
             //child = returnedData;
             child = putNA(returnedData, 'child');
         }));
-        listPromises.push(DataService.getItemList('scholarship', item.id).then(function (returnedData) {
-            scholarship = returnedData;
-            for (i = 0; i < scholarship.length; i++) {
-                if (scholarship[i].applied_received) {
-                    scholarship[i].level = 'applied';
-                } else {
-                    scholarship[i].level = 'received';
-                }
-            }
-            var data = scholarship;
-            scholarship = putNA(data, 'scholarship');
-        }));
-       
+        
+
         var default_form = DataService.getApplicationForm('application'),
             i,
             l,
@@ -193,14 +162,14 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 }
             }
         }
-        
+
         //put NAs for all NULL values
         for (i = 0, l = default_form.length; i < l; i++) {
             if (!item.hasOwnProperty(default_form[i].name)) {
                 item[default_form[i].name] = "N/A";
             }
         }
-       
+
         //after loading individual lists, we are ready to create the actual pdf
         $q.all(listPromises).then(function () {
             //define font to use in pdf
@@ -214,8 +183,8 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
             };
 
             var docDefinition = createDocument(item);
-            
-            $timeout(function() {
+
+            $timeout(function () {
                 $ionicLoading.hide();
             }, 200);
             try {
@@ -226,25 +195,28 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
             }
         });
     };
-    
+
     //support functions for pdf creation
     function buildTableBody(data, columns, headers, emptyRows) {
         var body = [],
             i,
             j,
             headerRow = [];
-        
+
         for (i = 0; i < headers.length; i++) {
-            headerRow.push({ text: headers[i], fillColor: 'lightgrey'});
+            headerRow.push({
+                text: headers[i],
+                fillColor: 'lightgrey'
+            });
         }
 
         // body.push(headers);
         body.push(headerRow);
-        
+
         if (emptyRows === undefined) {
-                emptyRows = 3;
+            emptyRows = 3;
         }
-        
+
         if (data !== undefined) {
 
             data.forEach(function (row) {
@@ -256,14 +228,14 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
 
                 body.push(dataRow);
             });
-            
+
             emptyRows = emptyRows - data.length;
             if (emptyRows < 0) {
                 emptyRows = 0;
             }
-        } 
-        
-            
+        }
+
+
         for (i = 0; i < emptyRows; i++) {
             var dataRow = [];
             for (j = 0; j < columns.length; j++) {
@@ -275,19 +247,19 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
 
         return body;
     }
-    
+
     //support functions for pdf creation
     function buildTableWidth(widths) {
         var width = [],
             i;
-        
+
         for (i = 0; i < widths.length; i++) {
             width.push(widths[i]);
         }
 
         return width;
     }
-    
+
     //support functions for pdf creation
     function table(data, columns, headers, widths, emptyRows, filter) {
         if (filter !== undefined) {
@@ -301,31 +273,30 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 margin: [10, 10, 10, 10],
                 headerRows: 1,
                 body: buildTableBody(data, columns, headers, emptyRows),
-                layout:
-                    {
-                        hLineWidth: function (i, node) {
-                            return (i === 0 || i === node.table.body.length) ? 2 : 1;
-                        },
-                        vLineWidth: function (i, node) {
-                            return (i === 0 || i === node.table.widths.length) ? 2 : 1;
-                        },
-                        hLineColor: function (i, node) {
-                            return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
-                        },
-                        vLineColor: function (i, node) {
-                            return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
-                        }
-                        
-                        // paddingLeft: function(i, node) { return 4; },
-                        // paddingRight: function(i, node) { return 4; },
-                        // paddingTop: function(i, node) { return 2; },
-                        // paddingBottom: function(i, node) { return 2; }
+                layout: {
+                    hLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                    },
+                    vLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                    },
+                    hLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+                    },
+                    vLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
                     }
+
+                    // paddingLeft: function(i, node) { return 4; },
+                    // paddingRight: function(i, node) { return 4; },
+                    // paddingTop: function(i, node) { return 2; },
+                    // paddingBottom: function(i, node) { return 2; }
+                }
             }
         };
     }
-    
-    function createDocument (item) {
+
+    function createDocument(item) {
         return {
             styles: {
                 header: {
@@ -792,7 +763,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     text: 'Test Scores',
                     style: 'sub'
                 },
-                
+
                 {
                     table: {
                         widths: [20, 70, 50, 20, 100, 50, 20, 70, 70],
@@ -975,11 +946,11 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                                     text: ''
                                 }
                             ]
-                           
+
                         ]
                     },
                     layout: 'noBorders'
-				},
+                },
                 {
                     text: 'Indicate the level of recognition you have achieved in the following scholarship competition(s).',
                     style: 'sub'
@@ -1043,7 +1014,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                         ]
                     },
                     layout: 'noBorders'
-				},
+                },
                 {
                     margin: 10,
                     text: ' '
@@ -1060,7 +1031,10 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     text: ''
                 },
                 {
-                    text: [{ text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.', bold: true }, ' Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.']
+                    text: [{
+                        text: 'For sections IV & V, fill space provided completely.  Do not submit a resume in lieu of completing sections IV & V.',
+                        bold: true
+                    }, ' Important:  If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.']
                 },
                 {
                     text: 'IV.  EMPLOYMENT, ACTIVITIES, SERVICE AND AWARDS',
@@ -1072,7 +1046,10 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 5],
-                    text: ['List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.', { text: ' List your most recent activities first.', bold: true }]
+                    text: ['List all of your previous and current jobs or internships.  Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment.', {
+                        text: ' List your most recent activities first.',
+                        bold: true
+                    }]
                 },
                 table(employment, ['position', 'employer', 'hours', 'date_from', 'date_to'], ['Position/Job Title', 'Employer', 'Hours Per Week', 'From:', 'To:'], [100, '*', '*', '*', '*'], 7),
                 {
@@ -1081,17 +1058,20 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 5],
-                    text: [ { text: 'In order of importance to you', bold: true }, ', list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.']
+                    text: [{
+                        text: 'In order of importance to you',
+                        bold: true
+                    }, ', list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.']
                 },
-                table(activity, ['activity', 'position', 'description', 'FR', 'SO', 'JR', 'SR'], ['Organization / Activity', 'Position(s) Held', 'Description of Activity', 'FR', 'SO', 'JR', 'SR'], [120, 100, 150, '*', '*', '*', '*'], 6), 
+                table(activity, ['activity', 'position', 'description', 'FR', 'SO', 'JR', 'SR'], ['Organization / Activity', 'Position(s) Held', 'Description of Activity', 'FR', 'SO', 'JR', 'SR'], [120, 100, 150, '*', '*', '*', '*'], 6),
                 {
                     text: 'Community or Volunteer Service',
                     style: 'notes'
                 },
                 {
-                    text: 'Describe your role in the organization, the type of organization you were associated with, how many hours of service you devoted each week, and when you participated in each activity.  List your most recent service first.',
+                    text: 'Describe your role in the organization, the type of organization you were associated with, how many hours of service you devoted each week, and when you participated in each activity.  List your most recent service first.'
                 },
-                table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'],[120, 160, 30, 30, '*', '*'], 6),   
+                table(volunteer, ['place', 'description', 'hours_week', 'hours_total', 'date_from', 'date_to'], ['Place of Service', 'Description of Service', 'Hours/Week', 'Hours/Total', 'From:', 'To:'], [120, 160, 30, 30, '*', '*'], 6),
                 {
                     pageBreak: 'after',
                     text: ''
@@ -1106,9 +1086,12 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 5],
-                    text: [{text: 'In order of importance to you', bold: true}, ', list up to six major awards, honors, or distinctions that you received both in and out of school during grades 9-12.'],
+                    text: [{
+                        text: 'In order of importance to you',
+                        bold: true
+                    }, ', list up to six major awards, honors, or distinctions that you received both in and out of school during grades 9-12.']
                 },
-                table(award, ['award', 'description', 'level', 'FR', 'SO', 'JR', 'SR'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR', 'SO', 'JR', 'SR'],[150, 150, 100, '*', '*', '*', '*'], 6),
+                table(award, ['award', 'description', 'level', 'FR', 'SO', 'JR', 'SR'], ['Award/Distinction/Honor', 'Description/Basis for or Sponsor of Award', 'Level of Competition', 'FR', 'SO', 'JR', 'SR'], [150, 150, 100, '*', '*', '*', '*'], 6),
                 {
                     text: 'V.  COLLEGE PLANS',
                     style: 'chapterheader'
@@ -1119,7 +1102,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 10],
-                    text: [item.first_graduate],
+                    text: [item.first_graduate]
 
                 },
                 {
@@ -1128,7 +1111,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 10],
-                    text: [item.why_apply],
+                    text: [item.why_apply]
                 },
                 {
                     margin: [0, 0, 0, 5],
@@ -1142,34 +1125,34 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                         body: [
                             [
                                 {
-                                    text: [university[0].rank.toString(), ' ', university[0].name],
+                                    text: [university[0].rank.toString(), ' ', university[0].name]
                                 },
                                 {
-                                    text: [university[3].rank.toString(), ' ', university[3].name],
+                                    text: [university[3].rank.toString(), ' ', university[3].name]
                                 }
                             ],
                             [
                                 {
-                                    text: [university[1].rank.toString(), ' ', university[1].name],
+                                    text: [university[1].rank.toString(), ' ', university[1].name]
                                 },
                                 {
-                                    text: [university[4].rank.toString(), ' ', university[4].name],
+                                    text: [university[4].rank.toString(), ' ', university[4].name]
                                 }
                             ],
                             [
                                 {
-                                    text: [university[2].rank.toString(), ' ', university[2].name],
+                                    text: [university[2].rank.toString(), ' ', university[2].name]
                                 },
                                 {
-                                    text: [university[5].rank.toString(), ' ', university[5].name],
+                                    text: [university[5].rank.toString(), ' ', university[5].name]
                                 }
                             ]
                         ]
                     }
-				},
+                },
                 {
                     margin: [0, 10, 0, 10],
-                    text: 'Why have you chosen your academic major(s)?',
+                    text: 'Why have you chosen your academic major(s)?'
                 },
                 {
                     margin: [0, 0, 0, 10],
@@ -1190,7 +1173,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 {
                     margin: [0, 0, 0, 10],
                     text: [item.life_goals],
-                    pageBreak: 'after',
+                    pageBreak: 'after'
                 },
                 {
                     text: 'VI.  FINANCIAL INFORMATION',
@@ -1518,7 +1501,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             style: 'field'
                         }
                     ]
-                }, 
+                },
                 {
                     columns: [
                         {
@@ -1560,12 +1543,12 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             style: 'field'
                         }
                     ]
-                }, 
-				{
+                },
+                {
                     text: 'Parents’/Guardians’ Adjusted Gross Income for 2014 (line 37 on Form 1040; line 21 on form 1040A):',
                     bold: true
-                },		
-				{
+                },
+                {
                     columns: [
                         {
                             text: [item.adjusted_cross_income.toString()],
@@ -1583,7 +1566,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                             pageBreak: 'after'
                         }
                     ]
-                }, 
+                },
                 {
                     text: 'VI.  FINANCIAL INFORMATION  (continued)',
                     style: 'chapterheader'
@@ -1592,25 +1575,25 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                     text: 'Please describe any special circumstances that affect your family’s ability to fund your college expenses (response required):',
                     bold: true
                 },
-				{
+                {
                     text: [item.description_special_circumstances],
                     style: 'field',
-                    width: 'auto',
-                },	
-				{
-                    text: 'Do you have a Texas Tomorrow Fund or 529 college savings plan?  If so, what is the plan’s value?',
+                    width: 'auto'
                 },
-				{
+                {
+                    text: 'Do you have a Texas Tomorrow Fund or 529 college savings plan?  If so, what is the plan’s value?'
+                },
+                {
                     text: [item.texas_tomorrow_fund],
                     style: 'field',
-                    width: 'auto',
-                },																													{
-                    text: 'Please provide the specified information for all children under 25 years of age in your family.  Do not include yourself or your parents. ',
-                },								
-                table(child, ['name', 'age', 'relationship', 'year', 'self_supporting'], ['Name', 'Age', 'Relationship', 'Year in College', 'Self-Supporting?'],[150, 50, 100, '*', '*'], 5),
+                    width: 'auto'
+                }, {
+                    text: 'Please provide the specified information for all children under 25 years of age in your family.  Do not include yourself or your parents. '
+                },
+                table(child, ['name', 'age', 'relationship', 'year', 'self_supporting'], ['Name', 'Age', 'Relationship', 'Year in College', 'Self-Supporting?'], [150, 50, 100, '*', '*'], 5),
                 {
                     margin: [0, 0, 0, 5],
-                    text: 'Do you have a sibling who is a current/past Terry Scholar or who is applying for a Terry Scholarship?  If so, please give name(s) and institution(s):',
+                    text: 'Do you have a sibling who is a current/past Terry Scholar or who is applying for a Terry Scholarship?  If so, please give name(s) and institution(s):'
                 },
                 {
                     text: [item.sibling_terry],
@@ -1626,7 +1609,7 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 5],
-                    text: 'Please indicate any college or departmental scholarships specific to your intended major for which you are applying:',
+                    text: 'Please indicate any college or departmental scholarships specific to your intended major for which you are applying:'
                 },
                 {
                     text: [item.department_scholarship],
@@ -1634,30 +1617,18 @@ angular.module('Controllers').controller('DashCtrl', function ($scope, $filter, 
                 },
                 {
                     margin: [0, 0, 0, 5],
-                    text: 'List other scholarships for which you have applied for the 2015-2016 academic year:',
+                    text: 'List other scholarships for which you have applied for the 2015-2016 academic year:'
                 },
-                table(scholarship, ['name', 'duration', 'amount'], ['Scholarship or Grant Name', 'Duration', 'Amount per year'],[200, 150, '*'], 4, 'applied'),
-				{
+                table(scholarship, ['name', 'duration', 'amount'], ['Scholarship or Grant Name', 'Duration', 'Amount per year'], [200, 150, '*'], 4, 'applied'),
+                {
                     margin: [0, 0, 0, 5],
-                    text: 'List other scholarships or grants you will receive for the 2015-2016 academic year:',
+                    text: 'List other scholarships or grants you will receive for the 2015-2016 academic year:'
                 },
-                table(scholarship, ['name', 'duration', 'amount'], ['Scholarship or Grant Name', 'Duration', 'Amount per year'],[200, 150, '*'], 4, 'received'),
+                table(scholarship, ['name', 'duration', 'amount'], ['Scholarship or Grant Name', 'Duration', 'Amount per year'], [200, 150, '*'], 4, 'received')
             ],
             pageSize: 'LETTER',
             pageMargins: [40, 60, 40, 60]
-                
+
         };
     }
-});
-
-/**
- * @ngdoc function
- * @name controller:DashDetailCtrl
- * @description
- * # DashController
- * Controller for object details used in the dashboard
- */
-angular.module('Controllers').controller('DashDetailCtrl', function ($scope, $filter, $ionicModal, $ionicPopup, $stateParams, DataService, item, coursework, activity) {
-    'use strict';
-    
 });

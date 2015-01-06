@@ -80,28 +80,44 @@ angular.module('terry-management-app', [
                 authenticate: false
             })
 
-            // setup an abstract state for the tabs directive
+            // secure abstract state
             .state('secure', {
                 url: "/tab",
                 abstract: true,
                 authenticate: true,
                 templateUrl: "templates/tabs.html",
+                
+                
+            })
+
+            .state('secure.dash', {
+                url: '/dash',
+                authenticate: true,
                 resolve: {
                     items: function (DataService) {
                         return DataService.getAllItemsWithFileNames('application');
                     }
-                }
-                
-            })
-
-            // Each tab has its own nav history stack:
-            .state('secure.dash', {
-                url: '/dash',
-                authenticate: true,
+                },
                 views: {
                     'secure-dash': {
-                        templateUrl: 'templates/tab-dash.html',
-                        controller: 'DashCtrl'
+                        templateUrl: 'templates/tab-freshman.html',
+                        controller: 'FreshmanCtrl'
+                    }
+                }
+            })
+        
+            .state('secure.transfer', {
+                url: '/transfer',
+                authenticate: true,
+                resolve: {
+                    items: function (DataService) {
+                        return DataService.getAllItemsWithFileNames('transferApplication');
+                    }
+                },
+                views: {
+                    'secure-dash': {
+                        templateUrl: 'templates/tab-freshman.html',
+                        controller: 'TransferCtrl'
                     }
                 }
             })
