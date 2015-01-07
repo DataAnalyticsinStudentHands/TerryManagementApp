@@ -115,7 +115,7 @@ angular.module('terry-management-app', [
                     }
                 },
                 views: {
-                    'secure-dash': {
+                    'secure-transfer': {
                         templateUrl: 'templates/tab-freshman.html',
                         controller: 'TransferCtrl'
                     }

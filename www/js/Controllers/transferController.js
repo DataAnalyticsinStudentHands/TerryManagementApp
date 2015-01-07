@@ -13,7 +13,7 @@ angular.module('Controllers').controller('TransferCtrl', function ($scope, $filt
 
     //get data for view
     $scope.items = items;
-    $scope.itemslength = Object.keys(items).length - 1;
+    $scope.itemslength = Object.keys(items).length;
 
     $scope.downloadEssay1 = function (id, lastname, firstname) {
         return DownloadService.get(id, 'essay1*', lastname + '.' + firstname + '.essay1');
