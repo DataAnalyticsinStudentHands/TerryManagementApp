@@ -521,217 +521,97 @@
         "required": "false"
     },
     {
-        "name": "guardian_occupation",
-        "label": "Guardian’s occupation:",
+        "name": "other_financial_resources",
+        "label": "Are there other financial resources that you regularly receive or rely upon to support yourself? If so, please describe and provide amounts:",
         "form": "financial_information",
         "id": 73,
         "type": "text",
         "required": "false"
     },
     {
-        "name": "mother_employer",
-        "label": "Mother’s employer:",
+        "name": "financialsupport_otherfamily",
+        "label": "If you provide financial support for another family, please tell us about this family:",
         "form": "financial_information",
         "id": 74,
         "type": "text",
         "required": "false"
     },
     {
-        "name": "guardian_employer",
-        "label": "Guardian’s employer:",
+        "name": "description_special_circumstances",
+        "label": "Please describe any special circumstances or additional factors that affect your family's ability to fund your college expenses:",
         "form": "financial_information",
         "id": 75,
         "type": "text",
         "required": "false"
     },
     {
-        "name": "mother_total_income",
-        "label": "Mother’s total annual income:",
+        "name": "dependent_taxreturn_2014",
+        "label": "Were you listed as a dependent on someone else's tax return for 2014?",
         "form": "financial_information",
         "id": 76,
-        "type": "number",
-        "required": "false"
+        "type": "text",
+        "required": "true"
     },
     {
-        "name": "guardian_total_income",
-        "label": "Guardian’s total annual income:",
+        "name": "dependent_taxreturn_2015",
+        "label": "Will you be listed as a dependent on someone else's tax return for 2015?",
         "form": "financial_information",
         "id": 77,
-        "type": "number",
-        "required": "false"
+        "type": "text",
+        "required": "true"
     },
     {
-        "name": "mother_age",
-        "label": "Mother’s age:",
+        "name": "claimant",
+        "label": "Name and relationship of claimant:",
         "form": "financial_information",
         "id": 78,
-        "type": "number",
+        "type": "text",
         "required": "false"
     },
     {
-        "name": "guardian_age",
-        "label": "Guardian’s age:",
+        "name": "father_occupation",
+        "label": "Father/stepfather occupation:",
         "form": "financial_information",
         "id": 79,
-        "type": "number",
+        "type": "text",
         "required": "false"
     },
     {
-        "name": "mother_level_education",
-        "label": "Highest level of education achieved:",
+        "name": "mother_occupation",
+        "label": "Mother/stepmother occupation:",
         "form": "financial_information",
         "id": 80,
         "type": "text",
         "required": "false"
     },
     {
-        "name": "guardian_level_education",
-        "label": "Highest level of education achieved:",
+        "name": "adjusted_cross_income",
+        "label": "Your parent(s)', stepparent(s)', or guardians' adjustd Gross Income for 2014:",
         "form": "financial_information",
         "id": 81,
-        "type": "text",
+        "type": "number",
         "required": "false"
     },
     {
-        "name": "income_same",
-        "label": "Has your family’s income for 2014 remained the same as 2013?",
+        "name": "family_support",
+        "label": "Amount of financial support reveiced by you from family (not your partner) in 2014?",
         "form": "financial_information",
         "id": 82,
-        "type": "text",
+        "type": "number",
         "required": "false"
     },
     {
-        "name": "increased",
-        "label": "increased",
+        "name": "additional_factors",
+        "label": "Please describe any special circumstances that affect your family's ability to fund your college expenses:",
         "form": "financial_information",
         "id": 83,
         "type": "text",
         "required": "false"
     },
     {
-        "name": "decreased",
-        "label": "decreased",
-        "form": "financial_information",
-        "id": 84,
-        "type": "text",
-        "required": "false"
-    },
-    {
-        "name": "family_attending_college",
-        "label": "Number of family members attending college during the 2015-2016 academic year (include yourself):",
-        "form": "financial_information",
-        "id": 85,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "financial_assistance",
-        "label": "Are you receiving financial assistance (such as Social Security disability) from any local or federal government entity?",
-        "form": "financial_information",
-        "id": 86,
-        "type": "text",
-        "required": "false"
-    },
-    {
-        "name": "assistance_type",
-        "label": "assistance_type",
-        "form": "financial_information",
-        "id": 87,
-        "type": "text",
-        "required": "false"
-    },
-    {
-        "name": "assistance_amount",
-        "label": "assistance_amount",
-        "form": "financial_information",
-        "id": 88,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "funds_saved_you",
-        "label": "Funds for college saved by you:",
-        "form": "financial_information",
-        "id": 89,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "funds_saved_others",
-        "label": "Funds for college saved by others:",
-        "form": "financial_information",
-        "id": 90,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "total_savings",
-        "label": "Your parents’ or guardians’ total cash savings (not limited to college):",
-        "form": "financial_information",
-        "id": 91,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "total_investments",
-        "label": "Value of your parents’ or guardians’ other investments (<b>NOT</b> including home):",
-        "form": "financial_information",
-        "id": 92,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "net_value",
-        "label": "Net value of your parents’ or guardians’ businesses, farms and/or ranches:",
-        "form": "financial_information",
-        "id": 93,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "adjusted_cross_income",
-        "label": "Parents’/Guardians’ Adjusted Gross Income for 2014 (line 37 on Form 1040; line 21 on form 1040A):",
-        "form": "financial_information",
-        "id": 94,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "projected_support",
-        "label": "Projected parental support (annual):",
-        "form": "financial_information",
-        "id": 95,
-        "type": "number",
-        "required": "false"
-    },
-    {
-        "name": "description_special_circumstances",
-        "label": "Please describe any special circumstances that affect your family’s ability to fund your college expenses:",
-        "form": "financial_information",
-        "id": 96,
-        "type": "text",
-        "required": "false"
-    },
-    {
-        "name": "texas_tomorrow_fund",
-        "label": "Do you have a Texas Tomorrow Fund or 529 college savings plan?  If so, what is the plan’s value?",
-        "form": "financial_information",
-        "id": 97,
-        "type": "text",
-        "required": "false"
-    },
-    {
-        "name": "sibling_terry",
-        "label": "Do you have a sibling who is a current/past Terry Scholar or who is applying for a Terry Scholarship?  If so, please give name(s) and institution(s):",
-        "form": "financial_information",
-        "id": 98,
-        "type": "text",
-        "required": "false"
-    },
-    {
         "name": "first_graduate",
         "label": "Will you be the first in your family to graduate college?",
-        "form": "college_plans",
+        "form": "personal_history",
         "id": 53,
         "type": "text",
         "required": "true"
@@ -739,7 +619,7 @@
     {
         "name": "why_apply",
         "label": "Why have you chosen to apply to the University of Houston?",
-        "form": "college_plans",
+        "form": "personal_history",
         "id": 54,
         "type": "text",
         "required": "true"
@@ -747,7 +627,7 @@
     {
         "name": "why_major",
         "label": "Why have you chosen your academic major(s)?",
-        "form": "college_plans",
+        "form": "personal_history",
         "id": 55,
         "type": "text",
         "required": "true"
@@ -755,7 +635,7 @@
     {
         "name": "educational_plans",
         "label": "Briefly describe any educational plans you have beyond earning your Bachelor’s degree:",
-        "form": "college_plans",
+        "form": "personal_history",
         "id": 56,
         "type": "text",
         "required": "true"
@@ -763,19 +643,43 @@
     {
         "name": "life_goals",
         "label": "What are some of your life’s goals and objectives?",
-        "form": "college_plans",
+        "form": "personal_history",
         "id": 57,
         "type": "text",
         "required": "true"
     },
     
     {
-        "name": "department_scholarship",
-        "label": "Please indicate any college or departmental scholarships specific to your intended major for which you are applying:",
+        "name": "influential_member",
+        "label": "Has there been a particularly influential faculty member or personal contact that has been instrumental in your decision to attend the University of Houston? If so, please relate:",
         "form": "scholarship_information",
-        "id": 99,
+        "id": 58,
         "type": "text",
         "required": "false"
+    },
+    {
+        "name": "successful_lessons",
+        "label": "Transfer/non-traditional students often tell us that their prior experience has taught them lessons that helped them be successful. What lessons have you learned that you would like to pass on to other students?",
+        "form": "scholarship_information",
+        "id": 59,
+        "type": "text",
+        "required": "true"
+    },
+    {
+        "name": "scholarship_consideration",
+        "label": "Is there any additional information that you consider improtant for the committee to know in evaluating your application for scholarship consideration?",
+        "form": "scholarship_information",
+        "id": 60,
+        "type": "text",
+        "required": "false"
+    },
+    {
+        "name": "status",
+        "label": "",
+        "form": "",
+        "id": 61,
+        "type": "",
+        "required": ""
     },
     {
         "name": "app_uh_method",
@@ -794,12 +698,28 @@
         "required": "true"
     },
     {
+        "name": "app_uh_date_sub_na",
+        "label": "UH Application submission date:",
+        "form": "submit",
+        "id": 102,
+        "type": "text",
+        "required": "false"
+    },
+    {
         "name": "app_uh_date_int_sub",
         "label": "UH Application anticipated submission date:",
         "form": "submit",
         "id": 103,
         "type": "date",
         "required": "true"
+    },
+    {
+        "name": "app_uh_date_int_sub_na",
+        "label": "UH Application anticipated submission date:",
+        "form": "submit",
+        "id": 103,
+        "type": "test",
+        "required": "false"
     },
     {
         "name": "transcript_method",
@@ -818,12 +738,28 @@
         "required": "true"
     },
     {
+        "name": "transcript_date_sub",
+        "label": "Transcripts submission date:",
+        "form": "submit",
+        "id": 105,
+        "type": "text",
+        "required": "false"
+    },
+    {
         "name": "transcript_date_int_sub",
         "label": "Transcripts anticipated submission date:",
         "form": "submit",
         "id": 106,
         "type": "date",
         "required": "true"
+    },
+    {
+        "name": "transcript_date_int_sub_na",
+        "label": "Transcripts anticipated submission date:",
+        "form": "submit",
+        "id": 106,
+        "type": "text",
+        "required": "false"
     },
     {
         "name": "fafsa_method",
@@ -842,12 +778,28 @@
         "required": "true"
     },
     {
+        "name": "fafsa_date_sub_na",
+        "label": "FAFSA application submission date:",
+        "form": "submit",
+        "id": 108,
+        "type": "text",
+        "required": "false"
+    },
+    {
         "name": "fafsa_date_int_sub",
         "label": "FAFSA application anticipated submission date:",
         "form": "submit",
         "id": 109,
         "type": "date",
         "required": "true"
+    },
+    {
+        "name": "fafsa_date_int_sub_na",
+        "label": "FAFSA application anticipated submission date:",
+        "form": "submit",
+        "id": 109,
+        "type": "text",
+        "required": "false"
     },
     {
         "name": "housing_method",
@@ -866,12 +818,28 @@
         "required": "true"
     },
     {
+        "name": "housing_date_sub_na",
+        "label": "UH Housing application submission date:",
+        "form": "submit",
+        "id": 111,
+        "type": "text",
+        "required": "false"
+    },
+    {
         "name": "housing_date_int_sub",
         "label": "UH Housing application anticipated submission date:",
         "form": "submit",
         "id": 112,
         "type": "date",
         "required": "true"
+    },
+    {
+        "name": "housing_date_int_sub_na",
+        "label": "UH Housing application anticipated submission date:",
+        "form": "submit",
+        "id": 112,
+        "type": "text",
+        "required": "false"
     }
 
 ]
