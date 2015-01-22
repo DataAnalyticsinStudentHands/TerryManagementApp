@@ -190,8 +190,10 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
         //TODO use filter
         //clean data
         if (item.citizen !== undefined) {
-            if (item.citzen === 'true') {
+            if (item.citizen === 'true') {
                 item.citizen = 'Yes';
+                item.permanent_resident = 'N/A';
+                item.permanent_resident_card = 'N/A';
             } else {
                 item.citizen = 'No';
                 if (item.permanent_resident !== undefined) {
