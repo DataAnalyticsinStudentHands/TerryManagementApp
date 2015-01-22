@@ -3,7 +3,7 @@ PROD_REPO = ssh://plindner@housuggest.org/~/terrymanagement.git
 
 # Deploy tasks
 
-prod: build git-prod
+prod: clean build git-prod
 	@ git tag -f production
 	@ echo "Production deploy complete"
 
@@ -25,7 +25,7 @@ git-prod:
 	git remote add origin $(PROD_REPO)
 	@ cd $(BUILD_DIR) && \
 	git add -A && \
-	git commit -m "Release" && \
+	git commit -m "Bugfixes Jan 21" && \
 	git push -f origin +master:refs/heads/master
 
 

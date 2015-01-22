@@ -1,4 +1,4 @@
-/*global angular, cordova, console, StatusBar*/
+/*global angular, cordova, console, StatusBar, window*/
 
 angular.module('terry-management-app', [
     'ionic',
@@ -11,9 +11,7 @@ angular.module('terry-management-app', [
     'ui.bootstrap.datetimepicker',
     'databaseControllerModule',
     'databaseServicesModule'
-])
-
-.run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
+]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
     'use strict';
 
     $ionicPlatform.ready(function () {
@@ -85,9 +83,7 @@ angular.module('terry-management-app', [
                 url: "/tab",
                 abstract: true,
                 authenticate: true,
-                templateUrl: "templates/tabs.html",
-                
-                
+                templateUrl: "templates/tabs.html"
             })
 
             .state('secure.dash', {
@@ -122,21 +118,6 @@ angular.module('terry-management-app', [
                 }
             })
         
-            .state('secure.dash-detail', {
-                
-                params: ['itemId'],
-                abstract: true,
-                authenticate: true,
-                resolve: {
-                    coursework: function (DataService, $stateParams) {
-                        return DataService.getItemList('coursework', $stateParams.itemId);
-                    },
-                    activity: function (DataService, $stateParams) {
-                        return DataService.getItemList('activity', $stateParams.itemId);
-                    }
-                }
-            })
-
             .state('secure.account', {
                 url: '/account',
                 views: {
