@@ -54,7 +54,7 @@
         "label": "Permanent Address:",
         "form": "student_information",
         "id": 7,
-        "type": "number",
+        "type": "text",
         "required": "true"
     },
     {
@@ -767,7 +767,7 @@
         "form": "submit",
         "id": 107,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "fafsa_date_sub",
@@ -775,7 +775,7 @@
         "form": "submit",
         "id": 108,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "fafsa_date_sub_na",
@@ -791,7 +791,7 @@
         "form": "submit",
         "id": 109,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "fafsa_date_int_sub_na",
@@ -807,7 +807,7 @@
         "form": "submit",
         "id": 110,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "housing_date_sub",
@@ -815,7 +815,7 @@
         "form": "submit",
         "id": 111,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "housing_date_sub_na",
@@ -831,7 +831,7 @@
         "form": "submit",
         "id": 112,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "housing_date_int_sub_na",

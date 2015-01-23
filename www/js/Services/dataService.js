@@ -7,7 +7,7 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function ($http, $ionicLoading, Restangular, ngNotify) {
+angular.module('Services').factory('DataService', function ($http, $stateParams, $ionicLoading, Restangular, ngNotify) {
     'use strict';
 
     //Load data for form data for terry application
@@ -115,7 +115,8 @@ angular.module('Services').factory('DataService', function ($http, $ionicLoading
         },
         getItemList: function (acType, id) {
             
-            return Restangular.one(acType).one('list').getList(id).then(
+            //return Restangular.one(acType).one('list').getList(id)
+            return Restangular.one(acType).one('list').customGETLIST(id, {transfer: "false"}).then(
                 function (result) {
                     
                     result = Restangular.stripRestangular(result);

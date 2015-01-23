@@ -6,19 +6,18 @@
 <ion-tabs class="tabs-icon-top">
 
     <!-- Freshman Application Tab Tab -->
-    <ion-tab title="Freshman Applications" icon="icon ion-person-stalker" href="#/tab/dash">
+    <ion-tab title="Freshman Applications" 
+             icon="icon ion-person-stalker"
+             ui-sref="secure.dash({ appType: 'freshman' })">
         <ion-nav-view name="secure-dash"></ion-nav-view>
     </ion-tab>
     
     <!-- Freshman Application Tab Tab -->
-    <ion-tab title="Transfer Applications" icon="icon ion-android-contacts" href="#/tab/transfer">
+    <ion-tab title="Transfer Applications" 
+             icon="icon ion-android-contacts" 
+             ui-sref="secure.transfer({ appType: 'transfer' })">
         <ion-nav-view name="secure-transfer"></ion-nav-view>
     </ion-tab>
-
-    <!-- Users Tab 
-    <ion-tab title="Users" icon="icon ion-person-stalker" href="#/tab/users">
-        <ion-nav-view name="secure-users"></ion-nav-view>
-    </ion-tab> -->
 
     <!-- Account Tab 
     <ion-tab title="Account" icon="icon ion-gear-b" href="#/tab/account">

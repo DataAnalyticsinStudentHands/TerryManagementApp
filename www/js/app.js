@@ -26,8 +26,8 @@ angular.module('terry-management-app', [
         }
     });
 
-    //Restangular.setBaseUrl("http://localhost:8080/terrytest/");
-    Restangular.setBaseUrl("https://www.housuggest.org:8443/terrytest/");
+    Restangular.setBaseUrl("http://localhost:8080/terrytest/");
+    //Restangular.setBaseUrl("https://www.housuggest.org:8443/terrytest/");
     //Restangular.setBaseUrl("https://www.housuggest.org:8443/terry/");
     
     $rootScope.Restangular = function () {
@@ -87,7 +87,7 @@ angular.module('terry-management-app', [
             })
 
             .state('secure.dash', {
-                url: '/dash',
+                url: '/dash/:appType',
                 authenticate: true,
                 resolve: {
                     items: function (DataService) {
@@ -103,7 +103,7 @@ angular.module('terry-management-app', [
             })
         
             .state('secure.transfer', {
-                url: '/transfer',
+                url: '/transfer/:appType',
                 authenticate: true,
                 resolve: {
                     items: function (DataService) {
