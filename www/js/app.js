@@ -26,8 +26,8 @@ angular.module('terry-management-app', [
         }
     });
 
-    Restangular.setBaseUrl("http://localhost:8080/terrytest/");
-    //Restangular.setBaseUrl("https://www.housuggest.org:8443/terrytest/");
+    //Restangular.setBaseUrl("http://localhost:8080/terrytest/");
+    Restangular.setBaseUrl("https://www.housuggest.org:8443/terrytest/");
     //Restangular.setBaseUrl("https://www.housuggest.org:8443/terry/");
     
     $rootScope.Restangular = function () {
