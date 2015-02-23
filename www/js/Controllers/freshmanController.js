@@ -212,6 +212,14 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                 }
             }
         }
+        
+        if (item.texas_resident !== undefined) {
+            if (item.texas_resident === 'true') {
+                item.texas_resident = 'Yes';
+            } else {
+                item.texas_resident = 'No';
+            }
+        }
 
         //put NAs for all NULL values
         for (i = 0, l = default_form.length; i < l; i++) {
@@ -392,6 +400,12 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                     italics: true,
                     bold: true,
                     margin: [0, 5, 0, 5]
+                },
+                notes_small: {
+                    fontSize:10,
+                    italics: true,
+                    bold: true,
+                    margin: [0, 5, 0, 5]
                 }
             },
             defaultStyle: {
@@ -442,7 +456,10 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                     text: 'Fill out each section of the application form completely, taking care to respond to each question in the space provided.  Please type or print all information legibly.',
                     style: 'notes'
                 },
-                'I CERTIFY THAT I HAVE READ AND UNDERSTAND THE PRECEEDING PAGE and that the information I am providing is complete and correct to the best of my knowledge.  If my application is accepted, I agree to abide by the policies, rules, and regulations of the Terry Foundation.  I authorize the University of Houston and/or the Terry Foundation to verify the information I have provided.  I further understand that this information will be relied upon by the Terry Foundation in determining my financial eligibility and that the submission of false information is grounds for rejection of my application, and/or withdrawal of an offer of scholarship.',
+                {
+                    text: 'I CERTIFY THAT I HAVE READ AND UNDERSTAND THE PRECEEDING PAGE and that the information I am providing is complete and correct to the best of my knowledge.  If my application is accepted, I agree to abide by the policies, rules, and regulations of the Terry Foundation.  I authorize the University of Houston and/or the Terry Foundation to verify the information I have provided.  I further understand that this information will be relied upon by the Terry Foundation in determining my financial eligibility and that the submission of false information is grounds for rejection of my application, and/or withdrawal of an offer of scholarship.',
+                    style: 'notes_small'
+                },
                 {
                     text: 'I. STUDENT INFORMATION',
                     style: 'chapterheader'
@@ -594,6 +611,19 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                         },
                         {
                             text: [item.gender],
+                            style: 'field'
+                        }
+                    ]
+                },
+                {
+                    columns: [
+                        {
+                            text: 'Email Address (one you access daily):',
+                            style: 'label',
+                            width: 'auto'
+                        },
+                        {
+                            text: [item.email],
                             style: 'field'
                         }
                     ]
