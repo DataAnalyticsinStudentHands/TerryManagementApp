@@ -97,7 +97,7 @@ angular.module('Services').factory('DataService', function ($http, $stateParams,
             );
         },
         getItem: function (acType, id) {
-
+            
             return Restangular.one(acType, id).get().then(
                 function (result) {
                     result = Restangular.stripRestangular(result);
@@ -167,21 +167,29 @@ angular.module('Services').factory('DataService', function ($http, $stateParams,
         },
         getAllItemsWithFileNames: function (type) {
             $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Loading Applications ...</div>'});
-            return Restangular.one(type).one("withfilenames").get().then(
-                function (success) {
-                    $ionicLoading.hide();
-                    success = Restangular.stripRestangular(success);
-                    return success;
-                },
-                function (error) {
-                    $ionicLoading.hide();
-                    ngNotify.set("Something went wrong retrieving list of files for all " + type + " !", {
-                        position: 'bottom',
-                        type: 'error'
-                    });
-                }
-            );
-        
+            var storedData = null;
+            storedData = localStorage.getItem(type);
+            if (storedData !== null) {
+                storedData = JSON.parse(localStorage[type]);
+                $ionicLoading.hide();
+                return storedData;
+            } else {
+                return Restangular.one(type).one("withfilenames").get().then(
+                    function (success) {
+                        $ionicLoading.hide();
+                        success = Restangular.stripRestangular(success);
+                        localStorage[type] = JSON.stringify(success);
+                        return success;
+                    },
+                    function (error) {
+                        $ionicLoading.hide();
+                        ngNotify.set("Something went wrong retrieving list of files for all " + type + " !", {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    }
+                );
+            }
         }
     };
     
