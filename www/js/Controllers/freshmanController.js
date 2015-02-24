@@ -212,12 +212,28 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                 }
             }
         }
-        
+
         if (item.texas_resident !== undefined) {
             if (item.texas_resident === 'true') {
                 item.texas_resident = 'Yes';
             } else {
                 item.texas_resident = 'No';
+            }
+        }
+
+        if (item.first_graduate !== undefined) {
+            if (item.first_graduate === 'true') {
+                item.first_graduate = 'Yes';
+            } else {
+                item.first_graduate = 'No';
+            }
+        }
+
+        if (item.texas_tomorrow_fund !== undefined) {
+            if (item.texas_tomorrow_fund === 'true') {
+                item.texas_tomorrow_fund = 'Yes';
+            } else {
+                item.texas_tomorrow_fund = 'No';
             }
         }
 
@@ -386,6 +402,7 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                     margin: [0, 0, 0, 10]
                 },
                 field: {
+                    decoration: 'underline',
                     margin: [5, 0, 0, 0]
                 },
                 tableExample: {
@@ -402,7 +419,7 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                     margin: [0, 5, 0, 5]
                 },
                 notes_small: {
-                    fontSize:10,
+                    fontSize: 10,
                     italics: true,
                     bold: true,
                     margin: [0, 5, 0, 5]
@@ -860,7 +877,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.psat_verbal.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: 'SAT',
@@ -872,7 +890,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.sat_reading.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: 'ACT',
@@ -885,7 +904,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.act_composite.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 }
                             ],
                             [
@@ -898,7 +918,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.psat_math.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -909,7 +930,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.sat_math.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -920,7 +942,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.act_date],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 }
                             ],
                             [
@@ -931,7 +954,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.psat_writing.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -945,7 +969,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.sat_writing.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -965,7 +990,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.psat_selection.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -979,7 +1005,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.sat_composite.toString()],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -999,7 +1026,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.psat_date],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -1014,7 +1042,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 {
                                     text: [item.sat_date],
                                     alignment: 'left',
-                                    colSpan: 2
+                                    colSpan: 2,
+                                    style: 'field'
                                 },
                                 {
                                     text: ''
@@ -1046,7 +1075,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.national_merit],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: 'Date:',
@@ -1054,7 +1084,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.national_merit_date],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 }
                             ],
                             [
@@ -1063,7 +1094,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.national_achievement],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: 'Date:',
@@ -1071,7 +1103,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.national_achievement_date],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 }
                             ],
                             [
@@ -1080,7 +1113,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.national_hispanic],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 },
                                 {
                                     text: 'Date:',
@@ -1088,7 +1122,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                                 },
                                 {
                                     text: [item.national_hispanic_date],
-                                    alignment: 'left'
+                                    alignment: 'left',
+                                    style: 'field'
                                 }
                             ]
                         ]
@@ -1267,292 +1302,398 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                     style: 'notes'
                 },
                 {
-                    columns: [
-                        {
-                            text: 'Your marital status:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.marital_status],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Your parents’ marital status:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.marital_status_parents],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
+                    table: {
+                        widths: ['auto', '*'],
+                        headerRows: 0,
+                        body: [
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Your marital status:',
+                                            width: 'auto',
+                                            style: 'label'
+                                        },
+                                        {
+                                            text: [item.marital_status],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Your parents’ marital status:',
+                                            width: 'auto',
+                                            style: 'label'
+                                        },
+                                        {
+                                            text: [item.marital_status_parents],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Your total annual income:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.total_annual_income.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'You presently live with (name & relationship):',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.present_partner],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    layout: 'noBorders'
                 },
                 {
-                    columns: [
-                        {
-                            text: 'Your total annual income:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.total_annual_income.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'You presently live with (name & relationship):',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.present_partner],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
+                    table: {
+                        widths: ['*', '*'],
+                        headerRows: 0,
+                        body: [
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Father’s occupation:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.father_occupation],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Step Parent’s occupation:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.stepparent_occupation],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Father’s employer:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.father_employer],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Step Parent’s employer:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.stepparent_employer],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Father’s total annual income:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.father_total_income.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Step Parent’s total annual income:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.stepparent_total_income.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Father’s age',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.father_age.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Step Parent’s age:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.stepparent_age.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Highest level of education achieved:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.father_level_education],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Highest level of education achieved:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.stepparent_level_education],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Mother’s occupation:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.mother_occupation],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Guardian’s occupation:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.guardian_occupation],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Mother’s employer:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.mother_employer],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Guardian’s employer:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.guardian_employer],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Mother’s total annual income:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.mother_total_income.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Guardian’s total annual income:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.guardian_total_income.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Mother’s age',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.mother_age.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Guardian’s age:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.guardian_age.toString()],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ],
+                            [
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Highest level of education achieved:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.mother_level_education],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        {
+                                            text: 'Highest level of education achieved:',
+                                            style: 'label',
+                                            width: 'auto'
+                                        },
+                                        {
+                                            text: [item.guardian_level_education],
+                                            alignment: 'left',
+                                            style: 'field'
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    layout: 'noBorders'
                 },
                 {
-                    columns: [
-                        {
-                            text: 'Father’s occupation:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.father_occupation],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Step Parent’s occupation:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.stepparent_occupation],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Father’s employer:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.father_employer],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Step Parent’s employer:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.stepparent_employer],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Father’s total annual income:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.father_total_income.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Step Parent’s total annual income:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.stepparent_total_income.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Father’s age',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.father_age.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Step Parent’s age:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.stepparent_age.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Highest level of education achieved:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.father_level_education],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Highest level of education ahcieved:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.stepparent_level_education],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Mother’s occupation:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.mother_occupation],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Guardian’s occupation:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.guardian_occupation],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Mother’s employer:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.mother_employer],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Guardian’s employer:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.guardian_employer],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Mother’s total annual income:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.mother_total_income.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Guardian’s total annual income:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.guardian_total_income.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Mother’s age',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.mother_age.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Guardian’s age:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.guardian_age.toString()],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
-                },
-                {
-                    columns: [
-                        {
-                            text: 'Highest level of education achieved:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.mother_level_education],
-                            alignment: 'left',
-                            style: 'field'
-                        },
-                        {
-                            text: 'Highest level of education achieved:',
-                            style: 'label',
-                            width: 'auto'
-                        },
-                        {
-                            text: [item.guardian_level_education],
-                            alignment: 'left',
-                            style: 'field'
-                        }
-                    ]
+                    table: {
+                        widths: ['*', '*'],
+                        headerRows: 0,
+                        body: [
+                            [
+                                { text: [
+														'Inlines can be ',
+														{ text: 'styled\n', italics: true },
+														{ text: 'easily as everywhere else', fontSize: 10 } ]
+												}
+                            ]
+                            
+                        ]
+                    }
                 },
                 {
                     text: 'The following questions will help to estimate your financial need.  Please complete all questions or your application cannot be considered.',
