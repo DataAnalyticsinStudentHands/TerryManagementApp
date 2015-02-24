@@ -1295,7 +1295,8 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                     style: 'chapterheader'
                 },
                 {
-                    text: 'To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient.  FAFSA forms can be submitted on-line after January 1st at www.fafsa.ed.gov.  You must file your FAFSA no later than February 28th. You must complete the FAFSA or your application cannot be processed.'
+                    text: 'To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient.  FAFSA forms can be submitted on-line after January 1st at www.fafsa.ed.gov.  You must file your FAFSA no later than February 28th. You must complete the FAFSA or your application cannot be processed.',
+                    fontSize: 8
                 },
                 {
                     text: 'Please complete all questions or your application cannot be considered.  Financial information may be subject to verification from tax returns or other sources.  ',
@@ -1685,15 +1686,42 @@ angular.module('Controllers').controller('FreshmanCtrl', function ($scope, $filt
                         headerRows: 0,
                         body: [
                             [
-                                { text: [
-														'Inlines can be ',
-														{ text: 'styled\n', italics: true },
-														{ text: 'easily as everywhere else', fontSize: 10 } ]
-												}
+                                {
+                                    text:
+                                        [
+								            { text: 'Has your family’s income for 2014 remained the same as 2013? ' }, { text: item.income_same, style: 'field' }
+								            
+                                        ]
+                                    
+								},
+                                {
+                                    text:
+                                        [
+								            'Are you receiving financial assistance (such as Social Security disability) from any local or federal government entity?  ', { text: item.financial_assistance, style: 'field'} 
+								            
+                                        ]
+								}
+                            ],
+                            [
+                                {
+                                    text:
+                                        [
+								            'If “NO”, by what amount (approximate) has it increased?  ', { text: item.increased, style: 'field' }, ' Decreased? '
+								            
+                                        ]
+								},
+                                {
+                                    text:
+                                        [
+								            'Are you receiving financial assistance (such as Social Security disability) from any local or federal government entity?  '
+								            
+                                        ]
+								}
                             ]
                             
                         ]
-                    }
+                    },
+                    layout: 'noBorders'
                 },
                 {
                     text: 'The following questions will help to estimate your financial need.  Please complete all questions or your application cannot be considered.',
